@@ -1,6 +1,6 @@
 import Axios from "axios";
 
-const RootPath = "http://localhost/RestServer-Absensi/api/";
+const RootPath = "http://localhost/seminar-server/api/";
 
 const GET = (path) => {
     const promise = new Promise((resolve,reject) => {
