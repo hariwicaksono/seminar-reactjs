@@ -1,30 +1,21 @@
 import React from 'react';
-import { Route, BrowserRouter, Router, Switch } from "react-router-dom"
-import HomePage from "../../Containers/Organism/Home"
-import AbsensiPage from "../../Containers/Organism/Absensi"
-import KaryawanPage from '../../Containers/Organism/Karyawan';
-import GajiPage from '../../Containers/Organism/Gaji';
-import IzinPage from '../../Containers/Organism/Izin';
-import SettingPage from '../../Containers/Organism/Setting';
-import {  } from 'antd';
-import DetailAbsen from '../../Containers/Organism/DetailAbsen';
-import AddKaryawan from '../../Containers/Organism/AddKaryawan';
-import EditKaryawan from '../../Containers/Organism/EditKaryawan';
-import DetailKaryawan from '../../Containers/Organism/DetailKaryawan';
+import { Route, Switch } from "react-router-dom"
+import { NotificationContainer } from 'react-notifications';
+import ScrollToTop from 'react-router-scroll-top';
+import PrivateRoute from './Private';
+import PublicRoute from './Public';
+import HomePage from "../../Components/Home"
+
 
 const MyRouter = () => {
     return(
         <Switch>
+            <ScrollToTop>
             <Route path="/" component={HomePage} exact />
-            <Route path = "/karyawans/edit/:id" component={EditKaryawan} />
-            <Route path = "/karyawans/detail/:id" component={DetailKaryawan} />
-            <Route path="/absensi" component={AbsensiPage} />
-            <Route path="/karyawan" component={KaryawanPage}  />
-            <Route path="/gaji" component={GajiPage}  />
-            <Route path="/izin" component={IzinPage}  />
-            <Route path="/setting" component={SettingPage}  />
-            <Route path ="/absen/detail/:id" component={DetailAbsen}/>
-            <Route path ="/absen/tambah" component={AddKaryawan}/>
+           
+
+            <NotificationContainer />
+        </ScrollToTop>
         </Switch>
             
     )

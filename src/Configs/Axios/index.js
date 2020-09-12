@@ -5,7 +5,7 @@ const RootPath = "http://localhost/seminar-server/api/";
 const GET = (path) => {
     const promise = new Promise((resolve,reject) => {
         Axios.get(RootPath+path).then(res => {
-            resolve(res.data)
+            resolve(res.data.data)
         }).catch(err => {
             reject(err)
         })
@@ -58,7 +58,7 @@ const DELETE = (path,data) => {
 }
 
 
-const GetAbsen = () => GET('AbsenController');
+const GetAktifSeminar = () => GET('GetAktifSeminar');
 const GetKaryawan = () => GET('UserController');
 const GetGaji = () => GET('GajiController');
 const GetIzin = () => GET('IzinController');
@@ -69,7 +69,7 @@ const PutKaryawan = (data) => PUT('UserController',data)
 const DeleteKaryawan = (data) => DELETE('UserController?id=',data)
 
 const API = {
-    GetAbsen,
+    GetAktifSeminar,
     GetKaryawan,
     GetGaji,
     GetIzin,

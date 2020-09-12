@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
+import 'react-notifications/lib/notifications.css';
+import 'spin.js/spin.css';
 import 'offline-js/offline.js';
 import 'offline-js/themes/offline-theme-default.css'
 import 'offline-js/themes/offline-language-english.css'
