@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
-import { Container, Row, Col, Card } from 'react-bootstrap'
+import { Container, Jumbotron, Row, Col, Card } from 'react-bootstrap'
 import ReactPaginate from 'react-paginate'
 import {ImagesUrl} from '../Configs/Url'
-import { BsChevronDoubleLeft, BsChevronDoubleRight } from "react-icons/bs";
+import { BsCalendar, BsGeoAlt , BsChevronDoubleRight } from "react-icons/bs";
 
 class AktifSeminar extends Component {
     constructor(props){
@@ -19,18 +19,18 @@ class AktifSeminar extends Component {
             <div key={s.id_seminar}>
             
                     <h1>{s.nm_seminar}</h1>
-                    {s.tgl_seminar} {s.jam_seminar} {s.lokasi_seminar}
+                    <p><BsCalendar/> {s.tgl_seminar} Pukul {s.jam_seminar} &mdash; <BsGeoAlt/> {s.lokasi_seminar}</p>
                     <p className="lead">{s.headline_seminar}</p>
                     <p>{s.deskripsi_seminar}</p>
-                    <Link to={'/detail/'+s.id_seminar} className="btn btn-success" >DETAIL</Link>&nbsp;
+                    <Link to={'/detail/'+s.id_seminar} className="btn btn-primary" >DETAIL</Link>&nbsp;
                     <Link to={'/detail/'+s.id_seminar} className="btn btn-success" >DAFTAR</Link>
             </div>
         ))
         return (
             <>
-            <Row>
+            <Jumbotron className="shadow text-center">
                 {List}
-            </Row>
+            </Jumbotron>
 
             </>
         )

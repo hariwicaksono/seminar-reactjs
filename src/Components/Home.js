@@ -3,6 +3,7 @@ import {Redirect} from 'react-router-dom'
 import { Container, Jumbotron, Row, Col, Card } from 'react-bootstrap'
 import API from '../Configs/Axios'
 import AktifSeminar from './AktifSeminar'
+import ArsipSeminar from './ArsipSeminar'
 import Loader from 'react-loader'
 import { isLogin } from '../Utils'
 
@@ -11,7 +12,8 @@ class Home extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            Seminar: [],
+            AktifSeminar: [],
+            ArsipSeminar: [],
             loading: true
          
         }
@@ -20,7 +22,13 @@ class Home extends Component {
     componentDidMount = () => {
         API.GetAktifSeminar().then(res => {
             setTimeout(() => this.setState({
-                Seminar: res,
+                AktifSeminar: res.data,
+                loading: false
+            }), 100);
+        })
+        API.GetArsipSeminar().then(res => {
+            setTimeout(() => this.setState({
+                ArsipSeminar: res.data,
                 loading: false
             }), 100);
         })
@@ -34,8 +42,8 @@ class Home extends Component {
             <>
                 <Container>
                    
-                    <div className="row">
-                        <div className="col-md-12">
+                    <Row>
+                        <Col>
                         
 
                         { this.state.loading ?
@@ -43,13 +51,15 @@ class Home extends Component {
                         
                         :
                         <>
-                       <Jumbotron>
-                            <AktifSeminar data={this.state.Seminar} />
-                            </Jumbotron>
+                       
+                        <AktifSeminar data={this.state.AktifSeminar} />
+
+                        
+                        <ArsipSeminar data={this.state.ArsipSeminar} />
                         </>
                         }
-                        </div>
-                    </div>
+                        </Col>
+                    </Row>
                 </Container>
 
             </>
