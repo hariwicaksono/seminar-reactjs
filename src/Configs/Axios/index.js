@@ -62,6 +62,10 @@ const GetAktifSeminar = () => GET('GetAktifSeminar');
 const GetArsipSeminar = () => GET('GetArsipSeminar');
 const GetIdSeminar = (data) => GET_ID('Seminar?id=',data)
 const GetIdentitasWeb = () => GET('IdentitasWeb');
+const PostLogin = (data) => POST('Login',data)
+const GetKartuIdentitas = () => GET('KartuIdentitas');
+const GetPendidikan = () => GET('Pendidikan');
+const GetKabupaten = () => GET('Kabupaten');
 const GetKaryawan = () => GET('UserController');
 const GetGaji = () => GET('GajiController');
 const GetIzin = () => GET('IzinController');
@@ -76,6 +80,10 @@ const API = {
     GetArsipSeminar,
     GetIdSeminar,
     GetIdentitasWeb,
+    PostLogin,
+    GetKartuIdentitas,
+    GetPendidikan,
+    GetKabupaten,
     GetKaryawan,
     GetGaji,
     GetIzin,

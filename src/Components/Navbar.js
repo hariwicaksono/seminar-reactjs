@@ -81,7 +81,7 @@ class MyNavbar extends Component{
            </Nav>    
 
 
-            <ul className="navbar-nav">
+            <Nav>
             
             {this.state.login ?
             <>
@@ -114,7 +114,7 @@ class MyNavbar extends Component{
             </NavDropdown>
             </NavItem>
             }
-            </ul>
+            </Nav>
 
         </Navbar.Collapse>
         </Container>
