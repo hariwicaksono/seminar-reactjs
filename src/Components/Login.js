@@ -27,13 +27,6 @@ class Login extends Component {
     }
 
     render() {
-
-        if(this.state.isLogin){
-            if (this.state.idLogin === "1") {
-                return( <Redirect to="/user" /> )
-            } 
-        }
-
         return (
             <>
             <Helmet>
@@ -58,7 +51,7 @@ class Login extends Component {
                             <Formik
                             initialValues={{ username: '', password: '', level:'USER' }}
                             onSubmit={(values, actions) => {
-                                alert(JSON.stringify(values));
+                                //alert(JSON.stringify(values));
                                 API.PostLogin(values).then(res=>{
                                     if (res.id === "1" ) {
                                         sessionStorage.setItem('isLogin',JSON.stringify(res.data))
@@ -66,7 +59,7 @@ class Login extends Component {
                                             isLogin:true,
                                             idLogin:"1"
                                         })
-                                        window.location.href = '/user';
+                                        window.location.href = '/member';
                                         NotificationManager.success('Login Berhasil');
                                     } else {
                                         NotificationManager.error('Login Gagal, periksa kembali username dan password anda');

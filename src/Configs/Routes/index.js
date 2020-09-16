@@ -12,6 +12,7 @@ import CaraDaftar from "../../Components/CaraDaftar"
 import Register from "../../Components/Register"
 import Login from "../../Components/Login"
 import AktivasiAkun from "../../Components/AktivasiAkun"
+import Member from "../../Components/Member"
 
 const MyRouter = () => {
     return(
@@ -25,6 +26,7 @@ const MyRouter = () => {
             <PublicRoute path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/aktivasi_akun/:id" component={AktivasiAkun} />
+            <PrivateRoute path="/member" component={Member} />
             <NotificationContainer />
         </ScrollToTop>
         </Switch>

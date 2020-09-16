@@ -82,6 +82,7 @@ const GetCaraDaftar = () => GET('CaraDaftar');
 const PostPeserta = (data) => POST('Peserta',data);
 const CheckPeserta = (data) => Axios(RootPath+`CheckPeserta?id=${data}`);
 const PutAktivasiAkun = (data) => PUT('AktivasiAkun',data);
+const GetIdPeserta = (data) => GET_ID('Peserta?id=',data)
 const GetKaryawan = () => GET('UserController');
 const GetGaji = () => GET('GajiController');
 const GetIzin = () => GET('IzinController');
@@ -106,6 +107,7 @@ const API = {
     PostPeserta,
     CheckPeserta,
     PutAktivasiAkun,
+    GetIdPeserta,
     GetKaryawan,
     GetGaji,
     GetIzin,

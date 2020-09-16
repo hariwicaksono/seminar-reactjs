@@ -17,27 +17,18 @@ class MyNavbar extends Component{
             url: ImagesUrl()
         }
       }
-      Logout = () => {
-        logout();
-        //sessionStorage.setItem('isLogin','');
-        //sessionStorage.clear();
-        //this.setState({
-            //login:true
-        //})
-        
-        //NotificationManager.success('Berhasil keluar sistem');
-        
+        Logout = () => {
+            logout();
         }
         componentDidMount = () => {
         if (isLogin()) {
-           console.log('LOGIN')
+           //console.log('LOGIN')
            const data = JSON.parse(sessionStorage.getItem('isLogin'))
-                const id = data[0].id_user
-                API.GetUserId(id).then(res=>{
+                const id = data[0].id_peserta
+                API.GetIdPeserta(id).then(res=>{
                     this.setState({
-                        id : res.id_user,
-                        nama: res.nama_user, 
-                        foto: res.photo_user,
+                        id : res.id_peserta,
+                        nama: res.nama_peserta
                     })
                 })
                 
