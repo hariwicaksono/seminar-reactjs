@@ -57,6 +57,16 @@ const DELETE = (path,data) => {
     return promise
 }
 
+const SEARCH = (path,data) => {
+    const promise = new Promise((resolve,reject) => {
+        Axios.get(RootPath+path+data).then(res => {
+            resolve(res.data)
+        }).catch(er => {
+            reject(er)
+        })
+    })
+    return promise
+}
 
 const GetAktifSeminar = () => GET('GetAktifSeminar');
 const GetArsipSeminar = () => GET('GetArsipSeminar');
@@ -66,6 +76,12 @@ const PostLogin = (data) => POST('Login',data)
 const GetKartuIdentitas = () => GET('KartuIdentitas');
 const GetPendidikan = () => GET('Pendidikan');
 const GetKabupaten = () => GET('Kabupaten');
+const CariSeminar = (data) => SEARCH('Search?id=',data)
+const GetProfilWeb = () => GET('ProfilWeb');
+const GetCaraDaftar = () => GET('CaraDaftar');
+const PostPeserta = (data) => POST('Peserta',data);
+const CheckPeserta = (data) => Axios(RootPath+`CheckPeserta?id=${data}`);
+const PutAktivasiAkun = (data) => PUT('AktivasiAkun',data);
 const GetKaryawan = () => GET('UserController');
 const GetGaji = () => GET('GajiController');
 const GetIzin = () => GET('IzinController');
@@ -84,6 +100,12 @@ const API = {
     GetKartuIdentitas,
     GetPendidikan,
     GetKabupaten,
+    CariSeminar,
+    GetProfilWeb,
+    GetCaraDaftar,
+    PostPeserta,
+    CheckPeserta,
+    PutAktivasiAkun,
     GetKaryawan,
     GetGaji,
     GetIzin,

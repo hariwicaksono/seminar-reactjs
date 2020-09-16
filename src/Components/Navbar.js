@@ -4,6 +4,7 @@ import {Container, Form,Button, Navbar, Nav, NavItem, NavDropdown} from 'react-b
 import API from '../Configs/Axios'
 import {ImagesUrl} from '../Configs/Url'
 import { logout, isLogin } from '../Utils'
+import SearchForm from './SearchForm'
 
 class MyNavbar extends Component{
     constructor(props) {
@@ -67,19 +68,16 @@ class MyNavbar extends Component{
                </>
             }    
 
-            <NavDropdown title="Kategori" id="basic-nav-dropdown">
-             <NavDropdown.Item as={Link} to='/page/31'>Alur Pendaftaran</NavDropdown.Item>
-             <NavDropdown.Item as={Link} to='/page/14'>Jenis Pendaftaran</NavDropdown.Item>
-             <NavDropdown.Item as={Link} to='/page/34'>Syarat Pendaftaran</NavDropdown.Item>
-             <NavDropdown.Item as={Link} to='/page/18'>Prosedur Pendaftaran</NavDropdown.Item>
-             
-             <NavDropdown.Item as={Link} to='/page/30'>Beasiswa - Beasiswa</NavDropdown.Item>
-             <NavDropdown.Item as={Link} to='/page/21'>Tata Tertib Penerimaan Mahasiswa Baru</NavDropdown.Item>
-             <NavDropdown.Item as={Link} to='/page/19'>Kegiatan Pra Kuliah Mahasiswa Baru</NavDropdown.Item>
+            <NavDropdown title="Tentang" id="basic-nav-dropdown">
+            <NavDropdown.Item as={Link} to='/caradaftar'>Cara Pendaftaran</NavDropdown.Item>
+             <NavDropdown.Item as={Link} to='/tentang'>Tentang</NavDropdown.Item>
+             <NavDropdown.Item as={Link} to='/kontak'>Kontak</NavDropdown.Item>
+            
             </NavDropdown>
 
            </Nav>    
 
+            <SearchForm/>
 
             <Nav>
             

@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import { Container, Jumbotron, Row, Col, Card } from 'react-bootstrap'
 import API from '../Configs/Axios'
-import AktifSeminar from './AktifSeminar'
-import ArsipSeminar from './ArsipSeminar'
 import Loader from 'react-loader'
 import Skeleton from 'react-loading-skeleton'
 import { isLogin } from '../Utils'
@@ -52,7 +50,7 @@ class Home extends Component {
                     <p className="lead">{s.headline_seminar}</p>
                     <p>{s.deskripsi_seminar}</p>
                     <Link to={'/detail/'+s.id_seminar} className="btn btn-primary" >DETAIL</Link>&nbsp;
-                    <Link to={'/detail/'+s.id_seminar} className="btn btn-success" >DAFTAR</Link>
+                    <Link to="/register" className="btn btn-success" >DAFTAR</Link>
             </div>
         ))
 

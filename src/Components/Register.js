@@ -7,17 +7,44 @@ import {Container, Breadcrumb, Card, Row, Col, Spinner, Button, Form} from 'reac
 import { Formik, Field } from 'formik'
 import * as yup from 'yup'
 
-const TITLE = ' Masuk - Seminar'
+const TITLE = 'Register - Seminar'
 const validationSchema = yup.object({
-    seminar: yup.string().required(),
-    jns_id: yup.string().required(),
-    no_id: yup.string().required(),
-    nm_peserta: yup.string().required(),
-    kelamin: yup.string().required(),
-    pendidikan: yup.string().required(),
-    usia: yup.string().required(),
-    alamat: yup.string().required(),
-    kabupaten: yup.string().required(),
+    seminar: yup.string().required('Seminar harus dipilih'),
+    jns_id: yup.string().required('Jenis Kartu Identitas harus dipilih'),
+    no_id: yup.string().required('Nomor Identitas harus diisi').test({
+        message: () => 'Nomor identitas sudah didaftarkan',
+        test: async (value) => {
+          try {
+              const res = await API.CheckPeserta(value)
+              const result = await res.data.results;
+              return !result
+              } catch (error) {
+              console.log(error.response); 
+              return error.response;
+              }
+        },
+      }),
+    nm_peserta: yup.string().required('Nama Lengkap harus diisi').test({
+        message: () => 'Nama sudah didaftarkan',
+        test: async (value) => {
+          try {
+              const res = await API.CheckPeserta(value)
+              const result = await res.data.results;
+              return !result
+              } catch (error) {
+              console.log(error.response); 
+              return error.response;
+              }
+        },
+      }),
+    kelamin: yup.string().required('Jenis Kelamin harus dipilih'),
+    pendidikan: yup.string().required('Pendidikan terakhir harus dipilih'),
+    usia: yup.string().required('Range usia harus dipilih'),
+    alamat: yup.string().required('Alamat lengkap harus diisi'),
+    kota_kab: yup.string().required('Kabupaten atau Kota harus dipilih'),
+    kodepos: yup.number().required('Kode Pos harus diisi').typeError("Harus berupa angka"),
+    no_hp: yup.number().required('Nomor Telepon atau HP harus diisi').typeError("Harus berupa angka"),
+    email: yup.string().email('Harus berupa email yang valid').required('Alamat email harus diisi'),
   }); 
   class Login extends Component {
     constructor(props) {
@@ -69,20 +96,20 @@ const validationSchema = yup.object({
             } 
         }
 
-        const ListSeminar = this.state.AktifSeminar.map(s => (
-            <option value={s.id_seminar}>{s.nm_seminar}</option>      
+        const ListSeminar = this.state.AktifSeminar.map((s, i) => (
+            <option value={s.id_seminar} key={i}>{s.nm_seminar}</option>      
         ))
 
-        const ListKartu = this.state.KartuIdentitas.map(s => (
-            <option value={s.id_kartu}>{s.jns_kartuid}</option>      
+        const ListKartu = this.state.KartuIdentitas.map((s, i) => (
+            <option value={s.id_kartu} key={i}>{s.jns_kartuid}</option>      
         ))
 
-        const ListPendidikan = this.state.Pendidikan.map(s => (
-            <option value={s.id_pendidikan}>{s.pendidikan}</option>      
+        const ListPendidikan = this.state.Pendidikan.map((s, i) => (
+            <option value={s.id_pendidikan} key={i}>{s.pendidikan}</option>      
         ))
 
-        const ListKabupaten = this.state.Kabupaten.map(s => (
-            <option value={s.id}>{s.name}</option>      
+        const ListKabupaten = this.state.Kabupaten.map((s, i) => (
+            <option value={s.id} key={i}>{s.name}</option>      
         ))
 
         return (
@@ -94,21 +121,34 @@ const validationSchema = yup.object({
                     <Row>
                   
                     <Col>
-                    <Breadcrumb className="card px-3 mb-2">
-                        <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/" }}>Home</Breadcrumb.Item>
-                        <Breadcrumb.Item active>Register</Breadcrumb.Item>
-                        </Breadcrumb>
+                    <ul className="nav nav-tabs nav-fill bg-white" style={{fontSize: '1.125rem'}}>
+                    <li className="nav-item">
+                        <NavLink className="nav-link" to='/login'>Masuk</NavLink>
+                    </li>
+                    <li className="nav-item">
+                    <NavLink className="nav-link active font-weight-bold" to='/register'>Daftar</NavLink>
+                    </li>
+
+                    </ul>
                         <Card>
                             <Card.Body>
                                
                             <Formik
-                            initialValues={{ seminar: '', jns_id: '', no_id: '', nm_peserta: '', kelamin: '', pendidikan: '', usia: '', alamat: '' }}
+                            initialValues={{ seminar: '', jns_id: '', no_id: '', nm_peserta: '', kelamin: '', pendidikan: '', usia: '', alamat: '', kota_kab: '', kodepos: '', no_hp: '', email: '' }}
                             onSubmit={(values, actions) => {
                                 alert(JSON.stringify(values));
-                                
+                                API.PostPeserta(values).then(res=>{
+                                    //console.log(res)
+                                    if (res.status === 1 ) {
+                                        this.props.history.push('/login')
+                                        NotificationManager.success('Pendaftaran Berhasil, silahkan periksa email untuk mengaktifkan Akun');
+                                    } else {
+                                        NotificationManager.error('Gagal, periksa kembali');
+                                    }
+                                })
                                 setTimeout(() => {
                                 actions.setSubmitting(false);
-                                }, 1000);
+                                }, 100);
                             }}
                             validationSchema={validationSchema}
                             >
@@ -121,7 +161,7 @@ const validationSchema = yup.object({
                                 errors,
                                 isSubmitting
                             }) => (
-                        <Form noValidate onSubmit={handleSubmit} className="px-5 py-3">
+                        <Form noValidate onSubmit={handleSubmit} className="px-3">
                             <h3 className="text-center" style={{fontWeight: '300'}}>Register</h3>
                         <Form.Group>
                             <Form.Label>Pilih Seminar</Form.Label>
@@ -198,13 +238,32 @@ const validationSchema = yup.object({
                             </Form.Group>
 
                             <Form.Group>
-                            <Form.Label>Kabupaten</Form.Label>
+                            <Form.Label>Kabupaten/Kota</Form.Label>
                             <Form.Control as="select" name="kota_kab" onChange={handleChange} onBlur={handleBlur} value={values.kota_kab} isInvalid={!!errors.kota_kab && touched.kota_kab}>
-                            <option value="">Pilih Kabupaten</option>
+                            <option value="">Pilih Kabupaten/Kota</option>
                             {ListKabupaten}
                             </Form.Control>
                             {errors.kota_kab && touched.kota_kab && <Form.Control.Feedback type="invalid">{errors.kota_kab}</Form.Control.Feedback>}
-                        </Form.Group>
+                            </Form.Group>
+
+                            <Form.Group>
+                                <Form.Label>Kode Pos</Form.Label>
+                                <Form.Control type="text" name="kodepos" placeholder="Kode Pos" className="form-control" onChange={handleChange} onBlur={handleBlur} value={values.kodepos} isInvalid={!!errors.kodepos && touched.kodepos} />
+                                {errors.kodepos && touched.kodepos && <Form.Control.Feedback type="invalid">{errors.kodepos}</Form.Control.Feedback>}
+                            </Form.Group>
+
+                            <Form.Group>
+                                <Form.Label>No HP (Format 62)</Form.Label>
+                                <Form.Control type="text" name="no_hp" placeholder="No HP" className="form-control" onChange={handleChange} onBlur={handleBlur} value={values.no_hp} isInvalid={!!errors.no_hp && touched.no_hp} />
+                                {errors.no_hp && touched.no_hp && <Form.Control.Feedback type="invalid">{errors.no_hp}</Form.Control.Feedback>}
+                            </Form.Group>
+
+                            <Form.Group>
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control type="text" name="email" placeholder="Email" className="form-control" onChange={handleChange} onBlur={handleBlur} value={values.email} isInvalid={!!errors.email && touched.email} />
+                                {errors.email && touched.email && <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>}
+                            </Form.Group>
+
     
                             <Button variant="primary" type="submit" disabled={isSubmitting}>{isSubmitting ? (
                             <>
