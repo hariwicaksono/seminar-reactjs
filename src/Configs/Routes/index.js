@@ -13,6 +13,8 @@ import Register from "../../Components/Register"
 import Login from "../../Components/Login"
 import AktivasiAkun from "../../Components/AktivasiAkun"
 import Member from "../../Components/Member"
+import Konfirmasi from "../../Components/Member/Konfirmasi"
+import Cetak from "../../Components/Member/Cetak"
 
 const MyRouter = () => {
     return(
@@ -27,6 +29,8 @@ const MyRouter = () => {
             <Route path="/register" component={Register} />
             <Route path="/aktivasi_akun/:id" component={AktivasiAkun} />
             <PrivateRoute path="/member" component={Member} />
+            <Route path="/konfirmasi" component={Konfirmasi} />
+            <PrivateRoute path="/cetak/:id" component={Cetak} />
             <NotificationContainer />
         </ScrollToTop>
         </Switch>

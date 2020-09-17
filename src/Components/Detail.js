@@ -5,8 +5,10 @@ import { Container, Breadcrumb, Row, Col, Card } from 'react-bootstrap'
 import { Helmet } from 'react-helmet'
 import {ImagesUrl} from '../Configs/Axios'
 import Loader from 'react-loader'
+import moment from 'moment'
+import 'moment/locale/id'
 
-const TITLE = ' - Seminar'
+const TITLE = ' - Seminar & Webinar'
 var options = {lines: 13,length: 20,width: 10,radius: 30,scale: 0.35,corners: 1,color: '#fff',opacity: 0.25,rotate: 0,direction: 1,speed: 1,trail: 60,fps: 20,zIndex: 2e9,top: '50%',left: '50%',shadow: false,hwaccel: false,position: 'absolute'};
 class Detail extends Component {
     constructor(props){
@@ -66,10 +68,10 @@ class Detail extends Component {
                         </Card>
                         <Card className="mb-2" body>
                             <h3>Deskripsi</h3>
-                            <p>Tanggal {this.state.tanggal}</p>
-                            <p>Pukul {this.state.jam}</p>
-                            <p>Lokasi {this.state.lokasi}</p>
-                            <p>Biaya Rp.{this.state.biaya}</p>
+                            <p>Tanggal: {moment(this.state.tanggal).format('DD MMMM YYYY')}</p>
+                            <p>Pukul: {moment(this.state.jam, "HH:mm:ss").format('HH:mm')}</p>
+                            <p>Lokasi: {this.state.lokasi}</p>
+                            <p>Biaya: Rp.{this.state.biaya}</p>
                         </Card>
                         </>
                 }

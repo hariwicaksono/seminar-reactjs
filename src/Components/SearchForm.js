@@ -4,7 +4,7 @@ import API from '../Configs/Axios'
 import SearchResult from './SearchResult'
 //import { NotificationManager } from 'react-notifications'
 import { Form, Button, Spinner } from 'react-bootstrap'
-import {BsSearch} from 'react-icons/bs'
+import { Search } from 'react-bootstrap-icons'
 //import Form from 'react-formal'
 //import * as yup from 'yup'
 
@@ -59,7 +59,7 @@ class LoginForm extends Component {
                         ?
                         <><Spinner as="span" animation="grow" size="sm"  role="status" aria-hidden="true" /></>
                         :   
-                    <><BsSearch size="1.2em" /></>}
+                    <><Search size="1.2em" /></>}
                     </Button>
                 </span>
 

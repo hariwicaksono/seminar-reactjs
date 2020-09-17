@@ -1,6 +1,7 @@
 import React,{Component} from 'react'
 import {Link,NavLink} from 'react-router-dom'
 import {Container, Form,Button, Navbar, Nav, NavItem, NavDropdown} from 'react-bootstrap'
+import { BoxArrowInRight } from 'react-bootstrap-icons'
 import API from '../Configs/Axios'
 import {ImagesUrl} from '../Configs/Url'
 import { logout, isLogin } from '../Utils'
@@ -56,17 +57,19 @@ class MyNavbar extends Component{
                </>
                :
                <>
+            <NavDropdown title="Untuk Member" id="basic-nav-dropdown">
+            <NavDropdown.Item as={Link} to='/member'>Data Registrasi</NavDropdown.Item>
+            <NavDropdown.Item as={Link} to='/konfirmasi'>Konfirmasi Bayar</NavDropdown.Item>
+            </NavDropdown>
                </>
-            }    
-
+            } 
             <NavDropdown title="Tentang" id="basic-nav-dropdown">
             <NavDropdown.Item as={Link} to='/caradaftar'>Cara Pendaftaran</NavDropdown.Item>
              <NavDropdown.Item as={Link} to='/tentang'>Tentang</NavDropdown.Item>
              <NavDropdown.Item as={Link} to='/kontak'>Kontak</NavDropdown.Item>
-            
             </NavDropdown>
 
-           </Nav>    
+            </Nav>    
 
             <SearchForm/>
 
@@ -75,10 +78,11 @@ class MyNavbar extends Component{
             {this.state.login ?
             <>
             <Form inline className="my-2 my-lg-0 pl-1">
-            <Button as={NavLink} variant="success" to='/login' activeClassName="active">Masuk/Daftar</Button>
+            <Button as={NavLink} variant="info" to='/login' activeClassName="active">Masuk/Daftar</Button>
             </Form>
             </>
            :
+           <>
            <NavItem>
            <NavDropdown title=
            {this.state.foto ? (
@@ -98,10 +102,10 @@ class MyNavbar extends Component{
                 src={this.state.url+'no-avatar.png'} />
             </>
             )} id="basic-nav-dropdown" alignRight>
-            <NavDropdown.Item as={Link} to={'/akunU'}>Akun</NavDropdown.Item>
-            <NavDropdown.Item onClick={this.Logout} href=''>Keluar</NavDropdown.Item>
+            <NavDropdown.Item onClick={this.Logout} href=''><BoxArrowInRight/> Keluar</NavDropdown.Item>
             </NavDropdown>
             </NavItem>
+            </>
             }
             </Nav>
 

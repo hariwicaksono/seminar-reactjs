@@ -24,6 +24,18 @@ const GET_ID = (path,id) => {
     return promise
 }
 
+const GET_BY_ID = (path,data) =>{
+    const promise = new Promise((resolve,reject)=>{
+         Axios.get(RootPath+path+data).then(res=>{
+             resolve(res.data)
+         },err=>{
+            console.log(err.response); 
+            return err.response;
+         })
+    })
+    return promise
+ }
+
 const POST = (path,data) => {
     const promise = new Promise((resolve,reject) => {
         Axios.post(RootPath+path,data).then(res => {
@@ -72,6 +84,7 @@ const GetAktifSeminar = () => GET('GetAktifSeminar');
 const GetArsipSeminar = () => GET('GetArsipSeminar');
 const GetIdSeminar = (data) => GET_ID('Seminar?id=',data)
 const GetIdentitasWeb = () => GET('IdentitasWeb');
+const GetBank = () => GET('Bank');
 const PostLogin = (data) => POST('Login',data)
 const GetKartuIdentitas = () => GET('KartuIdentitas');
 const GetPendidikan = () => GET('Pendidikan');
@@ -83,6 +96,8 @@ const PostPeserta = (data) => POST('Peserta',data);
 const CheckPeserta = (data) => Axios(RootPath+`CheckPeserta?id=${data}`);
 const PutAktivasiAkun = (data) => PUT('AktivasiAkun',data);
 const GetIdPeserta = (data) => GET_ID('Peserta?id=',data)
+const GetPembayaranById = (data) => GET_BY_ID('GetPembayaran?id=',data)
+const GetSeminarById = (data) => GET_BY_ID('GetSeminar?id=',data)
 const GetKaryawan = () => GET('UserController');
 const GetGaji = () => GET('GajiController');
 const GetIzin = () => GET('IzinController');
@@ -97,6 +112,7 @@ const API = {
     GetArsipSeminar,
     GetIdSeminar,
     GetIdentitasWeb,
+    GetBank,
     PostLogin,
     GetKartuIdentitas,
     GetPendidikan,
@@ -108,6 +124,8 @@ const API = {
     CheckPeserta,
     PutAktivasiAkun,
     GetIdPeserta,
+    GetPembayaranById,
+    GetSeminarById,
     GetKaryawan,
     GetGaji,
     GetIzin,

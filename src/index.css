@@ -54,29 +54,32 @@ input.error {
     margin-top: 1px;
 }
 .alert-primary {
-    border-left: 4px solid #563d7c;
+    border-left: 4px solid #563d7c !important;
 }
 .alert-secondary {
-    border-left: 4px solid #584b6e;
+    border-left: 4px solid #584b6e !important;
 }
 .alert-success {
-    border-left: 4px solid #28a745;
+    border-left: 4px solid #28a745 !important;
 }
 .alert-danger {
-    border-left: 4px solid #dc3545;
+    border-left: 4px solid #dc3545 !important;
 }
 .alert-warning {
-    border-left: 4px solid #ffc107;
+    border-left: 4px solid #ffc107 !important;
 }
 .alert-info {
-    border-left: 4px solid #17a2b8;
+    border-left: 4px solid #17a2b8 !important;
 }
 .alert-light {
-    border-left: 4px solid #f8f9fa;
+    border-left: 4px solid #f8f9fa !important;
 }
 .alert-dark {
-    border-left: 4px solid #343434;
+    border-left: 4px solid #343434 !important;
 }
+table td {
+    vertical-align: middle !important;
+  }
 #sidebar a,
 #sidebar a:hover,
 #sidebar a:focus {

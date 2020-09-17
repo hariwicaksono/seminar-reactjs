@@ -7,7 +7,7 @@ import {Container, Card, Row, Col, Spinner, Button, Form} from 'react-bootstrap'
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
-const TITLE = ' Masuk - Seminar'
+const TITLE = 'Masuk - Seminar & Webinar'
 const validationSchema = yup.object({
     username: yup.string().required(),
     password: yup.string().required()

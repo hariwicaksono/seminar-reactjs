@@ -7,7 +7,7 @@ import {Container, Breadcrumb, Card, Row, Col, Spinner, Button, Form} from 'reac
 import { Formik, Field } from 'formik'
 import * as yup from 'yup'
 
-const TITLE = 'Register - Seminar'
+const TITLE = 'Register - Seminar & Webinar'
 const validationSchema = yup.object({
     seminar: yup.string().required('Seminar harus dipilih'),
     jns_id: yup.string().required('Jenis Kartu Identitas harus dipilih'),
@@ -46,7 +46,7 @@ const validationSchema = yup.object({
     no_hp: yup.number().required('Nomor Telepon atau HP harus diisi').typeError("Harus berupa angka"),
     email: yup.string().email('Harus berupa email yang valid').required('Alamat email harus diisi'),
   }); 
-  class Login extends Component {
+  class Register extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -89,12 +89,6 @@ const validationSchema = yup.object({
     }
 
     render() {
-
-        if(this.state.isLogin){
-            if (this.state.idLogin === "1") {
-                return( <Redirect to="/user" /> )
-            } 
-        }
 
         const ListSeminar = this.state.AktifSeminar.map((s, i) => (
             <option value={s.id_seminar} key={i}>{s.nm_seminar}</option>      
@@ -295,4 +289,4 @@ const validationSchema = yup.object({
     }
 }
 
-export default Login
+export default Register
