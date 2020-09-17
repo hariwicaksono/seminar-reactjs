@@ -7,7 +7,7 @@ import {Container, Breadcrumb, Card, Row, Col, Spinner, Button, Form} from 'reac
 import { Formik, Field } from 'formik'
 import * as yup from 'yup'
 
-const TITLE = 'Register - Seminar & Webinar'
+const TITLE = 'Register - Seminar App'
 const validationSchema = yup.object({
     seminar: yup.string().required('Seminar harus dipilih'),
     jns_id: yup.string().required('Jenis Kartu Identitas harus dipilih'),

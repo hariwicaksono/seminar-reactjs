@@ -6,7 +6,7 @@ import Navbar from '../../Components/Navbar'
 import { Helmet } from 'react-helmet'
 import MyRouter from '../../Configs/Routes'
 
-const TITLE = 'Seminar & Webinar'
+const TITLE = 'Seminar App'
 
 class Home extends Component {
     

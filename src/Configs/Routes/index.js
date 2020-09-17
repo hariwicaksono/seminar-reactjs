@@ -29,7 +29,7 @@ const MyRouter = () => {
             <Route path="/register" component={Register} />
             <Route path="/aktivasi_akun/:id" component={AktivasiAkun} />
             <PrivateRoute path="/member" component={Member} />
-            <Route path="/konfirmasi" component={Konfirmasi} />
+            <PrivateRoute path="/konfirmasi" component={Konfirmasi} />
             <PrivateRoute path="/cetak/:id" component={Cetak} />
             <NotificationContainer />
         </ScrollToTop>

@@ -7,8 +7,10 @@ import {Container, Breadcrumb, Card, Row, Col, Spinner, Button, Form} from 'reac
 import { Formik, Field } from 'formik'
 import * as yup from 'yup'
 
-const TITLE = 'Konfirmasi Pembayaran - Seminar & Webinar'
+const TITLE = 'Konfirmasi Pembayaran - Seminar App'
 const validationSchema = yup.object({
+    id_peserta: yup.string().required('Id Pendaftaran harus dipilih'),
+    id_seminar: yup.string().required('Id Seminar harus dipilih'),
     bank_tujuan: yup.string().required('Bank Tujuan harus dipilih'),
     jml_trf: yup.number().required('Jumlah Transfer harus diisi').typeError("Harus berupa angka"),
     pemilik_rek: yup.string().required('Nama Pemilik Rekening harus diisi')
@@ -29,8 +31,8 @@ const validationSchema = yup.object({
         const id = datas[0].email_peserta
         API.GetPembayaranById(id).then(res=>{
             setTimeout(() => this.setState({
-                id_seminar : res.data[0].id_seminar,
-                id_peserta : res.data[0].id_peserta,
+                id_peserta: res.data[0].id_peserta,
+                id_seminar: res.data[0].id_seminar,
                 loading: false
             }), 100);
         }).catch(err => {
@@ -50,8 +52,6 @@ const validationSchema = yup.object({
         const ListBank = this.state.Bank.map((s, i) => (
             <option value={s.id_bank} key={i}>{s.nm_bank}</option>      
         ))
-
-   
 
         return (
             <>
@@ -88,6 +88,7 @@ const validationSchema = yup.object({
                                 }, 100);
                             }}
                             validationSchema={validationSchema}
+                            enableReinitialize={true}
                             >
                             {({
                                 handleSubmit,
@@ -100,8 +101,14 @@ const validationSchema = yup.object({
                             }) => (
                         <Form noValidate onSubmit={handleSubmit} className="px-3">
                             <h3 className="text-center">Konfirmasi Pembayaran</h3>
-                            <input type="hidden" name="id_peserta" value={this.state.id_peserta} />
-                            <input type="hidden" name="id_seminar" value={this.state.id_seminar} />
+                            <Form.Group>
+                                <Form.Label>Data Pendaftaran</Form.Label>
+                            <Form.Check type="radio" name="id_peserta" id="id_peserta" value={this.state.id_peserta} label={this.state.id_peserta} onChange={handleChange} feedback={errors.id_peserta} isInvalid={!!errors.id_peserta && touched.id_peserta} required />
+                            {errors.id_peserta && touched.id_peserta && <Form.Control.Feedback type="invalid">{errors.id_peserta}</Form.Control.Feedback>}
+
+                            <Form.Check type="radio" name="id_seminar" id="id_seminar" value={this.state.id_seminar} label={this.state.id_seminar} onChange={handleChange} feedback={errors.id_seminar} isInvalid={!!errors.id_seminar && touched.id_seminar} required />
+                            {errors.id_seminar && touched.id_seminar && <Form.Control.Feedback type="invalid">{errors.id_seminar}</Form.Control.Feedback>}
+                            </Form.Group>
                         <Form.Group>
                             <Form.Label>Pilih Bank</Form.Label>
                             <Form.Control as="select" name="bank_tujuan" onChange={handleChange} onBlur={handleBlur} value={values.bank_tujuan} isInvalid={!!errors.bank_tujuan && touched.bank_tujuan}>
