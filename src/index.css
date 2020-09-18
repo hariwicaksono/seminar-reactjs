@@ -38,26 +38,26 @@ body {
     font-weight: 500;
 }
 .error {
-    color: red;
-    font-size: 0.9rem;
+    color: #DF3B50;
+    margin-top: 0;
+    font-size: 80%;
     display: block;
-    margin-top: 1px;
 }
 input.error {
-    border: 1px solid red;
-    color: red;
+    border: 1px solid #DF3B50;
+    color: #DF3B50;
 }
 .error span {
-    color: red;
-    font-size: 0.875rem;
+    color: #DF3B50;
+    margin-top: 0;
+    font-size: 80%;
     display: block;
-    margin-top: 1px;
 }
 .alert-primary {
-    border-left: 4px solid #563d7c !important;
+    border-left: 4px solid #24447b !important;
 }
 .alert-secondary {
-    border-left: 4px solid #584b6e !important;
+    border-left: 4px solid #383d41 !important;
 }
 .alert-success {
     border-left: 4px solid #28a745 !important;

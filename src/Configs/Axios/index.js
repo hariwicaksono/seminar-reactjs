@@ -80,6 +80,19 @@ const SEARCH = (path,data) => {
     return promise
 }
 
+const POST_FOTO = (path,data,name) => {
+    const promise = new Promise((resolve,reject)=>{
+        const formdata = new FormData()
+        formdata.append('foto',data,name)
+        Axios.post(RootPath+path,formdata).then(res=>{
+           resolve(res.data.status)
+       },(err)=>{
+           reject(err)
+       })
+    })
+    return promise
+}
+
 const GetAktifSeminar = () => GET('GetAktifSeminar');
 const GetArsipSeminar = () => GET('GetArsipSeminar');
 const GetIdSeminar = (data) => GET_ID('Seminar?id=',data)
@@ -94,18 +107,14 @@ const GetProfilWeb = () => GET('ProfilWeb');
 const GetCaraDaftar = () => GET('CaraDaftar');
 const PostPeserta = (data) => POST('Peserta',data);
 const CheckPeserta = (data) => Axios(RootPath+`CheckPeserta?id=${data}`);
+const CheckPembayaran = (pst, smr) => Axios(RootPath+`CheckPembayaran?pst=${pst}&smr=${smr}`);
+const CheckSeminar = (data) => Axios(RootPath+`CheckSeminar?id=${data}`);
 const PutAktivasiAkun = (data) => PUT('AktivasiAkun',data);
 const GetIdPeserta = (data) => GET_ID('Peserta?id=',data)
 const GetPembayaranById = (data) => GET_BY_ID('GetPembayaran?id=',data)
 const GetSeminarById = (data) => GET_BY_ID('GetSeminar?id=',data)
-const GetKaryawan = () => GET('UserController');
-const GetGaji = () => GET('GajiController');
-const GetIzin = () => GET('IzinController');
-const GetIdAbsen = (data) => GET_ID('AbsenController?id=',data)
-const GetIdKaryawan = (data) => GET_ID('UserController?id=',data)
-const PostKaryawan = (data) => POST('UserController',data)
-const PutKaryawan = (data) => PUT('UserController',data)
-const DeleteKaryawan = (data) => DELETE('UserController?id=',data)
+const PostFoto = (data,name) => POST_FOTO('ImageUpload',data,name)
+const PostPembayaran = (data) => POST('Pembayaran',data);
 
 const API = {
     GetAktifSeminar,
@@ -122,18 +131,15 @@ const API = {
     GetCaraDaftar,
     PostPeserta,
     CheckPeserta,
+    CheckPembayaran,
+    CheckSeminar,
     PutAktivasiAkun,
     GetIdPeserta,
     GetPembayaranById,
     GetSeminarById,
-    GetKaryawan,
-    GetGaji,
-    GetIzin,
-    GetIdAbsen,
-    PostKaryawan,
-    PutKaryawan,
-    GetIdKaryawan,
-    DeleteKaryawan,
+    PostFoto,
+    PostPembayaran
+
 }
 
 export default API
