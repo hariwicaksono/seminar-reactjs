@@ -106,8 +106,9 @@ const CariSeminar = (data) => SEARCH('Search?id=',data)
 const GetProfilWeb = () => GET('ProfilWeb');
 const GetCaraDaftar = () => GET('CaraDaftar');
 const PostPeserta = (data) => POST('Peserta',data);
-const CheckPeserta = (data) => Axios(RootPath+`CheckPeserta?id=${data}`);
-const CheckPembayaran = (pst, smr) => Axios(RootPath+`CheckPembayaran?pst=${pst}&smr=${smr}`);
+const CheckPeserta = (no_id, nm_peserta) => Axios(RootPath+`CheckPeserta?no_id=${no_id}&nm_peserta=${nm_peserta}`);
+const CheckNokartu = (data) => Axios(RootPath+`CheckNokartu?no_id=${data}`);
+const CheckPembayaran = (id_peserta, id_seminar) => Axios(RootPath+`CheckPembayaran?id_peserta=${id_peserta}&id_seminar=${id_seminar}`);
 const CheckSeminar = (data) => Axios(RootPath+`CheckSeminar?id=${data}`);
 const PutAktivasiAkun = (data) => PUT('AktivasiAkun',data);
 const GetIdPeserta = (data) => GET_ID('Peserta?id=',data)
@@ -131,6 +132,7 @@ const API = {
     GetCaraDaftar,
     PostPeserta,
     CheckPeserta,
+    CheckNokartu,
     CheckPembayaran,
     CheckSeminar,
     PutAktivasiAkun,

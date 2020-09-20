@@ -9,34 +9,10 @@ import * as yup from 'yup'
 
 const TITLE = 'Register - Seminar App'
 const validationSchema = yup.object({
-    seminar: yup.string().required('Seminar harus dipilih'),
+    id_seminar: yup.string().required('Seminar harus dipilih'),
     jns_id: yup.string().required('Jenis Kartu Identitas harus dipilih'),
-    no_id: yup.string().required('Nomor Identitas harus diisi').test({
-        message: () => 'Nomor identitas sudah didaftarkan',
-        test: async (value) => {
-          try {
-              const res = await API.CheckPeserta(value)
-              const result = await res.data.results;
-              return !result
-              } catch (error) {
-              console.log(error.response); 
-              return error.response;
-              }
-        },
-      }),
-    nm_peserta: yup.string().required('Nama Lengkap harus diisi').test({
-        message: () => 'Nama sudah didaftarkan',
-        test: async (value) => {
-          try {
-              const res = await API.CheckPeserta(value)
-              const result = await res.data.results;
-              return !result
-              } catch (error) {
-              console.log(error.response); 
-              return error.response;
-              }
-        },
-      }),
+    no_id: yup.string().required('Nomor Identitas harus diisi'),
+    nm_peserta: yup.string().required('Nama Lengkap harus diisi'),
     kelamin: yup.string().required('Jenis Kelamin harus dipilih'),
     pendidikan: yup.string().required('Pendidikan terakhir harus dipilih'),
     usia: yup.string().required('Range usia harus dipilih'),
@@ -54,9 +30,7 @@ const validationSchema = yup.object({
             KartuIdentitas:[],
             Pendidikan:[],
             Kabupaten:[],
-            isLogin:false,
-            idLogin:"",
-            gagalLogin : ""
+            loading: true
         }
 
     }
@@ -128,18 +102,28 @@ const validationSchema = yup.object({
                             <Card.Body>
                                
                             <Formik
-                            initialValues={{ seminar: '', jns_id: '', no_id: '', nm_peserta: '', kelamin: '', pendidikan: '', usia: '', alamat: '', kota_kab: '', kodepos: '', no_hp: '', email: '' }}
+                            initialValues={{ id_seminar: '', jns_id: '', no_id: '', nm_peserta: '', kelamin: '', pendidikan: '', usia: '', alamat: '', kota_kab: '', kodepos: '', no_hp: '', email: '' }}
                             onSubmit={(values, actions) => {
                                 alert(JSON.stringify(values));
-                                API.PostPeserta(values).then(res=>{
-                                    //console.log(res)
-                                    if (res.status === 1 ) {
-                                        this.props.history.push('/login')
-                                        NotificationManager.success('Pendaftaran Berhasil, silahkan periksa email untuk mengaktifkan Akun');
+                                API.CheckPeserta(values.no_id, values.nm_peserta).then(res=>{
+                                    console.log(res)
+                                    if (res.data.results.length > 0) {
+                                        NotificationManager.error('Nama peserta atau no kartu identitas sudah terdaftar');
+                                        
+                        
                                     } else {
-                                        NotificationManager.error('Gagal, periksa kembali');
+                                        API.PostPeserta(values).then(res=>{
+                                            //console.log(res)
+                                            if (res.status === 1 ) {
+                                                this.props.history.push('/login')
+                                                NotificationManager.success('Pendaftaran Berhasil, silahkan periksa email untuk mengaktifkan Akun');
+                                            } 
+                                        })
+                                        
                                     }
+                                     
                                 })
+                                
                                 setTimeout(() => {
                                 actions.setSubmitting(false);
                                 }, 100);
@@ -159,11 +143,11 @@ const validationSchema = yup.object({
                             <h3 className="text-center" style={{fontWeight: '300'}}>Register</h3>
                         <Form.Group>
                             <Form.Label>Pilih Seminar</Form.Label>
-                            <Form.Control as="select" name="seminar" onChange={handleChange} onBlur={handleBlur} value={values.seminar} isInvalid={!!errors.seminar && touched.seminar}>
+                            <Form.Control as="select" name="id_seminar" onChange={handleChange} onBlur={handleBlur} value={values.id_seminar} isInvalid={!!errors.id_seminar && touched.id_seminar}>
                             <option value="">Pilih Seminar</option>
                             {ListSeminar}
                             </Form.Control>
-                            {errors.seminar && touched.seminar && <Form.Control.Feedback type="invalid">{errors.seminar}</Form.Control.Feedback>}
+                            {errors.id_seminar && touched.id_seminar && <Form.Control.Feedback type="invalid">{errors.id_seminar}</Form.Control.Feedback>}
                         </Form.Group>
 
                         <Form.Group>
@@ -274,10 +258,6 @@ const validationSchema = yup.object({
                      </Form>
                      )}
                     </Formik>
-                                {
-                                    this.state.gagalLogin
-                                }
-                               
                                
                             </Card.Body>
                         </Card>

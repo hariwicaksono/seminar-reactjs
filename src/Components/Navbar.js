@@ -58,7 +58,6 @@ class MyNavbar extends Component{
                :
                <>
             <NavDropdown title="Untuk Member" id="basic-nav-dropdown">
-            <NavDropdown.Item as={Link} to='/member'>Data Registrasi</NavDropdown.Item>
             <NavDropdown.Item as={Link} to='/konfirmasi'>Konfirmasi Bayar</NavDropdown.Item>
             </NavDropdown>
                </>

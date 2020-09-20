@@ -12,20 +12,7 @@ import Skeleton from 'react-loading-skeleton'
 const TITLE = 'Konfirmasi Pembayaran - Seminar App'
 const validationSchema = yup.object({
     id_peserta: yup.string().required('Id Pendaftaran harus dipilih'),
-    id_seminar: yup.string().required('Id Seminar harus dipilih').test({
-        message: () => 'Nomor registrasi dengan judul seminar tersebut sudah melakukan pembayaran',
-        test: async (pst, smr) => {
-          try {
-              const res = await API.CheckPembayaran(pst, smr)
-              const result = await res.data.results;
-              return !result
-              } catch (error) {
-              console.log(error.response); 
-              return error.response;
-              }
-        },
-      }),
-
+    id_seminar: yup.string().required('Id Seminar harus dipilih'),
     bank_tujuan: yup.string().required('Bank Tujuan harus dipilih'),
     jml_trf: yup.number().required('Jumlah Transfer harus diisi').typeError("Harus berupa angka"),
     pemilik_rek: yup.string().required('Nama Pemilik Rekening harus diisi'),
@@ -38,6 +25,7 @@ class Konfirmasi extends Component {
         this.state = {
             Bank: [],
             Seminar: [],
+            checked: null,
             id_seminar: '',
             id_peserta: '',
             foto: '',
@@ -81,6 +69,8 @@ class Konfirmasi extends Component {
                 loading: false
             })
         })
+        
+        
 
     }
 
@@ -94,8 +84,11 @@ class Konfirmasi extends Component {
             <option value={s.id_seminar} key={i}>{s.nm_seminar}</option>      
         ))
 
+        
+
         return (
             <>
+
             <Helmet>
             <title>{ TITLE }</title>
             </Helmet>
@@ -127,28 +120,39 @@ class Konfirmasi extends Component {
                                       }
                                     )
                                   );
-                                API.PostPembayaran(
-                                    { 
-                                        id_peserta: values.id_peserta,
-                                        id_seminar: values.id_seminar,
-                                        bank_tujuan: values.bank_tujuan,
-                                        jml_trf: values.jml_trf,
-                                        pemilik_rek: values.pemilik_rek,
-                                        info_tambahan: values.info_tambahan,
-                                        foto: values.foto.name
-                                    }
-                                  ).then(res=>{
-                                    //console.log(res)
-                                    if (res.status === 1 ) {
-                                        //this.props.history.push('/login')
-                                        NotificationManager.success('Konfirmasi Pembayaran Berhasil');
+
+                                  API.CheckPembayaran(values.id_peserta, values.id_seminar).then(res=>{
+                                    console.log(res)
+                                    if (res.data.results.length > 0) {
+                                        NotificationManager.error('Nomor registrasi dengan judul seminar tersebut sudah melakukan pembayaran');
                                     } else {
-                                        NotificationManager.error('Gagal, periksa kembali');
+                                        API.PostPembayaran(
+                                            { 
+                                                id_peserta: values.id_peserta,
+                                                id_seminar: values.id_seminar,
+                                                bank_tujuan: values.bank_tujuan,
+                                                jml_trf: values.jml_trf,
+                                                pemilik_rek: values.pemilik_rek,
+                                                info_tambahan: values.info_tambahan,
+                                                foto: values.foto.name
+                                            }
+                                          ).then(res=>{
+                                            //console.log(res)
+                                            if (res.status === 1 ) {
+                                                //this.props.history.push('/login')
+                                                NotificationManager.success('Konfirmasi Pembayaran Berhasil');
+                                            } else {
+                                                NotificationManager.error('Gagal, periksa kembali');
+                                            }
+                                        })
+                                        API.PostFoto(values.foto, values.foto.name).then(res => {
+                                            console.log('img_ok')
+                                        })
+                                        
                                     }
+                                     
                                 })
-                                API.PostFoto(values.foto, values.foto.name).then(res => {
-                                    console.log('img_ok')
-                                })
+
                                 setTimeout(() => {
                                 actions.setSubmitting(false);
                                 }, 100);
@@ -171,14 +175,14 @@ class Konfirmasi extends Component {
                             <Form.Group className="mb-0">
                             <Form.Label>Nomor Pendaftaran</Form.Label>
                             
-                            <Field type="radio" className="radio-btn positive" name="id_peserta" id="radio-id_peserta" value={this.state.id_peserta} onChange={handleChange} feedback={errors.id_peserta} isInvalid={!!errors.id_peserta && touched.id_peserta}  />
+                            <Field type="radio" className="radio-btn positive" name="id_peserta" id="radio-id_peserta" value={this.state.id_peserta} onChange={handleChange}  />
                             {this.state.loading ?
                             <>
                             <p><Skeleton height={55} /></p>
                             </>
                             :
                             <>
-                            <label className="radio-label" for="radio-id_peserta">{this.state.id_peserta}</label>
+                            <label className="radio-label" htmlFor="radio-id_peserta">{this.state.id_peserta}</label>
                             </>
                             }
                             {errors.id_peserta && touched.id_peserta && <div className="error mb-1" style={{marginTop: '-5px'}}>{errors.id_peserta}</div>}
@@ -224,9 +228,9 @@ class Konfirmasi extends Component {
                             </Form.Group>
 
                             <Form.Group>
-                            <Form.Label for="foto">Bukti Bayar</Form.Label>
+                            <Form.Label htmlFor="foto">Bukti Bayar</Form.Label>
                             
-                            <Form.File className="form-control" name="foto" id="foto" onChange={(event) => {setFieldValue("foto", event.currentTarget.files[0]);}} onBlue={handleBlur} isInvalid={!!errors.foto && touched.foto} />
+                            <Form.File className="form-control" name="foto" id="foto" onChange={(event) => {setFieldValue("foto", event.currentTarget.files[0]);}} onBlur={handleBlur} isInvalid={!!errors.foto && touched.foto} />
                             {errors.foto && touched.foto && <div className="error">{errors.foto}</div>}
                             {this.state.fotoPreviewUrl ? <img src={this.state.fotoPreviewUrl} width="200" alt="" className="mt-2 img-fluid" /> : ""}
                             </Form.Group>

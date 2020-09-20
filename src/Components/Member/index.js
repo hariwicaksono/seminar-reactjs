@@ -35,13 +35,13 @@ class index extends Component {
                       bayar: res.data,
                       loading: false
                     })
-                    NotificationManager.info('Selamat datang di Dashbor Member Seminar');
+                    //NotificationManager.info('Selamat datang di Dashbor Member Seminar');
                   } else {
                     this.setState({
                       bayar: res.data,
                       loading: false
                     })
-                    NotificationManager.error('Perhatian, anda belum melakukan Pendaftaran');
+                    NotificationManager.warning('Perhatian, anda belum melakukan Pendaftaran');
                   }
             }, 100);
             
@@ -65,7 +65,7 @@ class index extends Component {
  
     render() {
         const ListTable = this.state.bayar.map((s, i) => (
-            <tr key={s.id_seminar}>
+            <tr key={s.id_peserta}>
                
                     <td>{i + 1}</td>
                     <td>{s.id_peserta}</td>
@@ -134,33 +134,9 @@ class index extends Component {
                         <img src="./images/bg-informasi.png" className="mb-3 img-fluid" width="200" alt="Not Data Found" />
                         <h4 className="mb-3">Anda Belum Melakukan Pembayaran</h4>
                         <hr/>
-                        <Button as={Link} to="/user/pendaftaran" variant="primary" size="lg">Form Pembayaran</Button>
+                        <Button as={Link} to="/konfirmasi" variant="primary" size="lg">Konfirmasi Pembayaran</Button>
                     </div>
                     
-                    </>
-                    )
-
-                    )}
-                    </Card>
-
-                    {this.state.bayar.length > 0 ? (
-
-                    (this.state.loading
-                    ?
-                    <Loader options={options} className="spinner" />
-                    :
-
-                    <>
-                    </>
-                    )
-
-                    ): (
-
-                    (this.state.loading ?
-                    <Loader options={options} className="spinner" />
-                    :
-                    <>
-
                     <Alert variant="warning" className="shadow">
                     <Alert.Heading>Informasi Seminar</Alert.Heading>
                     <p>
@@ -173,13 +149,12 @@ class index extends Component {
                     Nama: {this.state.pemilik_rek}
                     </p>
                     </Alert>
-
                     </>
                     )
 
                     )}
+                    </Card>
 
-                    
 
                 </Col>
                 </Row>
