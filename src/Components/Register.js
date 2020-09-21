@@ -98,8 +98,7 @@ const validationSchema = yup.object({
                     </li>
 
                     </ul>
-                        <Card>
-                            <Card.Body>
+                        <Card className="shadow" body>
                                
                             <Formik
                             initialValues={{ id_seminar: '', jns_id: '', no_id: '', nm_peserta: '', kelamin: '', pendidikan: '', usia: '', alamat: '', kota_kab: '', kodepos: '', no_hp: '', email: '' }}
@@ -259,7 +258,6 @@ const validationSchema = yup.object({
                      )}
                     </Formik>
                                
-                            </Card.Body>
                         </Card>
                     </Col>
                     </Row>

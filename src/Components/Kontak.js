@@ -52,15 +52,15 @@ class Kontak extends Component {
                         <Breadcrumb.Item active>Kontak</Breadcrumb.Item>
                         </Breadcrumb>
 
-                        <Card className="mb-2" body>
+                        <Card className="shadow" body>
                         {this.state.loading ?
                         <>
-                        <h5><Skeleton height={25} /></h5>
+                        <h3 className="mb-3"><Skeleton height={30} /></h3>
                         <p><Skeleton count={6} /></p>
                         </>
                         :
                         <>
-                        <h4>Kontak</h4>
+                        <h3 className="mb-3">Kontak</h3>
                         <p>{this.state.nama}<br/>
                         Alamat: {this.state.alamat}<br/>
                         Kodepos: {this.state.kodepos}<br/>

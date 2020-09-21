@@ -20,8 +20,7 @@ class Login extends Component {
         super(props)
         this.state = {
             isLogin:false,
-            idLogin:"",
-            gagalLogin : ""
+            idLogin:""
         }
 
     }
@@ -45,9 +44,8 @@ class Login extends Component {
                 </li>
 
                 </ul>
-                        <Card>
-                            <Card.Body>
-                               
+                        <Card className="shadow" body>
+                            
                             <Formik
                             initialValues={{ username: '', password: '', level:'USER' }}
                             onSubmit={(values, actions) => {
@@ -108,12 +106,7 @@ class Login extends Component {
                      </Form>
                      )}
                     </Formik>
-                                {
-                                    this.state.gagalLogin
-                                }
-                               
-                               
-                            </Card.Body>
+
                         </Card>
                     </Col>
                     </Row>

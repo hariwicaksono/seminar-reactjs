@@ -43,16 +43,16 @@ class CaraDaftar extends Component {
                         <Breadcrumb.Item active>Cara Daftar</Breadcrumb.Item>
                         </Breadcrumb>
 
-                        <Card className="mb-2" body>
+                        <Card className="shadow" body>
                         {this.state.loading ?
                         <>
-                        <h5><Skeleton height={25} /></h5>
-                        <p><Skeleton count={3} /></p>
+                        <h3 className="mb-3"><Skeleton height={30} /></h3>
+                        <p><Skeleton height={800} /></p>
                         </>
                         :
                         <>
-                        <h4>Cara Pendaftaran</h4>
-                        <p className="text-center"><img src={this.state.url+this.state.img} className="img-fluid" alt="" /><br/>
+                        <h3 className="mb-3">Cara Pendaftaran</h3>
+                        <p className="text-center"><img src={this.state.url+this.state.img} className="img-fluid" alt="Cara Daftar" /><br/>
                         </p>
                         </>
                         }

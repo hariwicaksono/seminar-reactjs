@@ -8,6 +8,7 @@ import HomePage from "../../Components/Home"
 import Detail from "../../Components/Detail"
 import Kontak from "../../Components/Kontak"
 import Tentang from "../../Components/Tentang"
+import Kalender from "../../Components/Kalender"
 import CaraDaftar from "../../Components/CaraDaftar"
 import Register from "../../Components/Register"
 import Login from "../../Components/Login"
@@ -15,6 +16,7 @@ import AktivasiAkun from "../../Components/AktivasiAkun"
 import Member from "../../Components/Member"
 import Konfirmasi from "../../Components/Member/Konfirmasi"
 import Cetak from "../../Components/Member/Cetak"
+
 
 const MyRouter = () => {
     return(
@@ -24,6 +26,7 @@ const MyRouter = () => {
             <Route path="/detail/:id" component={Detail} />
             <Route path="/kontak" component={Kontak} />
             <Route path="/tentang" component={Tentang} />
+            <Route path="/kalender" component={Kalender} />
             <Route path="/caradaftar" component={CaraDaftar} />
             <PublicRoute path="/login" component={Login} />
             <Route path="/register" component={Register} />

@@ -116,6 +116,7 @@ const GetPembayaranById = (data) => GET_BY_ID('GetPembayaran?id=',data)
 const GetSeminarById = (data) => GET_BY_ID('GetSeminar?id=',data)
 const PostFoto = (data,name) => POST_FOTO('ImageUpload',data,name)
 const PostPembayaran = (data) => POST('Pembayaran',data);
+const GetKalender = () => GET('Kalender');
 
 const API = {
     GetAktifSeminar,
@@ -140,7 +141,8 @@ const API = {
     GetPembayaranById,
     GetSeminarById,
     PostFoto,
-    PostPembayaran
+    PostPembayaran,
+    GetKalender
 
 }
 

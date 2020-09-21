@@ -53,6 +53,7 @@ input.error {
     font-size: 80%;
     display: block;
 }
+svg{margin-bottom: 3px !important;}
 .alert-primary {
     border-left: 4px solid #24447b !important;
 }
@@ -384,4 +385,5 @@ table td {
 #searchResult{
     position: absolute;
     z-index: 9999
-   }
+}
+.fc-toolbar-chunk h2.fc-toolbar-title {font-size: 1rem;}
