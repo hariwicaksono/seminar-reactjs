@@ -16,7 +16,8 @@ import AktivasiAkun from "../../Components/AktivasiAkun"
 import Member from "../../Components/Member"
 import Konfirmasi from "../../Components/Member/Konfirmasi"
 import Cetak from "../../Components/Member/Cetak"
-
+import AdminLogin from "../../Components/Admin/Login"
+import Admin from "../../Components/Admin"
 
 const MyRouter = () => {
     return(
@@ -34,6 +35,8 @@ const MyRouter = () => {
             <PrivateRoute path="/member" component={Member} />
             <PrivateRoute path="/konfirmasi" component={Konfirmasi} />
             <PrivateRoute path="/cetak/:id" component={Cetak} />
+            <PublicRoute path="/auth/admin" component={AdminLogin} />
+            <PrivateRoute path="/admin" component={Admin} />
             <NotificationContainer />
         </ScrollToTop>
         </Switch>

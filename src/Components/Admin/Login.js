@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Link,Redirect,NavLink} from 'react-router-dom'
-import API from '../Configs/Axios'
+import API from '../../Configs/Axios'
 import { Helmet } from 'react-helmet'
 import { NotificationManager } from 'react-notifications'
 import {Container, Card, Row, Col, Spinner, Button, Form} from 'react-bootstrap'
@@ -35,32 +35,26 @@ class Login extends Component {
                     <Row className="justify-content-center">
                   
                     <Col lg="6">
-                    <ul className="nav nav-tabs nav-fill bg-white" style={{fontSize: '1.125rem', fontWeight: '500'}}>
-                <li className="nav-item">
-                    <NavLink className="nav-link active" to='/login'>Masuk</NavLink>
-                </li>
-                <li className="nav-item">
-                <NavLink className="nav-link" to='/register'>Daftar</NavLink>
-                </li>
 
-                </ul>
                         <Card className="shadow" body>
                             
                             <Formik
-                            initialValues={{ username: '', password: '', level:'USER' }}
+                            initialValues={{ username: '', password: '', level:'ADMIN' }}
                             onSubmit={(values, actions) => {
-                                //alert(JSON.stringify(values));
+                                alert(JSON.stringify(values));
                                 API.PostLogin(values).then(res=>{
-                                    if (res.id === "1" ) {
-                                        sessionStorage.setItem('isLogin',JSON.stringify(res.data))
+                                    console.log(res)
+                                    if (res.id === "2" ) {
+                                        sessionStorage.setItem('isAdmin',JSON.stringify(res.data))
                                         this.setState({
                                             isLogin:true,
-                                            idLogin:"1"
+                                            idLogin:"2"
                                         })
-                                        window.location.href = '/member';
-                                        NotificationManager.success('Login Berhasil');
+                                        window.location.href = '/admin';
+                                        NotificationManager.success('Berhasil masuk sistem');
+                                        
                                     } else {
-                                        NotificationManager.error('Login Gagal, periksa kembali username dan password anda');
+                                        NotificationManager.warning('Login gagal, periksa username dan password anda');
                                     }
                                 })
                                 setTimeout(() => {
@@ -79,19 +73,19 @@ class Login extends Component {
                                 isSubmitting
                             }) => (
                         <Form noValidate onSubmit={handleSubmit} className="px-5 py-3">
-                                 <h3 className="text-center" style={{fontWeight: '500'}}>Masuk ke Akun Seminar kamu!</h3>
+                                 <h3 className="text-center mb-3" style={{fontWeight: '500'}}>Login Administrator</h3>
                             <Form.Group>
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control type="text" name="username" placeholder="Email anda" className="form-control" onChange={handleChange} onBlur={handleBlur} value={values.username} isInvalid={!!errors.username && touched.username} />
+                                <Form.Label>Username</Form.Label>
+                                <Form.Control type="text" name="username" placeholder="Username" className="form-control" onChange={handleChange} onBlur={handleBlur} value={values.username} isInvalid={!!errors.username && touched.username} />
                                 {errors.username && touched.username && <Form.Control.Feedback type="invalid">{errors.username}</Form.Control.Feedback>}
                             </Form.Group>
                             <Form.Group>
-                                <Form.Label>Kata Sandi</Form.Label>
+                                <Form.Label>Password</Form.Label>
                                 <Form.Control type="password" name="password" placeholder="Password" className="form-control" onChange={handleChange} onBlur={handleBlur} isInvalid={!!errors.password && touched.password} />
                                 {errors.password && touched.password && <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>}
                             </Form.Group>
     
-                            <Button block size="lg" variant="primary" type="submit" disabled={isSubmitting}>{isSubmitting ? (
+                            <Button block size="lg" variant="outline-primary" type="submit" disabled={isSubmitting}>{isSubmitting ? (
                             <>
                             <Spinner
                             as="span"

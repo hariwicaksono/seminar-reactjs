@@ -61,17 +61,26 @@ class Home extends Component {
             <div key={i + 1}>
                     <h1 className="h2">{s.nm_seminar}</h1>
                     <p><CalendarEvent/> {s.tgl_seminar}, Pukul {moment(s.jam_seminar, "HH:mm:ss").format('HH:mm')} &mdash; <GeoAlt/> {s.lokasi_seminar}</p>
-                    <p className="lead">{s.headline_seminar}</p>
-                    <p>{s.deskripsi_seminar}</p>
-                    <Link to={'/detail/'+s.id_seminar} className="btn btn-primary" >DETAIL</Link>&nbsp;
-                    <Link to="/register" className="btn btn-success" >DAFTAR</Link>
+                    <p>{s.headline_seminar}</p>
+                    <Link to={'/detail/'+s.id_seminar} className="btn btn-outline-primary btn-lg" >DETAIL</Link>&nbsp;
+                    <Link to="/register" className="btn btn-outline-success btn-lg" >DAFTAR</Link>
             </div>
+        ))
+
+        const ListAktif_withSlide = this.state.AktifSeminar.map((s, i) => (
+            <Carousel.Item key={i + 1}>
+                    <h1 className="h2">{s.nm_seminar}</h1>
+                    <p><CalendarEvent/> {s.tgl_seminar}, Pukul {moment(s.jam_seminar, "HH:mm:ss").format('HH:mm')} &mdash; <GeoAlt/> {s.lokasi_seminar}</p>
+                    <p>{s.headline_seminar}</p>
+                    <Link to={'/detail/'+s.id_seminar} className="btn btn-outline-primary btn-lg" >DETAIL</Link>&nbsp;
+                    <Link to="/register" className="btn btn-outline-success btn-lg" >DAFTAR</Link>
+            </Carousel.Item>
         ))
         
         const ListArsip = this.state.ArsipSeminar.map((s, i) => (
             <div key={i + 1}>
-                    <h5>{s.nm_seminar} ({s.tgl_seminar})</h5>
-                    <p>{s.headline_seminar}</p>
+                    <h5>{s.nm_seminar}</h5>
+                    <p><CalendarEvent/> {s.tgl_seminar} &mdash; {s.headline_seminar}</p>
                     <Link to={'/detail/'+s.id_seminar} className="btn btn-primary" >DETAIL</Link>
              </div> 
         ))
@@ -87,25 +96,33 @@ class Home extends Component {
                         <>
                         <h1 className="h2"><Skeleton height={40} /></h1>
                         <p><Skeleton height={20} /></p>
-                        <p><Skeleton height={40} /></p>
-                        <p className="my-3"><Skeleton count={2} /></p>
-                        <Skeleton width={100} height={35} />
-                        <Skeleton width={100} height={35} />
+                        <p><Skeleton height={37} /></p>
+                        <Skeleton width={100} height={47} />
+                        <Skeleton width={100} height={47} />
                         </>
                         :
-                        <>
-                        {ListAktif}
-                        </>
+                            (this.state.AktifSeminar.length > 1 ?
+                            <>
+                            <Carousel indicators={false}>
+                            {ListAktif_withSlide}
+                            </Carousel>
+                            </>
+                            :
+                            <>
+                            {ListAktif}
+                            </>
+                            )
+                        
                         }
                         </Jumbotron>
 
-                        <div className="mb-3">
+                        <div className="mb-3" style={{fontWeight: '700'}}>
                             <Row>
                                 <Col>
-                                <Card as={Link} to="/caradaftar" bg="primary" text="light" className="mb-0" body><ArrowRepeat size="20"/> <strong>Cara Daftar</strong></Card>
+                                <Card as={Link} to="/caradaftar" bg="primary" text="light" className="mb-0" body><ArrowRepeat size="20"/> Cara Daftar</Card>
                                 </Col>
                                 <Col>
-                                <Card as={Link} to="/kalender" bg="info" text="light" className="mb-0" body><Calendar3 size="20"/> <strong>Kalender</strong></Card>
+                                <Card as={Link} to="/kalender" bg="info" text="light" className="mb-0" body><Calendar3 size="20"/> Kalender</Card>
                                 </Col>
                                 
                                 <Col>
@@ -116,6 +133,8 @@ class Home extends Component {
                         </div>
 
                         <Card className="shadow" body>
+                        <h5 style={{fontWeight: '700'}}>Seminar yang lalu</h5>
+                        <hr className="mt-0"/>
                         {this.state.loading ?
                         <>
                         <h5><Skeleton /></h5>

@@ -44,7 +44,7 @@ class MyNavbar extends Component{
      
         <Navbar className="shadow-sm border-bottom mb-3" expand="lg" sticky="top" style={{backgroundColor: '#fff'}}>
       <Container>
-        <Navbar.Brand as={Link} to='/'> 
+        <Navbar.Brand as={Link} to='/' style={{fontWeight: '700'}}> 
             Seminar
         </Navbar.Brand>
 

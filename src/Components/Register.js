@@ -89,12 +89,12 @@ const validationSchema = yup.object({
                     <Row>
                   
                     <Col>
-                    <ul className="nav nav-tabs nav-fill bg-white" style={{fontSize: '1.125rem'}}>
+                    <ul className="nav nav-tabs nav-fill bg-white" style={{fontSize: '1.125rem', fontWeight: '500'}}>
                     <li className="nav-item">
                         <NavLink className="nav-link" to='/login'>Masuk</NavLink>
                     </li>
                     <li className="nav-item">
-                    <NavLink className="nav-link active font-weight-bold" to='/register'>Daftar</NavLink>
+                    <NavLink className="nav-link active" to='/register'>Daftar</NavLink>
                     </li>
 
                     </ul>
@@ -139,7 +139,7 @@ const validationSchema = yup.object({
                                 isSubmitting
                             }) => (
                         <Form noValidate onSubmit={handleSubmit} className="px-3">
-                            <h3 className="text-center" style={{fontWeight: '300'}}>Register</h3>
+                            <h3 className="text-center" style={{fontWeight: '500'}}>Register</h3>
                         <Form.Group>
                             <Form.Label>Pilih Seminar</Form.Label>
                             <Form.Control as="select" name="id_seminar" onChange={handleChange} onBlur={handleBlur} value={values.id_seminar} isInvalid={!!errors.id_seminar && touched.id_seminar}>
