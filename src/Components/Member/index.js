@@ -27,7 +27,6 @@ class index extends Component {
     componentDidMount = () => {
         const datas = JSON.parse(sessionStorage.getItem('isLogin'))
         const id = datas[0].email_peserta
-        
         API.GetPembayaranById(id).then(res=>{
             setTimeout(() => {
                 if (res.data.length > 0) {
@@ -85,6 +84,7 @@ class index extends Component {
            <Helmet>
                 <title>{ TITLE }</title>
             </Helmet>
+         
                 <Container>
 
                 <Breadcrumb className="card px-3 mb-2">
@@ -94,7 +94,7 @@ class index extends Component {
 
                 <Row className="justify-content-center">
                 <Col md={12}>
-                <Card className="shadow-sm mb-2 " body>
+                <Card className="shadow mb-2 " body>
 
                     {this.state.bayar.length > 0 ? (
 

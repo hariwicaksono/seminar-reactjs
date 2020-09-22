@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import Navbar from '../../Components/Navbar'
 import Footer from '../../Components/Footer'
 //import Appbar from '../../Components/Appbar'
-//import Sidebar from '../../Components/Sidebar'
+import Sidebar from '../../Components/Sidebar'
 import { Helmet } from 'react-helmet'
 import MyRouter from '../../Configs/Routes'
+import { isLogin, isAdmin } from '../../Utils'
 
 const TITLE = 'Seminar App'
 
@@ -42,8 +43,18 @@ class Home extends Component {
             <Navbar toggleMenu={this.toggleMenu} />
                 
                 <div className="wrapper">
+                {isAdmin() ?
+                <>
+                <Sidebar showMenu={this.state.showMenu} />
+                </>
+                :
+                <>
+            
+                </>
+                } 
 
-                <div id="content">
+                
+                <div id="content" className="mt-3">
 
                 <MyRouter/>
  

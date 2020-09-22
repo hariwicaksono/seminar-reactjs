@@ -95,14 +95,14 @@ const POST_FOTO = (path,data,name) => {
 
 const GetAktifSeminar = () => GET('GetAktifSeminar');
 const GetArsipSeminar = () => GET('GetArsipSeminar');
-const GetIdSeminar = (data) => GET_ID('Seminar?id=',data)
+const GetIdSeminar = (data) => GET_ID('Seminar?id=',data);
 const GetIdentitasWeb = () => GET('IdentitasWeb');
 const GetBank = () => GET('Bank');
-const PostLogin = (data) => POST('Login',data)
+const PostLogin = (data) => POST('Login',data);
 const GetKartuIdentitas = () => GET('KartuIdentitas');
 const GetPendidikan = () => GET('Pendidikan');
 const GetKabupaten = () => GET('Kabupaten');
-const CariSeminar = (data) => SEARCH('Search?id=',data)
+const CariSeminar = (data) => SEARCH('Search?id=',data);
 const GetProfilWeb = () => GET('ProfilWeb');
 const GetCaraDaftar = () => GET('CaraDaftar');
 const PostPeserta = (data) => POST('Peserta',data);
@@ -111,12 +111,13 @@ const CheckNokartu = (data) => Axios(RootPath+`CheckNokartu?no_id=${data}`);
 const CheckPembayaran = (id_peserta, id_seminar) => Axios(RootPath+`CheckPembayaran?id_peserta=${id_peserta}&id_seminar=${id_seminar}`);
 const CheckSeminar = (data) => Axios(RootPath+`CheckSeminar?id=${data}`);
 const PutAktivasiAkun = (data) => PUT('AktivasiAkun',data);
-const GetIdPeserta = (data) => GET_ID('Peserta?id=',data)
-const GetPembayaranById = (data) => GET_BY_ID('GetPembayaran?id=',data)
-const GetSeminarById = (data) => GET_BY_ID('GetSeminar?id=',data)
-const PostFoto = (data,name) => POST_FOTO('ImageUpload',data,name)
+const GetIdPeserta = (data) => GET_ID('Peserta?id=',data);
+const GetPembayaranById = (data) => GET_BY_ID('GetPembayaran?id=',data);
+const GetSeminarById = (data) => GET_BY_ID('GetSeminar?id=',data);
+const PostFoto = (data,name) => POST_FOTO('ImageUpload',data,name);
 const PostPembayaran = (data) => POST('Pembayaran',data);
 const GetKalender = () => GET('Kalender');
+const GetIdAdmin = (data) => GET_ID('Pengguna?id=',data);
 
 const API = {
     GetAktifSeminar,
@@ -142,7 +143,8 @@ const API = {
     GetSeminarById,
     PostFoto,
     PostPembayaran,
-    GetKalender
+    GetKalender,
+    GetIdAdmin
 
 }
 

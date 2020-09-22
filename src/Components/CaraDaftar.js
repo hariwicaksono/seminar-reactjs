@@ -37,7 +37,6 @@ class CaraDaftar extends Component {
             </Helmet>
                 <Container>
                     
-              
                         <Breadcrumb className="card px-3 mb-2">
                         <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/" }}>Home</Breadcrumb.Item>
                         <Breadcrumb.Item active>Cara Daftar</Breadcrumb.Item>
@@ -52,7 +51,8 @@ class CaraDaftar extends Component {
                         :
                         <>
                         <h3 className="mb-3">Cara Pendaftaran</h3>
-                        <p className="text-center"><img src={this.state.url+this.state.img} className="img-fluid" alt="Cara Daftar" /><br/>
+                        <p className="text-center">
+                            <img src={this.state.url+this.state.img} className="img-fluid" alt="Cara Daftar" />
                         </p>
                         </>
                         }

@@ -5,7 +5,7 @@ import { CalendarEvent, GeoAlt, ArrowRepeat, Calendar3, InfoCircle } from "react
 import API from '../Configs/Axios'
 //import Loader from 'react-loader'
 import Skeleton from 'react-loading-skeleton'
-import { isLogin } from '../Utils'
+import { isLogin, isAdmin } from '../Utils'
 import moment from 'moment'
 import 'moment/locale/id'
 //import FullCalendar from '@fullcalendar/react'
@@ -55,14 +55,17 @@ class Home extends Component {
     render() {
         if (isLogin()) {
             return( <Redirect to="/member" /> )
+        } 
+        if (isAdmin()) {
+            return( <Redirect to="/admin" /> )
         }
         
         const ListAktif = this.state.AktifSeminar.map((s, i) => (
             <div key={i + 1}>
                     <h1 className="h2">{s.nm_seminar}</h1>
-                    <p><CalendarEvent/> {s.tgl_seminar}, Pukul {moment(s.jam_seminar, "HH:mm:ss").format('HH:mm')} &mdash; <GeoAlt/> {s.lokasi_seminar}</p>
-                    <p>{s.headline_seminar}</p>
-                    <Link to={'/detail/'+s.id_seminar} className="btn btn-outline-primary btn-lg" >DETAIL</Link>&nbsp;
+                    <p className="mb-3"><CalendarEvent/> {moment(s.tgl_seminar).format('DD-MM-YYYY')}, Pukul {moment(s.jam_seminar, "HH:mm:ss").format('HH:mm')} &mdash; <GeoAlt/> {s.lokasi_seminar}</p>
+                    <p className="lead">{s.headline_seminar}</p>
+                    <Link to={'/detail/'+s.id_seminar} className="btn btn-outline-primary btn-lg">DETAIL</Link>&nbsp;
                     <Link to="/register" className="btn btn-outline-success btn-lg" >DAFTAR</Link>
             </div>
         ))
@@ -70,9 +73,9 @@ class Home extends Component {
         const ListAktif_withSlide = this.state.AktifSeminar.map((s, i) => (
             <Carousel.Item key={i + 1}>
                     <h1 className="h2">{s.nm_seminar}</h1>
-                    <p><CalendarEvent/> {s.tgl_seminar}, Pukul {moment(s.jam_seminar, "HH:mm:ss").format('HH:mm')} &mdash; <GeoAlt/> {s.lokasi_seminar}</p>
-                    <p>{s.headline_seminar}</p>
-                    <Link to={'/detail/'+s.id_seminar} className="btn btn-outline-primary btn-lg" >DETAIL</Link>&nbsp;
+                    <p className="mb-3"><CalendarEvent/> {moment(s.tgl_seminar).format('DD-MM-YYYY')}, Pukul {moment(s.jam_seminar, "HH:mm:ss").format('HH:mm')} &mdash; <GeoAlt/> {s.lokasi_seminar}</p>
+                    <p className="lead">{s.headline_seminar}</p>
+                    <Link to={'/detail/'+s.id_seminar} className="btn btn-outline-primary btn-lg">DETAIL</Link>&nbsp;
                     <Link to="/register" className="btn btn-outline-success btn-lg" >DAFTAR</Link>
             </Carousel.Item>
         ))
@@ -84,19 +87,18 @@ class Home extends Component {
                     <Link to={'/detail/'+s.id_seminar} className="btn btn-primary" >DETAIL</Link>
              </div> 
         ))
-
+ 
         return (
             <>
-                <Container>
-                   
+                <Container> 
                     <Row>
                         <Col>
-                        <Jumbotron className="shadow text-center">
+                        <Jumbotron className="shadow text-center py-5">
                         {this.state.loading ?
                         <>
                         <h1 className="h2"><Skeleton height={40} /></h1>
-                        <p><Skeleton height={20} /></p>
-                        <p><Skeleton height={37} /></p>
+                        <p className="mb-3"><Skeleton height={20} /></p>
+                        <p className="lead"><Skeleton height={48} /></p>
                         <Skeleton width={100} height={47} />
                         <Skeleton width={100} height={47} />
                         </>

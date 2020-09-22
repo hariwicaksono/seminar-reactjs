@@ -16,7 +16,6 @@ import AktivasiAkun from "../../Components/AktivasiAkun"
 import Member from "../../Components/Member"
 import Konfirmasi from "../../Components/Member/Konfirmasi"
 import Cetak from "../../Components/Member/Cetak"
-import AdminLogin from "../../Components/Admin/Login"
 import Admin from "../../Components/Admin"
 
 const MyRouter = () => {
@@ -29,13 +28,12 @@ const MyRouter = () => {
             <Route path="/tentang" component={Tentang} />
             <Route path="/kalender" component={Kalender} />
             <Route path="/caradaftar" component={CaraDaftar} />
-            <PublicRoute path="/login" component={Login} />
-            <Route path="/register" component={Register} />
+            <PublicRoute path="/login" component={Login} restricted/>
+            <PublicRoute path="/register" component={Register} restricted/>
             <Route path="/aktivasi_akun/:id" component={AktivasiAkun} />
             <PrivateRoute path="/member" component={Member} />
             <PrivateRoute path="/konfirmasi" component={Konfirmasi} />
             <PrivateRoute path="/cetak/:id" component={Cetak} />
-            <PublicRoute path="/auth/admin" component={AdminLogin} />
             <PrivateRoute path="/admin" component={Admin} />
             <NotificationContainer />
         </ScrollToTop>
