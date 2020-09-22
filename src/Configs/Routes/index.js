@@ -17,6 +17,7 @@ import Member from "../../Components/Member"
 import Konfirmasi from "../../Components/Member/Konfirmasi"
 import Cetak from "../../Components/Member/Cetak"
 import Admin from "../../Components/Admin"
+import IdentitasWeb from "../../Components/Admin/IdentitasWeb"
 
 const MyRouter = () => {
     return(
@@ -35,6 +36,7 @@ const MyRouter = () => {
             <PrivateRoute path="/konfirmasi" component={Konfirmasi} />
             <PrivateRoute path="/cetak/:id" component={Cetak} />
             <PrivateRoute path="/admin" component={Admin} />
+            <PrivateRoute path="/identitasweb" component={IdentitasWeb} />
             <NotificationContainer />
         </ScrollToTop>
         </Switch>

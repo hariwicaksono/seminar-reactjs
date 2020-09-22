@@ -18,7 +18,9 @@ function SubMenu() {
         <Collapse in={open1} id="collapseKonten">
         <ul className="list-unstyled">
             <li>
-                <a href="#">Identitas Web</a>
+            <NavLink to={'/identitasweb'} title="Identitas Web" alt="Identitas Web">
+            <span>Identitas Web</span>
+            </NavLink>
             </li>
             <li>
                 <a href="#">Profil Website</a>

@@ -97,6 +97,7 @@ const GetAktifSeminar = () => GET('GetAktifSeminar');
 const GetArsipSeminar = () => GET('GetArsipSeminar');
 const GetIdSeminar = (data) => GET_ID('Seminar?id=',data);
 const GetIdentitasWeb = () => GET('IdentitasWeb');
+const PutIdentitasWeb = (data) => PUT('IdentitasWeb',data);
 const GetBank = () => GET('Bank');
 const PostLogin = (data) => POST('Login',data);
 const GetKartuIdentitas = () => GET('KartuIdentitas');
@@ -118,12 +119,17 @@ const PostFoto = (data,name) => POST_FOTO('ImageUpload',data,name);
 const PostPembayaran = (data) => POST('Pembayaran',data);
 const GetKalender = () => GET('Kalender');
 const GetIdAdmin = (data) => GET_ID('Pengguna?id=',data);
+const CountSeminar = () => GET('CountSeminar');
+const CountPeserta = () => GET('CountPeserta');
+const CountBayarnew = () => GET('CountBayarnew');
+const CountBayarcancel = () => GET('CountBayarcancel');
 
 const API = {
     GetAktifSeminar,
     GetArsipSeminar,
     GetIdSeminar,
     GetIdentitasWeb,
+    PutIdentitasWeb,
     GetBank,
     PostLogin,
     GetKartuIdentitas,
@@ -144,8 +150,11 @@ const API = {
     PostFoto,
     PostPembayaran,
     GetKalender,
-    GetIdAdmin
-
+    GetIdAdmin,
+    CountSeminar,
+    CountPeserta,
+    CountBayarnew,
+    CountBayarcancel
 }
 
 export default API
