@@ -6,25 +6,33 @@ import { Helmet } from 'react-helmet'
 //import Loader from 'react-loader'
 import Skeleton from 'react-loading-skeleton'
 
-const TITLE = 'Kontak - Seminar App'
+const TITLE = 'Profil Kami - Seminar App'
 //var options = {lines: 13,length: 20,width: 10,radius: 30,scale: 0.35,corners: 1,color: '#fff',opacity: 0.25,rotate: 0,direction: 1,speed: 1,trail: 60,fps: 20,zIndex: 2e9,top: '50%',left: '50%',shadow: false,hwaccel: false,position: 'absolute'};
-class Tentang extends Component {
+class Profil extends Component {
     constructor(props){
         super(props)
         this.state = {
             nama : '',
+            error: '',
             loading: true
         }
     }
 
     componentDidMount = () => {
         API.GetProfilWeb().then(res=>{
+            if (res.data.length > 0) {
             setTimeout(() => this.setState({
                 nama : res.data[0].isi_profil,
                 loading: false
             }), 100);
+        } else {
+            this.setState({
+                error: "No Data Found",
+                loading: false
+            })
+        }
         }).catch(err => {
-            console.log(err)
+            console.log(err.response)
         })
     }
     render() {
@@ -38,20 +46,21 @@ class Tentang extends Component {
               
                         <Breadcrumb className="card px-3 mb-2">
                         <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/" }}>Home</Breadcrumb.Item>
-                        <Breadcrumb.Item active>Tentang</Breadcrumb.Item>
+                        <Breadcrumb.Item active>Profil</Breadcrumb.Item>
                         </Breadcrumb>
 
                         <Card className="shadow" body>
+                        <h3 className="mb-3">Profil Kami</h3>
+                        <p className="lead text-center">
+                        {this.state.error}
+                        </p>
                         {this.state.loading ?
                         <>
-                        <h3 className="mb-3"><Skeleton height={30} /></h3>
                         <p><Skeleton count={3} /></p>
                         </>
                         :
                         <>
-                        <h3 className="mb-3">Tentang Kami</h3>
-                        <p>{this.state.nama}<br/>
-                        </p>
+                        <p>{this.state.nama}</p>
                         </>
                         }
                         
@@ -63,4 +72,4 @@ class Tentang extends Component {
     }
 }
 
-export default Tentang
+export default Profil

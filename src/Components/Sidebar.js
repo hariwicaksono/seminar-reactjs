@@ -18,15 +18,19 @@ function SubMenu() {
         <Collapse in={open1} id="collapseKonten">
         <ul className="list-unstyled">
             <li>
-            <NavLink to={'/identitasweb'} title="Identitas Web" alt="Identitas Web">
+            <NavLink to={'/konten/identitasweb'} title="Identitas Web" alt="Identitas Web">
             <span>Identitas Web</span>
             </NavLink>
             </li>
             <li>
-                <a href="#">Profil Website</a>
+            <NavLink to={'/konten/profilweb'} title="Profil Web" alt="Profil Web">
+            <span>Profil Web</span>
+            </NavLink>
             </li>
             <li>
-                <a href="#">Cara Pendaftaran</a>
+            <NavLink to={'/konten/caradaftar'} title="Profil Web" alt="Profil Web">
+            <span>Cara Daftar</span>
+            </NavLink>
             </li>
         </ul>
         </Collapse>

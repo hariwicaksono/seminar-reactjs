@@ -6,3 +6,7 @@ export const SiteUrl = () => {
 export const ImagesUrl = () => {
     return "http://localhost/seminar-server/assets/images/"
 }
+
+export const UploadUrl = () => {
+    return "http://localhost/seminar-server/assets/images/uploads/"
+}

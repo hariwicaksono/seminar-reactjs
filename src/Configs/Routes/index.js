@@ -7,7 +7,7 @@ import PublicRoute from './Public';
 import HomePage from "../../Components/Home"
 import Detail from "../../Components/Detail"
 import Kontak from "../../Components/Kontak"
-import Tentang from "../../Components/Tentang"
+import Profil from "../../Components/Profil"
 import Kalender from "../../Components/Kalender"
 import CaraDaftar from "../../Components/CaraDaftar"
 import Register from "../../Components/Register"
@@ -17,7 +17,10 @@ import Member from "../../Components/Member"
 import Konfirmasi from "../../Components/Member/Konfirmasi"
 import Cetak from "../../Components/Member/Cetak"
 import Admin from "../../Components/Admin"
-import IdentitasWeb from "../../Components/Admin/IdentitasWeb"
+import AIdentitasWeb from "../../Components/Admin/IdentitasWeb"
+import AProfilWeb from "../../Components/Admin/ProfilWeb"
+import ACaraDaftar from "../../Components/Admin/CaraDaftar"
+import APeserta from "../../Components/Admin/Peserta"
 
 const MyRouter = () => {
     return(
@@ -26,7 +29,7 @@ const MyRouter = () => {
             <Route path="/" component={HomePage} exact />
             <Route path="/detail/:id" component={Detail} />
             <Route path="/kontak" component={Kontak} />
-            <Route path="/tentang" component={Tentang} />
+            <Route path="/profil" component={Profil} />
             <Route path="/kalender" component={Kalender} />
             <Route path="/caradaftar" component={CaraDaftar} />
             <PublicRoute path="/login" component={Login} restricted/>
@@ -36,7 +39,10 @@ const MyRouter = () => {
             <PrivateRoute path="/konfirmasi" component={Konfirmasi} />
             <PrivateRoute path="/cetak/:id" component={Cetak} />
             <PrivateRoute path="/admin" component={Admin} />
-            <PrivateRoute path="/identitasweb" component={IdentitasWeb} />
+            <PrivateRoute path="/konten/identitasweb" component={AIdentitasWeb} />
+            <PrivateRoute path="/konten/profilweb" component={AProfilWeb} />
+            <PrivateRoute path="/konten/caradaftar" component={ACaraDaftar} />
+            <PrivateRoute path="/peserta" component={APeserta} />
             <NotificationContainer />
         </ScrollToTop>
         </Switch>

@@ -60,7 +60,7 @@ class IdentitasWeb extends Component {
         return (
             <>
             <Helmet>
-            <title>{ TITLE }</title>
+            <title>{ "Admin"+" - "+TITLE }</title>
             </Helmet>
                 <Container fluid>
                 <Breadcrumb className="card px-3 mb-2">
@@ -91,12 +91,19 @@ class IdentitasWeb extends Component {
                             }}
                             onSubmit={(values, actions) => {
                                 alert(JSON.stringify(values));
+                                
                                 API.PutIdentitasWeb(values).then(res=>{
-                                    console.log(res)
+                                    //console.log(res)
+                                    if (res.status === 1 ) {
+                                        NotificationManager.success('Data berhasil disimpan');
+                                    } 
+                                    
+                                }).catch(err => {
+                                    console.log(err.response)
+                                    NotificationManager.warning('Tidak ada data yang diubah');
 
-                                    NotificationManager.success('Berhasil memperbarui');
-                                   
                                 })
+                                
                                 setTimeout(() => {
                                 actions.setSubmitting(false);
                                 }, 1000);
