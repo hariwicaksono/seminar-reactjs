@@ -10309,11 +10309,11 @@ pre[class*="language-"] {
     margin-left: 0.75rem; }
 
 thead tr th {
-  font-weight: 400;
+  font-weight: 500;
   color: #343a40; }
 
 tbody tr th {
-  font-weight: 400; }
+  font-weight: 500; }
 
 .table thead th {
   border-bottom-width: 1px; }

@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
-import { Container, Row, Col, Card } from 'react-bootstrap'
+import { Container, Table, Row, Col, Card } from 'react-bootstrap'
 import ReactPaginate from 'react-paginate'
-import {ImagesUrl} from '../Configs/Axios'
-import { BsChevronDoubleLeft, BsChevronDoubleRight } from "react-icons/bs";
+//import {ImagesUrl} from '../Configs/Axios'
+//import { BsChevronDoubleLeft, BsChevronDoubleRight } from "react-icons/bs";
 
-class Produk extends Component {
+class TbPeserta extends Component {
     constructor(props){
         super(props)
         this.state={
-            url : ImagesUrl(),
+           // url : ImagesUrl(),
             offset: 0,
-            perPage: 8,
+            perPage: 5,
             currentPage: 0
         }
         this.handlePageClick = this
@@ -21,17 +21,14 @@ class Produk extends Component {
     getHandler = () => {
        
                 const slice = this.props.data.slice(this.state.offset, this.state.offset + this.state.perPage)
-                const ListProduk = slice.map(produk => (
-                    <div className="col-md-3" key={produk.id_produk}>
-                    <Card className="shadow-sm">
-                        <Card.Img variant="top" src={this.state.url+produk.foto_produk} alt={produk.nama_produk} />
-                        <Card.Body>
-                            <Card.Text>Rp {produk.harga_produk}<br/>
-                            {produk.nama_produk}</Card.Text>
-                            <Link to={'/detail/'+produk.id_produk} className="btn btn-success" >DETAIL</Link>
-                        </Card.Body>
-                    </Card>
-                    </div>
+                const ListProduk = slice.map((p,i) => (
+                    <tr key={i+1}>
+                        <td>{i+1}</td>
+                    <td>{p.id_peserta}</td>
+                            <td>{p.nama_peserta}</td>
+                            
+                   
+                    </tr>
                 ))
 
                 this.setState({
@@ -60,9 +57,20 @@ class Produk extends Component {
     render() {
         return (
             <>
-            <Row>
-                {this.state.ListProduk}
-            </Row>
+            <Table striped hover size="sm">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+    </tr>
+  </thead>
+  <tbody>
+  {this.state.ListProduk}
+  </tbody>
+</Table>
+
+
             <div className="mb-2">
                 <ReactPaginate
                 containerClassName="pagination"
@@ -75,8 +83,8 @@ class Produk extends Component {
                 previousLinkClassName="page-link"
                 nextLinkClassName="page-link"
                 activeClassName="active"
-                previousLabel={<BsChevronDoubleLeft/>}
-                nextLabel={<BsChevronDoubleRight/>}
+                previousLabel="prev"
+                nextLabel="next"
                 pageCount={this.state.pageCount}
                 marginPagesDisplayed={2}
                 pageRangeDisplayed={3}
@@ -88,4 +96,4 @@ class Produk extends Component {
     }
 }
 
-export default Produk
+export default TbPeserta
