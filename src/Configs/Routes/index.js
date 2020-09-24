@@ -21,6 +21,9 @@ import AIdentitasWeb from "../../Components/Admin/IdentitasWeb"
 import AProfilWeb from "../../Components/Admin/ProfilWeb"
 import ACaraDaftar from "../../Components/Admin/CaraDaftar"
 import APeserta from "../../Components/Admin/Peserta"
+import APsDetail from "../../Components/Admin/PsDetail"
+import APembayaran from "../../Components/Admin/Pembayaran"
+import APbDetail from "../../Components/Admin/PbDetail"
 
 const MyRouter = () => {
     return(
@@ -43,6 +46,9 @@ const MyRouter = () => {
             <PrivateRoute path="/konten/profilweb" component={AProfilWeb} />
             <PrivateRoute path="/konten/caradaftar" component={ACaraDaftar} />
             <PrivateRoute path="/peserta" component={APeserta} />
+            <PrivateRoute path="/ps/detail/:id" component={APsDetail} />
+            <PrivateRoute path="/pembayaran" component={APembayaran} />
+            <PrivateRoute path="/pb/detail/:id" component={APbDetail} />
             <NotificationContainer />
         </ScrollToTop>
         </Switch>

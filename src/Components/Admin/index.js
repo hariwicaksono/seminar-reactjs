@@ -61,7 +61,7 @@ class index extends Component {
                 <h2 className="text-light mb-3">Dashboard <small className="text-muted">Administrator</small></h2>
                 <Row>
                     <Col>
-                    <Card as={Link} to="" className="shadow" bg={'primary'} text={'light'} body>
+                    <Card as={Link} to="/seminar" className="shadow" bg={'primary'} text={'light'} body>
                         <h2 className="h1">{this.state.JumlahSeminar}
                         <FileEarmark size="60" className="float-right" style={{color: 'rgba(0, 0, 0, 0.3)'}}/>
                         </h2>
@@ -70,7 +70,7 @@ class index extends Component {
                     </Card>
                     </Col>
                     <Col>
-                    <Card as={Link} to="" className="shadow" bg={'success'} text={'light'} body>
+                    <Card as={Link} to="/peserta" className="shadow" bg={'success'} text={'light'} body>
                     <h2 className="h1">{this.state.JumlahPeserta}
                     <People size="60" className="float-right" style={{color: 'rgba(0, 0, 0, 0.3)'}}/>
                     </h2>
@@ -80,7 +80,7 @@ class index extends Component {
                     </Row>
                 <Row>
                     <Col>
-                    <Card as={Link} to="" className="shadow" bg={'warning'} text={'light'} body>
+                    <Card as={Link} to="/pembayaran" className="shadow" bg={'warning'} text={'light'} body>
                         <h2 className="h1">
                         {this.state.BayarNew}
                         <FileEarmarkPlus size="60" className="float-right" style={{color: 'rgba(0, 0, 0, 0.3)'}}/>
@@ -89,7 +89,7 @@ class index extends Component {
                         </Card>
                     </Col>
                     <Col>
-                    <Card as={Link} to="" className="shadow" bg={'danger'} text={'light'} body>
+                    <Card as={Link} to="/pembayaran" className="shadow" bg={'danger'} text={'light'} body>
                     <h2 className="h1">
                     {this.state.BayarCancel}
                     <FileEarmarkX size="60" className="float-right" style={{color: 'rgba(0, 0, 0, 0.3)'}}/>

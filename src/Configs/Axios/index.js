@@ -109,17 +109,21 @@ const PutProfilWeb = (data) => PUT('ProfilWeb',data);
 const GetCaraDaftar = () => GET('CaraDaftar');
 const PutCaraDaftar = (data) => PUT('CaraDaftar',data);
 const GetPeserta = () => GET('Peserta');
+const GetIdPeserta = (data) => GET_ID('Peserta?id=',data);
 const PostPeserta = (data) => POST('Peserta',data);
+const DeletePeserta = (id) => DELETE('Peserta/index_delete?id=',id)
 const CheckPeserta = (no_id, nm_peserta) => Axios(RootPath+`CheckPeserta?no_id=${no_id}&nm_peserta=${nm_peserta}`);
 const CheckNokartu = (data) => Axios(RootPath+`CheckNokartu?no_id=${data}`);
+const GetPembayaran = () => GET('Pembayaran');
+const GetIdPembayaran = (data) => GET_ID('Pembayaran?id=',data);
+const PostPembayaran = (data) => POST('Pembayaran',data);
+const DeletePembayaran = (id) => DELETE('Pembayaran/index_delete?id=',id)
+const GetPembayaranById = (data) => GET_BY_ID('GetPembayaran?id=',data);
 const CheckPembayaran = (id_peserta, id_seminar) => Axios(RootPath+`CheckPembayaran?id_peserta=${id_peserta}&id_seminar=${id_seminar}`);
 const CheckSeminar = (data) => Axios(RootPath+`CheckSeminar?id=${data}`);
 const PutAktivasiAkun = (data) => PUT('AktivasiAkun',data);
-const GetIdPeserta = (data) => GET_ID('Peserta?id=',data);
-const GetPembayaranById = (data) => GET_BY_ID('GetPembayaran?id=',data);
 const GetSeminarById = (data) => GET_BY_ID('GetSeminar?id=',data);
 const PostFoto = (data,name) => POST_FOTO('ImageUpload',data,name);
-const PostPembayaran = (data) => POST('Pembayaran',data);
 const GetKalender = () => GET('Kalender');
 const GetIdAdmin = (data) => GET_ID('Pengguna?id=',data);
 const CountSeminar = () => GET('CountSeminar');
@@ -144,17 +148,21 @@ const API = {
     GetCaraDaftar,
     PutCaraDaftar,
     GetPeserta,
+    GetIdPeserta,
     PostPeserta,
+    DeletePeserta,
     CheckPeserta,
     CheckNokartu,
+    GetPembayaran,
+    GetIdPembayaran,
+    PostPembayaran,
+    DeletePembayaran,
+    GetPembayaranById,
     CheckPembayaran,
     CheckSeminar,
     PutAktivasiAkun,
-    GetIdPeserta,
-    GetPembayaranById,
     GetSeminarById,
     PostFoto,
-    PostPembayaran,
     GetKalender,
     GetIdAdmin,
     CountSeminar,

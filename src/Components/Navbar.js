@@ -24,9 +24,9 @@ class MyNavbar extends Component{
             logout();
         }
         componentDidMount = () => {
-        if (sessionStorage.getItem('isLogin')) {
+        if (localStorage.getItem('isLogin')) {
            //console.log('LOGIN')
-            const data = JSON.parse(sessionStorage.getItem('isLogin'))
+            const data = JSON.parse(localStorage.getItem('isLogin'))
             const id = data[0].id_peserta
             API.GetIdPeserta(id).then(res=>{
                 this.setState({
@@ -36,9 +36,9 @@ class MyNavbar extends Component{
                 })
             })
                 
-        } else if (sessionStorage.getItem('isAdmin')) {
+        } else if (localStorage.getItem('isAdmin')) {
             //console.log('ADMIN')
-             const data = JSON.parse(sessionStorage.getItem('isAdmin'))
+             const data = JSON.parse(localStorage.getItem('isAdmin'))
              const id = data[0].usernm
              API.GetIdAdmin(id).then(res=>{
                  this.setState({

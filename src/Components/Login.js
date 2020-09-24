@@ -54,11 +54,11 @@ class Login extends Component {
                                 API.PostLogin(values).then(res=>{
                                     console.log(res)
                                     if (res.id === "1" ) {
-                                        sessionStorage.setItem('isLogin',JSON.stringify(res.data))
+                                        localStorage.setItem('isLogin',JSON.stringify(res.data))
                                         window.location.href = '/member';
                                         NotificationManager.success('Login Berhasil');
                                     } else if (res.id === "2" ) {
-                                        sessionStorage.setItem('isAdmin',JSON.stringify(res.data))
+                                        localStorage.setItem('isAdmin',JSON.stringify(res.data))
                                         window.location.href = '/admin';
                                         NotificationManager.success('Login Berhasil');
                                     } else {

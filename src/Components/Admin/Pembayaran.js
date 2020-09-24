@@ -13,10 +13,10 @@ import DataTable from 'react-data-table-component'
 import styled from 'styled-components'
 import Dialog from 'react-bootstrap-dialog'
 
-const TITLE = 'Peserta - Seminar App'
+const TITLE = 'Pembayaran - Seminar App'
 var options = {lines: 13,length: 20,width: 10,radius: 30,scale: 0.35,corners: 1,color: '#fff',opacity: 0.25,rotate: 0,direction: 1,speed: 1,trail: 60,fps: 20,zIndex: 2e9,top: '50%',left: '50%',shadow: false,hwaccel: false,position: 'absolute'};
 
-class Peserta extends Component {
+class Pembayaran extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -28,7 +28,7 @@ class Peserta extends Component {
     }
 
     componentDidMount = () => {
-        API.GetPeserta().then(res => {
+        API.GetPembayaran().then(res => {
           if (res.data.length > 0) {
             setTimeout(() => this.setState({
                 Daftar: res.data,
@@ -50,6 +50,16 @@ class Peserta extends Component {
 
       const columns = [
         {
+          name: 'No. Pembayaran',
+          selector: 'id_pembayaran',
+          sortable: true,
+        },
+        {
+          name: 'Tgl Bayar',
+          selector: 'tgl_transfer',
+          sortable: true,
+        },
+        {
           name: 'No. Registrasi',
           selector: 'id_peserta',
           sortable: true,
@@ -60,29 +70,24 @@ class Peserta extends Component {
           sortable: true,
         },
         {
-          name: 'Tgl. Daftar',
-          selector: 'tgl_daftar',
+          name: 'Bank',
+          selector: 'nm_bank',
           sortable: true,
         },
         {
-          name: 'Nama Seminar',
-          selector: 'nm_seminar',
+          name: 'Jumlah Bayar Rp.',
           sortable: true,
+          cell: row => <>Rp.{row.jml_transfer}</>,
         },
         {
-          name: 'No. Identitas',
-          selector: 'no_kartuid',
+          name: 'Status Bayar',
           sortable: true,
-        },
-        {
-          name: 'Email',
-          selector: 'email_peserta',
-          sortable: true,
+          cell: row => <>{row.status_bayar}</>,
         },
         {
           name: 'Opsi',
           sortable: false,
-          cell: row => <><Button as={Link} to={'/ps/detail/'+row.id_peserta} variant="light" size="sm">Detail</Button>&nbsp;
+          cell: row => <><Button as={Link} to={'/pb/detail/'+row.id_pembayaran} variant="light" size="sm">Detail</Button>&nbsp;
           <Button onClick={() => {
                 this.dialog.show({
                   title: 'Konfirmasi',
@@ -93,9 +98,9 @@ class Peserta extends Component {
                       console.log('Cancel was clicked!')
                     }),
                     Dialog.OKAction(() => {
-                      API.DeletePeserta(row.id_peserta).then(res => {
+                      API.DeletePembayaran(row.id_pembayaran).then(res => {
                         if (res.status === 1) {
-                            window.location.href = '/peserta';
+                            window.location.href = '/pembayaran';
                             NotificationManager.success('Hapus data berhasil');
                         } else {
                             console.log('gagal')
@@ -129,6 +134,7 @@ class Peserta extends Component {
       border-bottom-right-radius: 0;
       border: 1px solid #e5e5e5;
       padding: 0 32px 0 16px;
+    
       &:hover {
         cursor: pointer;
       }
@@ -173,7 +179,7 @@ class Peserta extends Component {
     
       return (
         <DataTable
-          title="Daftar Peserta"
+          title="Daftar Pembayaran"
           columns={columns}
           data={filteredItems}
           pagination
@@ -199,7 +205,7 @@ class Peserta extends Component {
                 <Container fluid>
                 <Breadcrumb className="card px-3 mb-2">
                 <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/admin" }}>Beranda</Breadcrumb.Item>
-                <Breadcrumb.Item active>Daftar Peserta</Breadcrumb.Item>
+                <Breadcrumb.Item active>Daftar Pembayaran</Breadcrumb.Item>
                 </Breadcrumb>
                     <Row>
                   
@@ -227,4 +233,4 @@ class Peserta extends Component {
 
 
 
-export default Peserta
+export default Pembayaran
