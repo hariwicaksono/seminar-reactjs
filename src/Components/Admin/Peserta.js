@@ -21,6 +21,7 @@ class Peserta extends Component {
         super(props)
         this.state = {
            Daftar: [],
+           Seminar: [],
            loading: true
             
         }
@@ -42,7 +43,22 @@ class Peserta extends Component {
         }
         }).catch(err => {
           console.log(err.response)
-      })
+        })
+        API.GetSeminar().then(res => {
+          if (res.data.length > 0) {
+            setTimeout(() => this.setState({
+                Seminar: res.data,
+                loading: false
+            }), 100);
+          } else {
+            this.setState({
+                error: "No Data Found",
+                loading: false
+            })
+        }
+        }).catch(err => {
+          console.log(err.response)
+        })
     }  
     
     
@@ -60,18 +76,8 @@ class Peserta extends Component {
           sortable: true,
         },
         {
-          name: 'Tgl. Daftar',
-          selector: 'tgl_daftar',
-          sortable: true,
-        },
-        {
           name: 'Nama Seminar',
           selector: 'nm_seminar',
-          sortable: true,
-        },
-        {
-          name: 'No. Identitas',
-          selector: 'no_kartuid',
           sortable: true,
         },
         {
@@ -111,15 +117,8 @@ class Peserta extends Component {
               }} variant="danger" size="sm">Hapus</Button></>,
         },
       ];
-      const state = { toggledClearRows: false }
-      const handleChange = (state) => {
-        // You can use setState or dispatch with something like Redux so we can use the retrieved data
-        console.log('Selected Rows: ', state.selectedRows);
-      };
-      const handleClearRows = () => {
-        this.setState({ toggledClearRows: !this.state.toggledClearRows})
-      }
       const TextField = styled.input`
+      font-size: 12px;
       height: 32px;
       width: 200px;
       border-radius: 3px;
@@ -147,8 +146,40 @@ class Peserta extends Component {
       justify-content: center;
     `;
 
+    const SampleStyle = styled.div`
+  padding: 10px;
+  display: block;
+  width: 100%;
+
+  p {
+    font-size: 12px;
+    font-weight: 400;
+    word-break: break-all;
+  }
+`;
+const SampleExpandedComponent = ({ data }) => (
+  <SampleStyle>
+    <p>
+      Seminar: {data.nm_seminar}<br/>
+      Tanggal Daftar: {data.tgl_daftar}<br/>
+      Kartu Identitas: {data.jns_kartuid} / No: {data.no_kartuid}
+    </p>
+  </SampleStyle>
+);
+
+const ListSeminar = this.state.Seminar.map((s,i) => (
+
+    <option value={s.nm_seminar} key={i+1}>{s.nm_seminar}</option>
+
+));
+
     const FilterComponent = ({ filterText, onFilter, onClear }) => (
       <>
+      <select className="form-control" id="exampleFormControlSelect1" onChange={onFilter}>
+
+      <option value=''></option>
+      {ListSeminar}
+    </select>
         <TextField id="search" type="text" placeholder="Filter By Nama" aria-label="Search Input" value={filterText} onChange={onFilter} />
         <ClearButton type="button" onClick={onClear}>X</ClearButton>
       </>
@@ -157,7 +188,7 @@ class Peserta extends Component {
     const BasicTable = () => {
       const [filterText, setFilterText] = useState('');
       const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
-      const filteredItems = this.state.Daftar.filter(item => item.nama_peserta && item.nama_peserta.toLowerCase().includes(filterText.toLowerCase()));
+      const filteredItems = this.state.Daftar.filter(item => item.nama_peserta && item.nama_peserta.toLowerCase().includes(filterText.toLowerCase()) || item.nm_seminar && item.nm_seminar.toLowerCase().includes(filterText.toLowerCase()) );
     
       const subHeaderComponentMemo = useMemo(() => {
         const handleClear = () => {
@@ -183,8 +214,9 @@ class Peserta extends Component {
           //selectableRows
           //selectableRowsHighlight
           persistTableHead
-          onSelectedRowsChange={handleChange}
-          clearSelectedRows={this.state.toggledClearRows}
+          expandableRows
+          expandOnRowClicked
+          expandableRowsComponent={<SampleExpandedComponent />}
         />
       );
     };

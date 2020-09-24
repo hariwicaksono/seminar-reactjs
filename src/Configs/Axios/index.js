@@ -95,6 +95,7 @@ const POST_FOTO = (path,data,name) => {
 
 const GetAktifSeminar = () => GET('GetAktifSeminar');
 const GetArsipSeminar = () => GET('GetArsipSeminar');
+const GetSeminar = () => GET('Seminar');
 const GetIdSeminar = (data) => GET_ID('Seminar?id=',data);
 const GetIdentitasWeb = () => GET('IdentitasWeb');
 const PutIdentitasWeb = (data) => PUT('IdentitasWeb',data);
@@ -134,6 +135,7 @@ const CountBayarcancel = () => GET('CountBayarcancel');
 const API = {
     GetAktifSeminar,
     GetArsipSeminar,
+    GetSeminar,
     GetIdSeminar,
     GetIdentitasWeb,
     PutIdentitasWeb,
