@@ -27,6 +27,9 @@ import APbDetail from "../../Components/Admin/PbDetail"
 import ASeminar from "../../Components/Admin/Seminar"
 import ASmTambah from "../../Components/Admin/SmTambah"
 import ASmEdit from "../../Components/Admin/SmEdit"
+import AKartuIdentitas from "../../Components/Admin/KartuIdentitas"
+import APendidikan from "../../Components/Admin/Pendidikan"
+import ABank from "../../Components/Admin/Bank"
 
 const MyRouter = () => {
     return(
@@ -44,17 +47,20 @@ const MyRouter = () => {
             <PrivateRoute path="/member" component={Member} />
             <PrivateRoute path="/konfirmasi" component={Konfirmasi} />
             <PrivateRoute path="/cetak/:id" component={Cetak} />
-            <PrivateRoute path="/admin" component={Admin} />
+            <PrivateRoute path="/admin" component={Admin} exact />
             <PrivateRoute path="/konten/identitasweb" component={AIdentitasWeb} />
             <PrivateRoute path="/konten/profilweb" component={AProfilWeb} />
             <PrivateRoute path="/konten/caradaftar" component={ACaraDaftar} />
-            <PrivateRoute path="/peserta" component={APeserta} />
-            <PrivateRoute path="/ps/detail/:id" component={APsDetail} />
-            <PrivateRoute path="/pembayaran" component={APembayaran} />
-            <PrivateRoute path="/pb/detail/:id" component={APbDetail} />
-            <PrivateRoute path="/seminar" component={ASeminar} />
-            <PrivateRoute path="/sm/tambah" component={ASmTambah} />
-            <PrivateRoute path="/sm/edit/:id" component={ASmEdit} />
+            <PrivateRoute path="/peserta" component={APeserta} exact />
+            <PrivateRoute path="/peserta/detail/:id" component={APsDetail} />
+            <PrivateRoute path="/pembayaran" component={APembayaran} exact />
+            <PrivateRoute path="/pembayaran/detail/:id" component={APbDetail} />
+            <PrivateRoute path="/seminar" component={ASeminar} exact />
+            <PrivateRoute path="/seminar/tambah" component={ASmTambah} />
+            <PrivateRoute path="/seminar/edit/:id" component={ASmEdit} />
+            <PrivateRoute path="/kartuidentitas" component={AKartuIdentitas} exact />
+            <PrivateRoute path="/pendidikan" component={APendidikan} exact />
+            <PrivateRoute path="/bank" component={ABank} exact />
             <NotificationContainer />
         </ScrollToTop>
         </Switch>

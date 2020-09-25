@@ -88,7 +88,7 @@ class Peserta extends Component {
         {
           name: 'Opsi',
           sortable: false,
-          cell: row => <><Button as={Link} to={'/ps/detail/'+row.id_peserta} variant="light" size="sm">Detail</Button>&nbsp;
+          cell: row => <><Button as={Link} to={'/peserta/detail/'+row.id_peserta} variant="light" size="sm">Detail</Button>&nbsp;
           <Button onClick={() => {
                 this.dialog.show({
                   title: 'Konfirmasi',

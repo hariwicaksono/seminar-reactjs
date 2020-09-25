@@ -14,26 +14,20 @@ import * as yup from 'yup'
 const TITLE = ' - Seminar App'
 var options = {lines: 13,length: 20,width: 10,radius: 30,scale: 0.35,corners: 1,color: '#fff',opacity: 0.25,rotate: 0,direction: 1,speed: 1,trail: 60,fps: 20,zIndex: 2e9,top: '50%',left: '50%',shadow: false,hwaccel: false,position: 'absolute'};
 const validationSchema = yup.object({
-    //username: yup.string().required(),
-    //password: yup.string().required()
-    //.min(8, "Password is too short - should be 8 chars minimum.")
-    //.matches(/(?=.*[0-9])/, "Password must contain a number.")
-    //,
+    nm_seminar: yup.string().required(),
+    tgl_seminar: yup.string().required(),
+    jam_seminar: yup.string().required(),
+    biaya_seminar: yup.string().required(),
+    lokasi_seminar: yup.string().required(),
+    headline_seminar: yup.string().required(),
+    deskripsi_seminar: yup.string().required(),
+    aktif_seminar: yup.string().required(),
   }); 
 class SmTambah extends Component {
     constructor(props){
         super(props)
         this.state = {
-            id: '',
-            nama: '',
-            tgl: '',
-            jam: '',
-            lokasi: '',
-            biaya: '',
-            headline: '',
-            deskripsi: '',
-            mduser: '',
-            aktif: '',
+            cruser: '',
             url: UploadUrl(),
             loading: true
         }
@@ -42,23 +36,9 @@ class SmTambah extends Component {
     componentDidMount = () => {
         const datas = JSON.parse(localStorage.getItem('isAdmin'))
         const usernm = datas[0].usernm
-        const id = this.props.match.params.id
-        API.GetSeminar(id).then(res=>{
-            setTimeout(() => this.setState({
-                id: res.data[0].id_seminar,
-                nama: res.data[0].nm_seminar,
-                tgl: res.data[0].tgl_seminar,
-                jam: res.data[0].jam_seminar,
-                lokasi: res.data[0].lokasi_seminar,
-                biaya: res.data[0].biaya_seminar,
-                headline: res.data[0].headline_seminar,
-                deskripsi: res.data[0].deskripsi_seminar,
-                mduser: usernm,
-                aktif: res.data[0].aktif_seminar,
-                loading: false
-            }), 100);
-        }).catch(err => {
-            console.log(err)
+        this.setState({
+            cruser: usernm,
+            loading: false
         })
     }
 
@@ -66,7 +46,7 @@ class SmTambah extends Component {
         return (
             <>
            <Helmet>
-        <title> {'Edit'} {this.state.nama} { TITLE }</title>
+        <title> Tambah Seminar { TITLE }</title>
             </Helmet>
                 <Container fluid>
                     
@@ -86,22 +66,22 @@ class SmTambah extends Component {
                             <h5 className="mb-3" style={{fontWeight: '400'}}>Tambah Seminar</h5>
                             <Formik
                             initialValues={{ 
-                                id_seminar: this.state.id, 
-                                nm_seminar: this.state.nama,
-                                tgl_seminar: this.state.tgl,
-                                jam_seminar: this.state.jam,
-                                biaya_seminar: this.state.biaya,
-                                lokasi_seminar: this.state.lokasi,
-                                headline_seminar: this.state.headline,
-                                deskripsi_seminar: this.state.deskripsi,
-                                aktif_seminar: this.state.aktif,
-                                md_username_seminar: this.state.mduser,
+                                id_seminar: '', 
+                                nm_seminar: '',
+                                tgl_seminar: '',
+                                jam_seminar: '',
+                                biaya_seminar: '',
+                                lokasi_seminar: '',
+                                headline_seminar: '',
+                                deskripsi_seminar: '',
+                                aktif_seminar: '',
+                                cr_username_seminar: this.state.cruser,
                                
                             }}
                             onSubmit={(values, actions) => {
                                 alert(JSON.stringify(values));
                                 
-                                API.PutSeminar(values).then(res=>{
+                                API.PostSeminar(values).then(res=>{
                                     //console.log(res)
                                     if (res.status === 1 ) {
                                         NotificationManager.success('Data berhasil disimpan');
@@ -181,11 +161,11 @@ class SmTambah extends Component {
                                 <Form.Label>Aktifkan Seminar</Form.Label>
                                 <Row>
                             <Col>
-                            <Form.Check type="radio" name="aktif_seminar" id="radio-1" value="Y" label="Ya" onChange={handleChange} feedback={errors.aktif_seminar} isInvalid={!!errors.aktif_seminar && touched.aktif_seminar} checked={values.aktif_seminar === "Y" ? "checked" : ""} required />
+                            <Form.Check type="radio" name="aktif_seminar" id="radio-1" value="Y" label="Ya" onChange={handleChange} feedback={errors.aktif_seminar} isInvalid={!!errors.aktif_seminar && touched.aktif_seminar} required />
                            
                             </Col>
                             <Col>
-                            <Form.Check type="radio" name="aktif_seminar" id="radio-2" value="N" label="Tidak" onChange={handleChange} feedback={errors.aktif_seminar} isInvalid={!!errors.aktif_seminar && touched.aktif_seminar} checked={values.aktif_seminar === "N" ? "checked" : ""} required /> 
+                            <Form.Check type="radio" name="aktif_seminar" id="radio-2" value="N" label="Tidak" onChange={handleChange} feedback={errors.aktif_seminar} isInvalid={!!errors.aktif_seminar && touched.aktif_seminar} required /> 
                             
                             </Col>
                             {errors.aktif_seminar && touched.aktif_seminar && <Form.Control.Feedback type="invalid">{errors.aktif_seminar}</Form.Control.Feedback>}

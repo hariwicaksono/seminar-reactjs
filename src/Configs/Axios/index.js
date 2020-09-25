@@ -110,6 +110,7 @@ const PutIdentitasWeb = (data) => PUT('IdentitasWeb',data);
 const GetBank = () => GET('Bank');
 const PostLogin = (data) => POST('Login',data);
 const GetKartuIdentitas = () => GET('KartuIdentitas');
+const PutStatusKartu = (data) => PUT('StatusKartu',data);
 const GetPendidikan = () => GET('Pendidikan');
 const GetKabupaten = () => GET('Kabupaten');
 const GetProfilWeb = () => GET('ProfilWeb');
@@ -155,6 +156,7 @@ const API = {
     GetBank,
     PostLogin,
     GetKartuIdentitas,
+    PutStatusKartu,
     GetPendidikan,
     GetKabupaten,
     GetProfilWeb,

@@ -77,17 +77,17 @@ function SubMenu() {
             </NavLink>
           </li>
           <li>
-          <NavLink to={'/peserta'} title="Kartu Identitas" alt="Kartu Identitas">
+          <NavLink to={'/kartuidentitas'} title="Kartu Identitas" alt="Kartu Identitas">
             <span>Kartu Identitas</span>
             </NavLink>
           </li>
           <li>
-          <NavLink to={'/peserta'} title="Pendidikan" alt="Pendidikan">
+          <NavLink to={'/pendidikan'} title="Pendidikan" alt="Pendidikan">
             <span>Pendidikan</span>
             </NavLink>
           </li>
           <li>
-          <NavLink to={'/peserta'} title="Bank" alt="Bank">
+          <NavLink to={'/bank'} title="Bank" alt="Bank">
             <span>Bank</span>
             </NavLink>
           </li>

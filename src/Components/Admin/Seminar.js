@@ -117,7 +117,7 @@ class Seminar extends Component {
         {
           name: 'Opsi',
           sortable: false,
-          cell: row => <><Button as={Link} to={'/sm/edit/'+row.id_seminar} variant="light" size="sm">Edit</Button>&nbsp;
+          cell: row => <><Button as={Link} to={'/seminar/edit/'+row.id_seminar} variant="light" size="sm">Edit</Button>&nbsp;
           <Button onClick={() => {
                 this.dialog.show({
                   title: 'Konfirmasi',
@@ -227,7 +227,7 @@ class Seminar extends Component {
 
     const FilterComponent = ({ filterText, onFilter, onClear }) => (
       <>
-      <Button as={Link} to="/sm/tambah" variant="primary" style={{ position: 'absolute', left: '0', marginLeft: '15px'}}>Tambah</Button>
+      <Button as={Link} to="/seminar/tambah" variant="primary" style={{ position: 'absolute', left: '0', marginLeft: '15px'}}>Tambah</Button>
         <TextField id="search" type="text" placeholder="Filter By Nama" aria-label="Search Input" value={filterText} onChange={onFilter} />
         <ClearButton type="button" onClick={onClear}>X</ClearButton>
       </>
