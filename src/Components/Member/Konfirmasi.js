@@ -48,7 +48,7 @@ class Konfirmasi extends Component {
     }
 
     componentDidMount = () => {
-        const datas = JSON.parse(sessionStorage.getItem('isLogin'))
+        const datas = JSON.parse(localStorage.getItem('isLogin'))
         const id = datas[0].email_peserta
         API.GetSeminarById(id).then(res=>{
             setTimeout(() => this.setState({

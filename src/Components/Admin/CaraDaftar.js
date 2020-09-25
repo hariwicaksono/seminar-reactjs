@@ -47,7 +47,7 @@ class CaraDaftar extends Component {
     }
 
     componentDidMount = () => {
-    const datas = JSON.parse(sessionStorage.getItem('isAdmin'))
+    const datas = JSON.parse(localStorage.getItem('isAdmin'))
     const id = datas[0].usernm
     API.GetCaraDaftar().then(res=>{
         console.log(res)

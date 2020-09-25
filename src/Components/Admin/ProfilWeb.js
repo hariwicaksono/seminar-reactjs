@@ -28,7 +28,7 @@ class ProfilWeb extends Component {
     }
 
     componentDidMount = () => {
-    const datas = JSON.parse(sessionStorage.getItem('isAdmin'))
+    const datas = JSON.parse(localStorage.getItem('isAdmin'))
     const id = datas[0].usernm
     API.GetProfilWeb().then(res=>{
         console.log(res)

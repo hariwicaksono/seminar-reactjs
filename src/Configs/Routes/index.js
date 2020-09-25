@@ -24,6 +24,9 @@ import APeserta from "../../Components/Admin/Peserta"
 import APsDetail from "../../Components/Admin/PsDetail"
 import APembayaran from "../../Components/Admin/Pembayaran"
 import APbDetail from "../../Components/Admin/PbDetail"
+import ASeminar from "../../Components/Admin/Seminar"
+import ASmTambah from "../../Components/Admin/SmTambah"
+import ASmEdit from "../../Components/Admin/SmEdit"
 
 const MyRouter = () => {
     return(
@@ -49,6 +52,9 @@ const MyRouter = () => {
             <PrivateRoute path="/ps/detail/:id" component={APsDetail} />
             <PrivateRoute path="/pembayaran" component={APembayaran} />
             <PrivateRoute path="/pb/detail/:id" component={APbDetail} />
+            <PrivateRoute path="/seminar" component={ASeminar} />
+            <PrivateRoute path="/sm/tambah" component={ASmTambah} />
+            <PrivateRoute path="/sm/edit/:id" component={ASmEdit} />
             <NotificationContainer />
         </ScrollToTop>
         </Switch>

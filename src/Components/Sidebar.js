@@ -72,7 +72,7 @@ function SubMenu() {
       <Collapse in={open3}>
       <ul className="list-unstyled" id="collapsePengaturan">
           <li>
-            <NavLink to={'/peserta'} title="Seminar" alt="Seminar">
+            <NavLink to={'/seminar'} title="Seminar" alt="Seminar">
             <span>Seminar</span>
             </NavLink>
           </li>

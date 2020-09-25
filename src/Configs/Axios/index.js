@@ -97,6 +97,14 @@ const GetAktifSeminar = () => GET('GetAktifSeminar');
 const GetArsipSeminar = () => GET('GetArsipSeminar');
 const GetSeminar = () => GET('Seminar');
 const GetIdSeminar = (data) => GET_ID('Seminar?id=',data);
+const PostSeminar = (data) => POST('Seminar',data);
+const PutSeminar = (data) => PUT('Seminar',data);
+const PutStatusSeminar = (data) => PUT('StatusSeminar',data);
+const DeleteSeminar = (id) => DELETE('Seminar/index_delete?id=',id)
+const GetSeminarById = (data) => GET_BY_ID('GetSeminar?id=',data);
+const CariSeminar = (data) => SEARCH('Search?id=',data);
+const CheckSeminar = (data) => Axios(RootPath+`CheckSeminar?id=${data}`);
+const CountSeminar = () => GET('CountSeminar');
 const GetIdentitasWeb = () => GET('IdentitasWeb');
 const PutIdentitasWeb = (data) => PUT('IdentitasWeb',data);
 const GetBank = () => GET('Bank');
@@ -104,7 +112,6 @@ const PostLogin = (data) => POST('Login',data);
 const GetKartuIdentitas = () => GET('KartuIdentitas');
 const GetPendidikan = () => GET('Pendidikan');
 const GetKabupaten = () => GET('Kabupaten');
-const CariSeminar = (data) => SEARCH('Search?id=',data);
 const GetProfilWeb = () => GET('ProfilWeb');
 const PutProfilWeb = (data) => PUT('ProfilWeb',data);
 const GetCaraDaftar = () => GET('CaraDaftar');
@@ -118,25 +125,31 @@ const CheckNokartu = (data) => Axios(RootPath+`CheckNokartu?no_id=${data}`);
 const GetPembayaran = () => GET('Pembayaran');
 const GetIdPembayaran = (data) => GET_ID('Pembayaran?id=',data);
 const PostPembayaran = (data) => POST('Pembayaran',data);
+const PutPembayaran = (data) => PUT('Pembayaran',data);
 const DeletePembayaran = (id) => DELETE('Pembayaran/index_delete?id=',id)
 const GetPembayaranById = (data) => GET_BY_ID('GetPembayaran?id=',data);
 const CheckPembayaran = (id_peserta, id_seminar) => Axios(RootPath+`CheckPembayaran?id_peserta=${id_peserta}&id_seminar=${id_seminar}`);
-const CheckSeminar = (data) => Axios(RootPath+`CheckSeminar?id=${data}`);
 const PutAktivasiAkun = (data) => PUT('AktivasiAkun',data);
-const GetSeminarById = (data) => GET_BY_ID('GetSeminar?id=',data);
 const PostFoto = (data,name) => POST_FOTO('ImageUpload',data,name);
 const GetKalender = () => GET('Kalender');
 const GetIdAdmin = (data) => GET_ID('Pengguna?id=',data);
-const CountSeminar = () => GET('CountSeminar');
 const CountPeserta = () => GET('CountPeserta');
 const CountBayarnew = () => GET('CountBayarnew');
 const CountBayarcancel = () => GET('CountBayarcancel');
-
+ 
 const API = {
     GetAktifSeminar,
     GetArsipSeminar,
     GetSeminar,
     GetIdSeminar,
+    PostSeminar,
+    PutSeminar,
+    PutStatusSeminar,
+    DeleteSeminar,
+    GetSeminarById,
+    CariSeminar,
+    CheckSeminar,
+    CountSeminar,
     GetIdentitasWeb,
     PutIdentitasWeb,
     GetBank,
@@ -144,7 +157,6 @@ const API = {
     GetKartuIdentitas,
     GetPendidikan,
     GetKabupaten,
-    CariSeminar,
     GetProfilWeb,
     PutProfilWeb,
     GetCaraDaftar,
@@ -158,16 +170,14 @@ const API = {
     GetPembayaran,
     GetIdPembayaran,
     PostPembayaran,
+    PutPembayaran,
     DeletePembayaran,
     GetPembayaranById,
     CheckPembayaran,
-    CheckSeminar,
     PutAktivasiAkun,
-    GetSeminarById,
     PostFoto,
     GetKalender,
     GetIdAdmin,
-    CountSeminar,
     CountPeserta,
     CountBayarnew,
     CountBayarcancel

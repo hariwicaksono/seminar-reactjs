@@ -63,7 +63,7 @@ class Peserta extends Component {
     
     
     render() {
-
+      
       const columns = [
         {
           name: 'No. Registrasi',
@@ -117,10 +117,27 @@ class Peserta extends Component {
               }} variant="danger" size="sm">Hapus</Button></>,
         },
       ];
-      const TextField = styled.input`
-      font-size: 12px;
-      height: 32px;
-      width: 200px;
+    const customStyles = {
+        rows: {
+          style: {
+            fontSize: '14px',
+          }
+        },
+        headCells: {
+          style: {
+            fontSize: '14px',
+          },
+        },
+        cells: {
+          style: {
+            fontSize: '14px',
+          },
+        },
+    };
+    const TextField = styled.input`
+      font-size: 14px;
+      height: 34px;
+      width: 250px;
       border-radius: 3px;
       border-top-left-radius: 5px;
       border-bottom-left-radius: 5px;
@@ -132,55 +149,64 @@ class Peserta extends Component {
         cursor: pointer;
       }
     `;
-    
+    const Select = styled.select`
+      width: 350px;
+      height: 34px;
+      padding: 0 10px 0 5px;
+      font-size: 14px;
+      border-radius: 3px;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border: 1px solid #e5e5e5;
+      margin-right: 10px;
+    `;
     const ClearButton = styled(Button)`
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
       border-top-right-radius: 5px;
       border-bottom-right-radius: 5px;
-      height: 32px;
+      height: 34px;
       width: 32px;
       text-align: center;
       display: flex;
       align-items: center;
       justify-content: center;
     `;
+    const ExpandedStyle = styled.div`
+      padding: 10px;
+      display: block;
+      width: 100%;
 
-    const SampleStyle = styled.div`
-  padding: 10px;
-  display: block;
-  width: 100%;
+      p {
+        font-size: 14px;
+        font-weight: 400;
+        word-break: break-all;
+      }
+    `;
 
-  p {
-    font-size: 12px;
-    font-weight: 400;
-    word-break: break-all;
-  }
-`;
-const SampleExpandedComponent = ({ data }) => (
-  <SampleStyle>
-    <p>
-      Seminar: {data.nm_seminar}<br/>
-      Tanggal Daftar: {data.tgl_daftar}<br/>
-      Kartu Identitas: {data.jns_kartuid} / No: {data.no_kartuid}
-    </p>
-  </SampleStyle>
-);
+    const ExpandedComponent = ({ data }) => (
+      <ExpandedStyle>
+        <p>
+          Seminar: {data.nm_seminar}<br/>
+          Tanggal Daftar: {data.tgl_daftar}<br/>
+          Kartu Identitas: {data.jns_kartuid} / No: {data.no_kartuid}
+        </p>
+      </ExpandedStyle>
+    );
 
-const ListSeminar = this.state.Seminar.map((s,i) => (
-
-    <option value={s.nm_seminar} key={i+1}>{s.nm_seminar}</option>
-
-));
+    const ListSeminar = this.state.Seminar.map((s,i) => (
+        <option value={s.nm_seminar} key={i+1}>{s.nm_seminar}</option>
+    ));
 
     const FilterComponent = ({ filterText, onFilter, onClear }) => (
       <>
-      <select className="form-control" id="exampleFormControlSelect1" onChange={onFilter}>
-
-      <option value=''></option>
+      <Select className="custom-select" id="select" onChange={onFilter}>
+      <option value=''>Filter by Seminar</option>
       {ListSeminar}
-    </select>
-        <TextField id="search" type="text" placeholder="Filter By Nama" aria-label="Search Input" value={filterText} onChange={onFilter} />
+    </Select>
+        <TextField id="search" type="text" placeholder="Filter by Nama" aria-label="Search Input" value={filterText} onChange={onFilter} />
         <ClearButton type="button" onClick={onClear}>X</ClearButton>
       </>
     );
@@ -216,7 +242,8 @@ const ListSeminar = this.state.Seminar.map((s,i) => (
           persistTableHead
           expandableRows
           expandOnRowClicked
-          expandableRowsComponent={<SampleExpandedComponent />}
+          expandableRowsComponent={<ExpandedComponent />}
+          customStyles={customStyles}
         />
       );
     };
