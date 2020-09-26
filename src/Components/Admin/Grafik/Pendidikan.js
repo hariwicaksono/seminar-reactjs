@@ -7,8 +7,9 @@ import {Pie} from 'react-chartjs-2'
 import 'chartjs-plugin-colorschemes/src/plugins/plugin.colorschemes'
 import { SetOne9 } from 'chartjs-plugin-colorschemes/src/colorschemes/colorschemes.brewer'
 
-const TITLE = 'Grafik Peserta-Jenis Kelamin - Seminar App' 
-class GrafikJenkel extends Component {
+const TITLE = 'Grafik Peserta-Pendidikan - Seminar App'
+
+class GrafikPendidikan extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -17,7 +18,7 @@ class GrafikJenkel extends Component {
 
     }
     componentDidMount = () => {
-        API.GrafikJenkel().then(res => {
+        API.GrafikPendidikan().then(res => {
            this.setState({
                 data: res.data,
             })
@@ -30,7 +31,7 @@ class GrafikJenkel extends Component {
         labels: this.state.data.map(d => d.label),
         datasets: [
           {
-            label: 'Peserta - Jenis Kelamin',
+            label: 'Peserta - Pendidikan',
             data: this.state.data.map(d => d.value)
           }
         ]
@@ -43,11 +44,11 @@ class GrafikJenkel extends Component {
             <Container fluid>
                 <Breadcrumb className="card px-3 mb-2">
                 <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/admin" }}>Beranda</Breadcrumb.Item>
-                <Breadcrumb.Item active>Grafik Peserta-Jenis Kelamin</Breadcrumb.Item>
+                <Breadcrumb.Item active>Grafik Peserta-Pendidikan</Breadcrumb.Item>
                 </Breadcrumb>
 
             <div className="shadow p-4 bg-white">
-            <h3 className="mb-3">Grafik Peserta - Jenis Kelamin</h3>
+            <h3 className="mb-3">Grafik Peserta - Pendidikan</h3>
             <Pie
             data={data}
             width={500}
@@ -64,4 +65,4 @@ class GrafikJenkel extends Component {
     );
   }
 }
-export default GrafikJenkel
+export default GrafikPendidikan

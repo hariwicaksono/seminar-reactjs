@@ -154,8 +154,9 @@ const GetIdAdmin = (data) => GET_ID('Pengguna?id=',data);
 const CountPeserta = () => GET('CountPeserta');
 const CountBayarnew = () => GET('CountBayarnew');
 const CountBayarcancel = () => GET('CountBayarcancel');
-const CountJenkelL = () => GET('CountJenkelL');
-const CountJenkelP = () => GET('CountJenkelP');
+const GrafikJenkel = () => GET('GrafikJenkel');
+const GrafikPendidikan = () => GET('GrafikPendidikan');
+const GrafikRangeusia = () => GET('GrafikRangeusia');
  
 const API = {
     PostLogin,
@@ -219,8 +220,9 @@ const API = {
     CountPeserta,
     CountBayarnew,
     CountBayarcancel,
-    CountJenkelL,
-    CountJenkelP
+    GrafikJenkel,
+    GrafikPendidikan,
+    GrafikRangeusia
 }
 
 export default API

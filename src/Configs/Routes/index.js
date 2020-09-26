@@ -37,7 +37,9 @@ import ABank from "../../Components/Admin/Bank/"
 import ABankTambah from "../../Components/Admin/Bank/Tambah"
 import ABankEdit from "../../Components/Admin/Bank/Edit"
 import AGfJenkel from "../../Components/Admin/Grafik/Jenkel"
- 
+import AGfPendidikan from "../../Components/Admin/Grafik/Pendidikan"
+import AGfRangeusia from "../../Components/Admin/Grafik/Rangeusia"
+
 const MyRouter = () => {
     return(
         <Switch>
@@ -75,6 +77,8 @@ const MyRouter = () => {
             <PrivateRoute path="/bank/tambah" component={ABankTambah} />
             <PrivateRoute path="/bank/edit/:id" component={ABankEdit} />
             <PrivateRoute path="/grafik/jenkel" component={AGfJenkel} />
+            <PrivateRoute path="/grafik/pendidikan" component={AGfPendidikan} />
+            <PrivateRoute path="/grafik/rangeusia" component={AGfRangeusia} />
             <NotificationContainer />
         </ScrollToTop>
         </Switch>

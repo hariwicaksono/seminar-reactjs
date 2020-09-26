@@ -55,7 +55,7 @@ class Kalender extends Component {
             </>
             :     
             <FullCalendar  
-                initialView="dayGridMonth"  
+                initialView="timeGridWeek"  
               headerToolbar={{
                 left: 'prev,next today',
                 center: 'title',

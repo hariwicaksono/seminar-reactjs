@@ -57,12 +57,12 @@ function SubMenu() {
             </NavLink>
           </li>
           <li>
-          <NavLink to={'/peserta'} title="Peserta - Jenis Kelamin" alt="Peserta - Jenis Kelamin">
+          <NavLink to={'/grafik/pendidikan'} title="Peserta - Pendidikan" alt="Peserta - Pendidikan">
             <span>Peserta - Pendidikan</span>
             </NavLink>
           </li>
           <li>
-          <NavLink to={'/peserta'} title="Peserta - Jenis Kelamin" alt="Peserta - Jenis Kelamin">
+          <NavLink to={'/grafik/rangeusia'} title="Peserta - Range Usia" alt="Peserta - Range Usia">
             <span>Peserta - Range Usia</span>
             </NavLink>
           </li>
