@@ -46,7 +46,7 @@ class Konfirmasi extends Component {
             fotoPreviewUrl: URL.createObjectURL(e.target.files[0])
         })
     }
-
+ 
     componentDidMount = () => {
         const datas = JSON.parse(localStorage.getItem('isLogin'))
         const id = datas[0].email_peserta
@@ -63,7 +63,7 @@ class Konfirmasi extends Component {
                 loading: false
             }), 100);
         })
-        API.GetBank().then(res => {
+        API.GetAktifBank().then(res => {
             this.setState({
                 Bank: res.data,
                 loading: false
@@ -105,7 +105,14 @@ class Konfirmasi extends Component {
                             <Card.Body>
                                
                             <Formik
-                            initialValues={{ id_peserta: '', id_seminar: '', bank_tujuan: '', jml_trf: '', pemilik_rek: '', info_tambahan: '', foto: null }}
+                            initialValues={{ 
+                                id_peserta: this.state.id_peserta, 
+                                id_seminar: this.state.id_seminar, 
+                                bank_tujuan: '', 
+                                jml_trf: '', 
+                                pemilik_rek: '', 
+                                info_tambahan: '', 
+                                foto: null }}
                             onSubmit={(values, actions) => {
                                 alert(
                                     JSON.stringify(
@@ -119,9 +126,9 @@ class Konfirmasi extends Component {
                                           foto: values.foto.name
                                       }
                                     )
-                                  );
+                                );
 
-                                  API.CheckPembayaran(values.id_peserta, values.id_seminar).then(res=>{
+                                API.CheckPembayaran(values.id_peserta, values.id_seminar).then(res=>{
                                     console.log(res)
                                     if (res.data.results.length > 0) {
                                         NotificationManager.error('Nomor registrasi dengan judul seminar tersebut sudah melakukan pembayaran');
@@ -139,7 +146,7 @@ class Konfirmasi extends Component {
                                           ).then(res=>{
                                             //console.log(res)
                                             if (res.status === 1 ) {
-                                                //this.props.history.push('/login')
+                                                this.props.history.push('/member')
                                                 NotificationManager.success('Konfirmasi Pembayaran Berhasil');
                                             } else {
                                                 NotificationManager.error('Gagal, periksa kembali');
@@ -172,30 +179,19 @@ class Konfirmasi extends Component {
                             }) => (
                         <Form noValidate onSubmit={handleSubmit} className="px-3">
                             <h3 className="text-center">Konfirmasi Pembayaran</h3>
-                            <Form.Group className="mb-0">
-                            <Form.Label>Nomor Pendaftaran</Form.Label>
-                            
-                            <Field type="radio" className="radio-btn positive" name="id_peserta" id="radio-id_peserta" value={this.state.id_peserta} onChange={handleChange}  />
-                            {this.state.loading ?
-                            <>
-                            <p><Skeleton height={55} /></p>
-                            </>
-                            :
-                            <>
-                            <label className="radio-label" htmlFor="radio-id_peserta">{this.state.id_peserta}</label>
-                            </>
-                            }
-                            {errors.id_peserta && touched.id_peserta && <div className="error mb-1" style={{marginTop: '-5px'}}>{errors.id_peserta}</div>}
+
+                            <Form.Group>
+                                <Form.Label>No. Registrasi</Form.Label>
+                                <Form.Control type="text" name="id_peserta" placeholder="Jumlah Transfer" className="form-control" onChange={handleChange} onBlur={handleBlur} value={values.id_peserta} readOnly />
+                                
                             </Form.Group>
 
                             <Form.Group>
-                            <Form.Label>Pilih Seminar</Form.Label>
-                            <Form.Control as="select" name="id_seminar" onChange={handleChange} onBlur={handleBlur} value={values.id_seminar} isInvalid={!!errors.id_seminar && touched.id_seminar}>
-                            <option value="">Pilih Seminar</option>
-                            {ListSeminar}
-                            </Form.Control>
-                            {errors.id_seminar && touched.id_seminar && <Form.Control.Feedback type="invalid">{errors.id_seminar}</Form.Control.Feedback>}
+                                <Form.Label>ID Seminar</Form.Label>
+                                <Form.Control type="text" name="id_seminar" placeholder="Jumlah Transfer" className="form-control" onChange={handleChange} onBlur={handleBlur} value={values.id_seminar} readOnly />
+                                
                             </Form.Group>
+
 
                             <Form.Group>
                             <Form.Label>Pilih Bank</Form.Label>

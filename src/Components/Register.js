@@ -42,13 +42,13 @@ const validationSchema = yup.object({
                 loading: false
             })
         })
-        API.GetKartuIdentitas().then(res => {
+        API.GetAktifKartuId().then(res => {
             this.setState({
                 KartuIdentitas: res.data,
                 loading: false
             })
         })
-        API.GetPendidikan().then(res => {
+        API.GetAktifPendidikan().then(res => {
             this.setState({
                 Pendidikan: res.data,
                 loading: false

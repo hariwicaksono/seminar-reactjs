@@ -20,17 +20,24 @@ import Admin from "../../Components/Admin"
 import AIdentitasWeb from "../../Components/Admin/IdentitasWeb"
 import AProfilWeb from "../../Components/Admin/ProfilWeb"
 import ACaraDaftar from "../../Components/Admin/CaraDaftar"
-import APeserta from "../../Components/Admin/Peserta"
-import APsDetail from "../../Components/Admin/PsDetail"
-import APembayaran from "../../Components/Admin/Pembayaran"
-import APbDetail from "../../Components/Admin/PbDetail"
-import ASeminar from "../../Components/Admin/Seminar"
-import ASmTambah from "../../Components/Admin/SmTambah"
-import ASmEdit from "../../Components/Admin/SmEdit"
-import AKartuIdentitas from "../../Components/Admin/KartuIdentitas"
-import APendidikan from "../../Components/Admin/Pendidikan"
-import ABank from "../../Components/Admin/Bank"
-
+import APeserta from "../../Components/Admin/Peserta/"
+import APsDetail from "../../Components/Admin/Peserta/Detail"
+import APembayaran from "../../Components/Admin/Pembayaran/"
+import APbDetail from "../../Components/Admin/Pembayaran/Detail"
+import ASeminar from "../../Components/Admin/Seminar/"
+import ASmTambah from "../../Components/Admin/Seminar/Tambah"
+import ASmEdit from "../../Components/Admin/Seminar/Edit"
+import AKartuIdentitas from "../../Components/Admin/KartuIdentitas/"
+import AKtTambah from "../../Components/Admin/KartuIdentitas/Tambah"
+import AKtEdit from "../../Components/Admin/KartuIdentitas/Edit"
+import APendidikan from "../../Components/Admin/Pendidikan/"
+import APdTambah from "../../Components/Admin/Pendidikan/Tambah"
+import APdEdit from "../../Components/Admin/Pendidikan/Edit"
+import ABank from "../../Components/Admin/Bank/"
+import ABankTambah from "../../Components/Admin/Bank/Tambah"
+import ABankEdit from "../../Components/Admin/Bank/Edit"
+import AGfJenkel from "../../Components/Admin/Grafik/Jenkel"
+ 
 const MyRouter = () => {
     return(
         <Switch>
@@ -59,8 +66,15 @@ const MyRouter = () => {
             <PrivateRoute path="/seminar/tambah" component={ASmTambah} />
             <PrivateRoute path="/seminar/edit/:id" component={ASmEdit} />
             <PrivateRoute path="/kartuidentitas" component={AKartuIdentitas} exact />
+            <PrivateRoute path="/kartuidentitas/tambah" component={AKtTambah} />
+            <PrivateRoute path="/kartuidentitas/edit/:id" component={AKtEdit} />
             <PrivateRoute path="/pendidikan" component={APendidikan} exact />
+            <PrivateRoute path="/pendidikan/tambah" component={APdTambah} />
+            <PrivateRoute path="/pendidikan/edit/:id" component={APdEdit} />
             <PrivateRoute path="/bank" component={ABank} exact />
+            <PrivateRoute path="/bank/tambah" component={ABankTambah} />
+            <PrivateRoute path="/bank/edit/:id" component={ABankEdit} />
+            <PrivateRoute path="/grafik/jenkel" component={AGfJenkel} />
             <NotificationContainer />
         </ScrollToTop>
         </Switch>

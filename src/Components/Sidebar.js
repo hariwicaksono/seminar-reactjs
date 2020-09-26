@@ -52,15 +52,19 @@ function SubMenu() {
       <Collapse in={open2}>
       <ul className="list-unstyled" id="collapseGrafik">
           <li>
-            <NavLink to={'/peserta'} title="Peserta - Jenis Kelamin" alt="Peserta - Jenis Kelamin">
+            <NavLink to={'/grafik/jenkel'} title="Peserta - Jenis Kelamin" alt="Peserta - Jenis Kelamin">
             <span>Peserta - Jenis Kelamin</span>
             </NavLink>
           </li>
           <li>
-              <a href="#">Profil Website</a>
+          <NavLink to={'/peserta'} title="Peserta - Jenis Kelamin" alt="Peserta - Jenis Kelamin">
+            <span>Peserta - Pendidikan</span>
+            </NavLink>
           </li>
           <li>
-              <a href="#">Cara Pendaftaran</a>
+          <NavLink to={'/peserta'} title="Peserta - Jenis Kelamin" alt="Peserta - Jenis Kelamin">
+            <span>Peserta - Range Usia</span>
+            </NavLink>
           </li>
       </ul>
       </Collapse>

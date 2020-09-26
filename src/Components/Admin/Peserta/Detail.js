@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import API from '../../Configs/Axios'
+import API from '../../../Configs/Axios'
 import { Container, Breadcrumb, Row, Col, Card } from 'react-bootstrap'
 import { Helmet } from 'react-helmet'
 //import {ImagesUrl} from '../Configs/Axios'
@@ -34,9 +34,11 @@ class PsDetail extends Component {
 
     componentDidMount = () => {
         const id = this.props.match.params.id
-        API.GetPeserta(id).then(res=>{
+        this.setState({
+            id : id
+        })
+        API.GetIdPeserta(id).then(res=>{
             setTimeout(() => this.setState({
-                id: res.data[0].id_peserta,
                 tgl: res.data[0].tgl_daftar,
                 nama_sem: res.data[0].nm_seminar,
                 jenis_kartu: res.data[0].jns_kartuid,
@@ -56,10 +58,7 @@ class PsDetail extends Component {
             console.log(err)
         })
     }
-    componentDidUpdate(prevProps) {
-        if (prevProps.location.pathname !== this.props.location.pathname) { window.location.reload();
-        }
-    }
+
     render() {
         return (
             <>

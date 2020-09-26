@@ -93,6 +93,7 @@ const POST_FOTO = (path,data,name) => {
     return promise
 }
 
+const PostLogin = (data) => POST('Login',data);
 const GetAktifSeminar = () => GET('GetAktifSeminar');
 const GetArsipSeminar = () => GET('GetArsipSeminar');
 const GetSeminar = () => GET('Seminar');
@@ -108,10 +109,26 @@ const CountSeminar = () => GET('CountSeminar');
 const GetIdentitasWeb = () => GET('IdentitasWeb');
 const PutIdentitasWeb = (data) => PUT('IdentitasWeb',data);
 const GetBank = () => GET('Bank');
-const PostLogin = (data) => POST('Login',data);
+const GetIdBank = (data) => GET_ID('Bank?id=',data);
+const GetAktifBank = () => GET('AktifBank');
+const PostBank = (data) => POST('Bank',data);
+const PutBank = (data) => PUT('Bank',data);
+const PutStatusBank = (data) => PUT('StatusBank',data);
+const DeleteBank = (id) => DELETE('Bank/index_delete?id=',id)
 const GetKartuIdentitas = () => GET('KartuIdentitas');
+const GetIdKartuIdentitas = (data) => GET_ID('KartuIdentitas?id=',data);
+const GetAktifKartuId = () => GET('AktifKartuId');
+const PostKartuIdentitas = (data) => POST('KartuIdentitas',data);
+const PutKartuIdentitas = (data) => PUT('KartuIdentitas',data);
 const PutStatusKartu = (data) => PUT('StatusKartu',data);
+const DeleteKartuIdentitas = (id) => DELETE('KartuIdentitas/index_delete?id=',id)
 const GetPendidikan = () => GET('Pendidikan');
+const GetIdPendidikan = (data) => GET_ID('Pendidikan?id=',data);
+const GetAktifPendidikan = () => GET('AktifPendidikan');
+const PostPendidikan = (data) => POST('Pendidikan',data);
+const PutPendidikan = (data) => PUT('Pendidikan',data);
+const PutStatusPendidikan = (data) => PUT('StatusPendidikan',data);
+const DeletePendidikan = (id) => DELETE('Pendidikan/index_delete?id=',id)
 const GetKabupaten = () => GET('Kabupaten');
 const GetProfilWeb = () => GET('ProfilWeb');
 const PutProfilWeb = (data) => PUT('ProfilWeb',data);
@@ -137,8 +154,11 @@ const GetIdAdmin = (data) => GET_ID('Pengguna?id=',data);
 const CountPeserta = () => GET('CountPeserta');
 const CountBayarnew = () => GET('CountBayarnew');
 const CountBayarcancel = () => GET('CountBayarcancel');
+const CountJenkelL = () => GET('CountJenkelL');
+const CountJenkelP = () => GET('CountJenkelP');
  
 const API = {
+    PostLogin,
     GetAktifSeminar,
     GetArsipSeminar,
     GetSeminar,
@@ -154,10 +174,26 @@ const API = {
     GetIdentitasWeb,
     PutIdentitasWeb,
     GetBank,
-    PostLogin,
+    GetIdBank,
+    GetAktifBank,
+    PostBank,
+    PutBank,
+    PutStatusBank,
+    DeleteBank,
     GetKartuIdentitas,
+    GetIdKartuIdentitas,
+    GetAktifKartuId,
+    PostKartuIdentitas,
+    PutKartuIdentitas,
     PutStatusKartu,
+    DeleteKartuIdentitas,
     GetPendidikan,
+    GetIdPendidikan,
+    GetAktifPendidikan,
+    PostPendidikan,
+    PutPendidikan,
+    PutStatusPendidikan,
+    DeletePendidikan,
     GetKabupaten,
     GetProfilWeb,
     PutProfilWeb,
@@ -182,7 +218,9 @@ const API = {
     GetIdAdmin,
     CountPeserta,
     CountBayarnew,
-    CountBayarcancel
+    CountBayarcancel,
+    CountJenkelL,
+    CountJenkelP
 }
 
 export default API

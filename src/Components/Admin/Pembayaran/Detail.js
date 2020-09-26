@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import API from '../../Configs/Axios'
+import API from '../../../Configs/Axios'
+import {UploadUrl} from '../../../Configs/Url'
 import { Container, Breadcrumb, Row, Col, Card, Badge  } from 'react-bootstrap'
 import { Helmet } from 'react-helmet'
-import {UploadUrl} from '../../Configs/Url'
 import Loader from 'react-loader'
 import moment from 'moment'
 import 'moment/locale/id'
 
 const TITLE = ' - Seminar App'
 var options = {lines: 13,length: 20,width: 10,radius: 30,scale: 0.35,corners: 1,color: '#fff',opacity: 0.25,rotate: 0,direction: 1,speed: 1,trail: 60,fps: 20,zIndex: 2e9,top: '50%',left: '50%',shadow: false,hwaccel: false,position: 'absolute'};
-class PbDetail extends Component {
+class Detail extends Component {
     constructor(props){
         super(props)
         this.state = {
@@ -34,9 +34,11 @@ class PbDetail extends Component {
 
     componentDidMount = () => {
         const id = this.props.match.params.id
-        API.GetPembayaran(id).then(res=>{
+        this.setState({
+            id : id
+        })
+        API.GetIdPembayaran(id).then(res=>{
             setTimeout(() => this.setState({
-                id: res.data[0].id_pembayaran,
                 status: res.data[0].status_bayar,
                 tgl: res.data[0].tgl_transfer,
                 jam: res.data[0].jam_transfer,
@@ -55,10 +57,7 @@ class PbDetail extends Component {
             console.log(err)
         })
     }
-    componentDidUpdate(prevProps) {
-        if (prevProps.location.pathname !== this.props.location.pathname) { window.location.reload();
-        }
-    }
+
     render() {
         return (
             <>
@@ -136,4 +135,4 @@ class PbDetail extends Component {
     }
 }
 
-export default PbDetail
+export default Detail

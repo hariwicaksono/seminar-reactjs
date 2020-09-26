@@ -1,26 +1,27 @@
 import React, { Component, useState, useMemo } from 'react'
 import {Link,Redirect,NavLink} from 'react-router-dom'
-import API from '../../Configs/Axios'
+import API from '../../../Configs/Axios'
 import { Helmet } from 'react-helmet'
 import { NotificationManager } from 'react-notifications'
-import {Container, Breadcrumb, Card, Row, Col, Button, Form} from 'react-bootstrap'
+import {Container, Breadcrumb, Card, Row, Col, Spinner, Button, Modal, Form} from 'react-bootstrap'
+import { EyeFill, TrashFill } from 'react-bootstrap-icons'
 import { Formik } from 'formik';
 //import * as yup from 'yup';
-import {UploadUrl} from '../../Configs/Url'
+//import TbPeserta from './TbPeserta'
 import Loader from 'react-loader'
 import DataTable from 'react-data-table-component'
 import styled from 'styled-components'
 import Dialog from 'react-bootstrap-dialog'
 
-const TITLE = 'Kartu Identitas - Seminar App'
+const TITLE = 'Peserta - Seminar App'
 var options = {lines: 13,length: 20,width: 10,radius: 30,scale: 0.35,corners: 1,color: '#fff',opacity: 0.25,rotate: 0,direction: 1,speed: 1,trail: 60,fps: 20,zIndex: 2e9,top: '50%',left: '50%',shadow: false,hwaccel: false,position: 'absolute'};
 
-class Bank extends Component {
+class index extends Component {
     constructor(props) {
         super(props)
         this.state = {
-           Kartu: [],
-           url: UploadUrl(),
+           Daftar: [],
+           Seminar: [],
            loading: true
             
         }
@@ -28,10 +29,10 @@ class Bank extends Component {
     }
 
     componentDidMount = () => {
-        API.GetKartuIdentitas().then(res => {
+        API.GetPeserta().then(res => {
           if (res.data.length > 0) {
             setTimeout(() => this.setState({
-                Kartu: res.data,
+                Daftar: res.data,
                 loading: false
             }), 100);
           } else {
@@ -42,82 +43,52 @@ class Bank extends Component {
         }
         }).catch(err => {
           console.log(err.response)
-      })
+        })
+        API.GetSeminar().then(res => {
+          if (res.data.length > 0) {
+            setTimeout(() => this.setState({
+                Seminar: res.data,
+                loading: false
+            }), 100);
+          } else {
+            this.setState({
+                error: "No Data Found",
+                loading: false
+            })
+        }
+        }).catch(err => {
+          console.log(err.response)
+        })
     }  
     
     
     render() {
-
+      
       const columns = [
         {
-          name: 'ID Kartu',
-          selector: 'id_kartu',
+          name: 'No. Registrasi',
+          selector: 'id_peserta',
           sortable: true,
         },
         {
-          name: 'Nama Kartu ID',
-          selector: 'jns_kartuid',
+          name: 'Nama Peserta',
+          selector: 'nama_peserta',
           sortable: true,
         },
         {
-          name: 'Aktif',
+          name: 'Nama Seminar',
+          selector: 'nm_seminar',
           sortable: true,
-          cell: row => <>
-          <Formik
-                            initialValues={{ 
-                                id: row.id_kartu, 
-                                aktif_kartuid: '',
-                                
-                            }}
-                            onSubmit={(values, actions) => {
-                                alert('Apakah anda yakin akan mengubah data ini?');
-                                API.PutStatusSeminar(values).then(res=>{
-                                  //console.log(res)
-                                  if (res.status === 1 ) {
-                                      NotificationManager.success('Data berhasil disimpan');
-                                  } 
-                                  
-                              }).catch(err => {
-                                  console.log(err.response)
-                                  NotificationManager.warning('Tidak ada data yang diubah');
-
-                              })
-                                
-                                setTimeout(() => {
-                                actions.setSubmitting(false);
-                                }, 1000);
-                            }}
-                            >
-                            {({
-                                handleSubmit,
-                                handleChange,
-                                handleBlur,
-                                values,
-                                touched,
-                                errors,
-                                isSubmitting
-                            }) => (
-                        <Form onChange={handleSubmit}>
-                            <Form.Control as="select" name="aktif_kartuid" onChange={handleChange} onBlur={handleBlur} size="sm" custom>
-                            <option value="">Pilih Status</option>
-                            <option value="Y" selected={row.aktif_kartuid === "Y" ? "selected" : ""}>{isSubmitting ? 
-                           "loading..." : "Aktif"}
-                           </option>
-                            <option value='N' selected={row.aktif_kartuid === "N" ? "selected" : ""}>{isSubmitting ? 
-                             "loading..." : "Tidak Aktif"}
-                             </option>
- 
-                            </Form.Control>
-       
-                     </Form>
-                     )}
-                    </Formik>
-          </>,
         },
         {
-          name: 'Opsi',
+          name: 'Email',
+          selector: 'email_peserta',
+          sortable: true,
+        },
+        {
+          name: 'Aksi',
           sortable: false,
-          cell: row => <><Button as={Link} to={'/kartuidentitas/edit/'+row.id_kartu} variant="light" size="sm">Edit</Button>&nbsp;
+          cell: row => <><Button as={Link} to={'/peserta/detail/'+row.id_peserta} size="sm" title="Detail" alt="Detail"><EyeFill/></Button>&nbsp;
           <Button onClick={() => {
                 this.dialog.show({
                   title: 'Konfirmasi',
@@ -128,9 +99,9 @@ class Bank extends Component {
                       console.log('Cancel was clicked!')
                     }),
                     Dialog.OKAction(() => {
-                      API.DeleteKartuIdentitas(row.id_kartu).then(res => {
+                      API.DeletePeserta(row.id_peserta).then(res => {
                         if (res.status === 1) {
-                            window.location.href = '/kartuidentitas';
+                            window.location.href = '/peserta';
                             NotificationManager.success('Hapus data berhasil');
                         } else {
                             console.log('gagal')
@@ -143,11 +114,10 @@ class Bank extends Component {
                     console.log('closed by clicking background.')
                   }
                 })
-              }} variant="danger" size="sm">Hapus</Button></>,
+              }} title="Hapus" alt="Hapus" variant="danger" size="sm"><TrashFill/></Button></>,
         },
       ];
-
-      const customStyles = {
+    const customStyles = {
         rows: {
           style: {
             fontSize: '14px',
@@ -219,25 +189,32 @@ class Bank extends Component {
     const ExpandedComponent = ({ data }) => (
       <ExpandedStyle>
         <p>
-          Tanggal Dibuat: {data.cr_dt_seminar} {data.cr_tm_seminar}<br/>
-          Tanggal Diubah: {data.md_dt_seminar} {data.md_tm_seminar}<br/>
+          Seminar: {data.nm_seminar}<br/>
+          Tanggal Daftar: {data.tgl_daftar}<br/>
+          Kartu Identitas: {data.jns_kartuid} / No: {data.no_kartuid}
         </p>
       </ExpandedStyle>
     );
 
+    const ListSeminar = this.state.Seminar.map((s,i) => (
+        <option value={s.nm_seminar} key={i+1}>{s.nm_seminar}</option>
+    ));
+
     const FilterComponent = ({ filterText, onFilter, onClear }) => (
       <>
-      <Button as={Link} to="/kartuidentitas/tambah" variant="primary" style={{ position: 'absolute', left: '0', marginLeft: '15px'}}>Tambah</Button>
-        <TextField id="search" type="text" placeholder="Filter By Nama" aria-label="Search Input" value={filterText} onChange={onFilter} />
-        <ClearButton type="button" onClick={onClear}>X</ClearButton>
+      <Select className="custom-select" id="select" onChange={onFilter}>
+      <option value=''>Filter by Seminar</option>
+      {ListSeminar}
+    </Select>
+        <TextField id="search" type="text" placeholder="Filter by Nama" aria-label="Search Input" value={filterText} onChange={onFilter} />
+        <ClearButton variant="secondary" type="button" onClick={onClear}>X</ClearButton>
       </>
     );
     
     const BasicTable = () => {
       const [filterText, setFilterText] = useState('');
       const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
-      const filteredItems = this.state.Kartu.filter(item => item.jns_kartuid && item.jns_kartuid.toLowerCase().includes(filterText.toLowerCase()) 
-       );
+      const filteredItems = this.state.Daftar.filter(item => item.nama_peserta && item.nama_peserta.toLowerCase().includes(filterText.toLowerCase()) || item.nm_seminar && item.nm_seminar.toLowerCase().includes(filterText.toLowerCase()) );
     
       const subHeaderComponentMemo = useMemo(() => {
         const handleClear = () => {
@@ -253,7 +230,7 @@ class Bank extends Component {
     
       return (
         <DataTable
-          title="Daftar Seminar"
+          title="Daftar Peserta"
           columns={columns}
           data={filteredItems}
           pagination
@@ -281,7 +258,7 @@ class Bank extends Component {
                 <Container fluid>
                 <Breadcrumb className="card px-3 mb-2">
                 <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/admin" }}>Beranda</Breadcrumb.Item>
-                <Breadcrumb.Item active>Daftar Seminar</Breadcrumb.Item>
+                <Breadcrumb.Item active>Daftar Peserta</Breadcrumb.Item>
                 </Breadcrumb>
                     <Row>
                   
@@ -309,4 +286,4 @@ class Bank extends Component {
 
 
 
-export default Bank
+export default index

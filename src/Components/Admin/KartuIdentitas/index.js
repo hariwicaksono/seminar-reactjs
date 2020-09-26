@@ -1,12 +1,13 @@
 import React, { Component, useState, useMemo } from 'react'
 import {Link,Redirect,NavLink} from 'react-router-dom'
-import API from '../../Configs/Axios'
+import API from '../../../Configs/Axios'
+import {UploadUrl} from '../../../Configs/Url'
 import { Helmet } from 'react-helmet'
 import { NotificationManager } from 'react-notifications'
 import {Container, Breadcrumb, Card, Row, Col, Button, Form} from 'react-bootstrap'
+import { PencilSquare, TrashFill } from 'react-bootstrap-icons'
 import { Formik } from 'formik';
 //import * as yup from 'yup';
-import {UploadUrl} from '../../Configs/Url'
 import Loader from 'react-loader'
 import DataTable from 'react-data-table-component'
 import styled from 'styled-components'
@@ -15,7 +16,7 @@ import Dialog from 'react-bootstrap-dialog'
 const TITLE = 'Kartu Identitas - Seminar App'
 var options = {lines: 13,length: 20,width: 10,radius: 30,scale: 0.35,corners: 1,color: '#fff',opacity: 0.25,rotate: 0,direction: 1,speed: 1,trail: 60,fps: 20,zIndex: 2e9,top: '50%',left: '50%',shadow: false,hwaccel: false,position: 'absolute'};
 
-class Pendidikan extends Component {
+class index extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -71,7 +72,7 @@ class Pendidikan extends Component {
                             }}
                             onSubmit={(values, actions) => {
                                 alert('Apakah anda yakin akan mengubah data ini?');
-                                API.PutStatusSeminar(values).then(res=>{
+                                API.PutStatusKartu(values).then(res=>{
                                   //console.log(res)
                                   if (res.status === 1 ) {
                                       NotificationManager.success('Data berhasil disimpan');
@@ -98,17 +99,16 @@ class Pendidikan extends Component {
                                 isSubmitting
                             }) => (
                         <Form onChange={handleSubmit}>
-                            <Form.Control as="select" name="aktif_kartuid" onChange={handleChange} onBlur={handleBlur} size="sm" custom>
-                            <option value="">Pilih Status</option>
-                            <option value="Y" selected={row.aktif_kartuid === "Y" ? "selected" : ""}>{isSubmitting ? 
+                            <Form.Control as="select" name="aktif_kartuid" onChange={handleChange} defaultValue={row.aktif_kartuid} onBlur={handleBlur} size="sm" custom>
+                            <option value="Y" >{isSubmitting ? 
                            "loading..." : "Aktif"}
                            </option>
-                            <option value='N' selected={row.aktif_kartuid === "N" ? "selected" : ""}>{isSubmitting ? 
+                            <option value='N' >{isSubmitting ? 
                              "loading..." : "Tidak Aktif"}
                              </option>
  
                             </Form.Control>
-       
+        
                      </Form>
                      )}
                     </Formik>
@@ -117,7 +117,7 @@ class Pendidikan extends Component {
         {
           name: 'Opsi',
           sortable: false,
-          cell: row => <><Button as={Link} to={'/kartuidentitas/edit/'+row.id_kartu} variant="light" size="sm">Edit</Button>&nbsp;
+          cell: row => <><Button as={Link} to={'/kartuidentitas/edit/'+row.id_kartu} size="sm"  title="Edit" alt="Edit"><PencilSquare/></Button>&nbsp;
           <Button onClick={() => {
                 this.dialog.show({
                   title: 'Konfirmasi',
@@ -143,7 +143,7 @@ class Pendidikan extends Component {
                     console.log('closed by clicking background.')
                   }
                 })
-              }} variant="danger" size="sm">Hapus</Button></>,
+              }} title="Hapus" alt="Hapus" variant="danger" size="sm"><TrashFill/></Button></>,
         },
       ];
 
@@ -219,8 +219,8 @@ class Pendidikan extends Component {
     const ExpandedComponent = ({ data }) => (
       <ExpandedStyle>
         <p>
-          Tanggal Dibuat: {data.cr_dt_seminar} {data.cr_tm_seminar}<br/>
-          Tanggal Diubah: {data.md_dt_seminar} {data.md_tm_seminar}<br/>
+          Tanggal Dibuat: {data.cr_dt_kartuid} {data.cr_tm_kartuid} / Oleh: {data.cr_username_kartuid ? data.cr_username_kartuid:"-"}<br/>
+          Tanggal Diubah: {data.md_dt_kartuid} {data.md_tm_kartuid} / Oleh: {data.md_username_kartuid ? data.md_username_kartuid:"-"}<br/>
         </p>
       </ExpandedStyle>
     );
@@ -229,7 +229,7 @@ class Pendidikan extends Component {
       <>
       <Button as={Link} to="/kartuidentitas/tambah" variant="primary" style={{ position: 'absolute', left: '0', marginLeft: '15px'}}>Tambah</Button>
         <TextField id="search" type="text" placeholder="Filter By Nama" aria-label="Search Input" value={filterText} onChange={onFilter} />
-        <ClearButton type="button" onClick={onClear}>X</ClearButton>
+        <ClearButton variant="secondary" type="button" onClick={onClear}>X</ClearButton>
       </>
     );
     
@@ -253,7 +253,7 @@ class Pendidikan extends Component {
     
       return (
         <DataTable
-          title="Daftar Seminar"
+          title="Master Kartu Identitas"
           columns={columns}
           data={filteredItems}
           pagination
@@ -281,7 +281,7 @@ class Pendidikan extends Component {
                 <Container fluid>
                 <Breadcrumb className="card px-3 mb-2">
                 <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/admin" }}>Beranda</Breadcrumb.Item>
-                <Breadcrumb.Item active>Daftar Seminar</Breadcrumb.Item>
+                <Breadcrumb.Item active>Master Kartu Identitas</Breadcrumb.Item>
                 </Breadcrumb>
                     <Row>
                   
@@ -309,4 +309,4 @@ class Pendidikan extends Component {
 
 
 
-export default Pendidikan
+export default index
