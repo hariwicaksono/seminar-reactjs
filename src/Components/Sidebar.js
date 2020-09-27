@@ -81,6 +81,11 @@ function SubMenu() {
             </NavLink>
           </li>
           <li>
+          <NavLink to={'/sertifikat'} title="Sertifikat" alt="Sertifikat">
+            <span>Sertifikat</span>
+            </NavLink>
+          </li>
+          <li>
           <NavLink to={'/kartuidentitas'} title="Kartu Identitas" alt="Kartu Identitas">
             <span>Kartu Identitas</span>
             </NavLink>

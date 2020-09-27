@@ -10,6 +10,8 @@ import moment from 'moment'
 import 'moment/locale/id'
 import { Formik } from 'formik'
 import * as yup from 'yup'
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
 
 const TITLE = ' - Seminar App'
 var options = {lines: 13,length: 20,width: 10,radius: 30,scale: 0.35,corners: 1,color: '#fff',opacity: 0.25,rotate: 0,direction: 1,speed: 1,trail: 60,fps: 20,zIndex: 2e9,top: '50%',left: '50%',shadow: false,hwaccel: false,position: 'absolute'};
@@ -17,12 +19,18 @@ const validationSchema = yup.object({
     nm_seminar: yup.string().required(),
     tgl_seminar: yup.string().required(),
     jam_seminar: yup.string().required(),
-    biaya_seminar: yup.string().required(),
+    biaya_seminar: yup.number().required().typeError("Harus berupa angka"),
     lokasi_seminar: yup.string().required(),
     headline_seminar: yup.string().required(),
     deskripsi_seminar: yup.string().required(),
-    aktif_seminar: yup.string().required(),
   }); 
+  function validateDTPicker(value) {
+    let error;
+    if (!value) {
+      error = 'Required';
+    } 
+    return error;
+  }
 class Tambah extends Component {
     constructor(props){
         super(props)
@@ -74,7 +82,7 @@ class Tambah extends Component {
                                 lokasi_seminar: '',
                                 headline_seminar: '',
                                 deskripsi_seminar: '',
-                                aktif_seminar: '',
+                                id_sertifikat: '',
                                 cr_username_seminar: this.state.cruser,
                                
                             }}
@@ -84,11 +92,12 @@ class Tambah extends Component {
                                 API.PostSeminar(values).then(res=>{
                                     //console.log(res)
                                     if (res.status === 1 ) {
-                                        NotificationManager.success('Data berhasil disimpan');
+                                        this.props.history.push('/seminar')
+                                       NotificationManager.success('Data berhasil disimpan');
                                     } 
                                     
                                 }).catch(err => {
-                                    console.log(err.response)
+                                   // console.log(err.response)
                                     NotificationManager.warning('Tidak ada data yang diubah');
 
                                 })
@@ -119,16 +128,44 @@ class Tambah extends Component {
 
 
                             <Form.Group>
+                           
                             <Form.Row>
                             <Col>
                                 <Form.Label>Tanggal Seminar</Form.Label>
-                                <Form.Control name="tgl_seminar" placeholder="" className="form-control" onChange={handleChange} onBlur={handleBlur} value={values.tgl_seminar} isInvalid={!!errors.tgl_seminar && touched.tgl_seminar} />
-                                {errors.tgl_seminar && touched.tgl_seminar && <Form.Control.Feedback type="invalid">{errors.tgl_seminar}</Form.Control.Feedback>}
+                                <DatePicker 
+                                autoComplete="off"
+                      selected={values.tgl_seminar}
+                      value={values.tgl_seminar}
+                      dateFormat="yyyy-MM-dd"
+                      className="form-control"
+                      name="tgl_seminar"
+                      onChange={date => setFieldValue('tgl_seminar', date)}
+                      validate={validateDTPicker}
+                      onBlur={handleBlur}
+                      peekNextMonth
+      showMonthDropdown
+      showYearDropdown
+      dropdownMode="select"
+                    />
+                                
+                                {errors.tgl_seminar && touched.tgl_seminar && <span className="error">{errors.tgl_seminar}</span>}
                             </Col>
                             <Col>
                             <Form.Label>Jam Seminar</Form.Label>
-                                <Form.Control name="jam_seminar" placeholder="" className="form-control" onChange={handleChange} onBlur={handleBlur} value={values.jam_seminar} isInvalid={!!errors.jam_seminar && touched.jam_seminar} />
-                                {errors.jam_seminar && touched.jam_seminar && <Form.Control.Feedback type="invalid">{errors.jam_seminar}</Form.Control.Feedback>}
+                            <DatePicker
+                            autoComplete="off"
+                                selected={values.jam_seminar}
+                                name="jam_seminar"
+                                className="form-control"
+                                onChange={date => setFieldValue('jam_seminar', date)}
+                                onBlur={handleBlur}
+                                showTimeSelect
+                                showTimeSelectOnly
+                                timeIntervals={15}
+                                timeCaption="Time"
+                                dateFormat="hh:mm:ss"
+                                />
+                                {errors.jam_seminar && touched.jam_seminar && <span className="error">{errors.jam_seminar}</span>}
                             </Col>
                             <Col>
                             <Form.Label>Lokasi Seminar</Form.Label>
@@ -156,21 +193,6 @@ class Tambah extends Component {
                                 {errors.deskripsi_seminar && touched.deskripsi_seminar && <Form.Control.Feedback type="invalid">{errors.deskripsi_seminar}</Form.Control.Feedback>}
                             </Form.Group>
 
-
-                            <Form.Group>
-                                <Form.Label>Aktifkan Seminar</Form.Label>
-                                <Row>
-                            <Col>
-                            <Form.Check type="radio" name="aktif_seminar" id="radio-1" value="Y" label="Ya" onChange={handleChange} feedback={errors.aktif_seminar} isInvalid={!!errors.aktif_seminar && touched.aktif_seminar} required />
-                           
-                            </Col>
-                            <Col>
-                            <Form.Check type="radio" name="aktif_seminar" id="radio-2" value="N" label="Tidak" onChange={handleChange} feedback={errors.aktif_seminar} isInvalid={!!errors.aktif_seminar && touched.aktif_seminar} required /> 
-                            
-                            </Col>
-                            {errors.aktif_seminar && touched.aktif_seminar && <Form.Control.Feedback type="invalid">{errors.aktif_seminar}</Form.Control.Feedback>}
-                            </Row>
-                            </Form.Group>
                            
 
                             <Button variant="primary" type="submit" disabled={isSubmitting}>{isSubmitting ? (
