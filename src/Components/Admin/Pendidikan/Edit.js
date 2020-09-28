@@ -36,7 +36,7 @@ class Edit extends Component {
         const id = this.props.match.params.id
         this.setState({
             id : id
-        })
+        }) 
         API.GetIdPendidikan(id).then(res=>{
             setTimeout(() => this.setState({
                 nama: res.data[0].pendidikan,
@@ -126,7 +126,7 @@ class Edit extends Component {
                            
                             </Col>
                             <Col>
-                            <Form.Check type="radio" name="aktif_pendidikan" id="radio-2" value="N" label="Tidak" onChange={handleChange} feedback={errors.aktif_pendidikan} isInvalid={!!errors.aktif_pendidikan && touched.aktif_pendidikan} checked={values.aktif_kartuid === "N" ? "checked" : ""} required /> 
+                            <Form.Check type="radio" name="aktif_pendidikan" id="radio-2" value="N" label="Tidak" onChange={handleChange} feedback={errors.aktif_pendidikan} isInvalid={!!errors.aktif_pendidikan && touched.aktif_pendidikan} checked={values.aktif_pendidikan === "N" ? "checked" : ""} required /> 
                             
                             </Col>
                             {errors.aktif_pendidikan && touched.aktif_pendidikan && <Form.Control.Feedback type="invalid">{errors.aktif_pendidikan}</Form.Control.Feedback>}

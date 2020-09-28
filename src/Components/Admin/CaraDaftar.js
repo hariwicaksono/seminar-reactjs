@@ -36,16 +36,6 @@ class CaraDaftar extends Component {
 
     }
 
-    handlerImage = (e)=>{
-        this.setState({
-            foto: e.target.files[0].name,
-            file: {
-                foto: e.target.files[0]
-            },
-            fotoPreviewUrl: URL.createObjectURL(e.target.files[0])
-        })
-    }
-
     componentDidMount = () => {
     const datas = JSON.parse(localStorage.getItem('isAdmin'))
     const id = datas[0].usernm
@@ -98,7 +88,7 @@ class CaraDaftar extends Component {
                                     if (res.status === 1 ) {
                                         NotificationManager.success('Data berhasil disimpan');
                                     } 
-                                    
+                                     
                                 }).catch(err => {
                                     console.log(err.response)
                                     NotificationManager.warning('Tidak ada data yang diubah');
@@ -142,7 +132,15 @@ class CaraDaftar extends Component {
                             <Form.Group>
                             <Form.Label htmlFor="foto">Upload Gambar</Form.Label>
                             
-                            <Form.File className="form-control" name="foto" id="foto" onChange={(event) => {setFieldValue("foto", event.currentTarget.files[0]);}} onBlur={handleBlur} isInvalid={!!errors.foto && touched.foto} />
+                            <Form.File className="form-control" name="foto" id="foto" onChange={(event) => 
+                                {
+                                    setFieldValue("foto", event.currentTarget.files[0]); 
+                                    this.setState({
+                                        fotoPreviewUrl: URL.createObjectURL(event.currentTarget.files[0])
+                                    })
+                                    }
+                                
+                                } onBlur={handleBlur} isInvalid={!!errors.foto && touched.foto} />
                             {errors.foto && touched.foto && <div className="error">{errors.foto}</div>}
                             {this.state.fotoPreviewUrl ? <img src={this.state.fotoPreviewUrl} width="200" alt="" className="mt-2 img-fluid" /> : ""}
                             </Form.Group>

@@ -26,7 +26,7 @@ class index extends Component {
 
     componentDidMount = () => {
         const datas = JSON.parse(localStorage.getItem('isLogin'))
-        const id = datas[0].email_peserta
+        const id = datas[0].id_peserta
         API.GetPembayaranById(id).then(res=>{
             setTimeout(() => {
                 if (res.data.length > 0) {
@@ -75,7 +75,7 @@ class index extends Component {
                     {s.status_bayar === "Baru" ? <Button variant="primary" size="sm" disabled>Sedang proses</Button> : ""}
                     {s.status_bayar === "Menunggu" ? <Button variant="primary" size="sm" disabled>Sedang proses</Button> : ""}
                     {s.status_bayar === "Batal" ? <Button variant="primary" size="sm" disabled>Dibatalkan</Button> : ""}
-                    {s.status_bayar === "Lunas" ? <Link to={'/cetak/'+s.email_peserta} className="btn btn-primary"><Printer/> Cetak Bukti Pendaftaran</Link> : ""}
+                    {s.status_bayar === "Lunas" ? <><Link to={'/cetak/bukti/'+s.id_peserta} className="btn btn-primary mb-1"><Printer/> Cetak Bukti Pendaftaran</Link><Link to={'/cetak/sertifikat/'+s.id_peserta} className="btn btn-warning"><Printer/> Cetak Sertifikat</Link></> : ""}
                     </td>
              </tr> 
         ))

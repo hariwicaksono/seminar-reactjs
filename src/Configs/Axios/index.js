@@ -101,6 +101,7 @@ const GetIdSeminar = (data) => GET_ID('Seminar?id=',data);
 const PostSeminar = (data) => POST('Seminar',data);
 const PutSeminar = (data) => PUT('Seminar',data);
 const PutStatusSeminar = (data) => PUT('StatusSeminar',data);
+const PutSertifikatSeminar = (data) => PUT('SertifikatSeminar',data);
 const DeleteSeminar = (id) => DELETE('Seminar/index_delete?id=',id)
 const GetSeminarById = (data) => GET_BY_ID('GetSeminar?id=',data);
 const CariSeminar = (data) => SEARCH('Search?id=',data);
@@ -147,8 +148,14 @@ const PutPembayaran = (data) => PUT('Pembayaran',data);
 const DeletePembayaran = (id) => DELETE('Pembayaran/index_delete?id=',id)
 const GetPembayaranById = (data) => GET_BY_ID('GetPembayaran?id=',data);
 const CheckPembayaran = (id_peserta, id_seminar) => Axios(RootPath+`CheckPembayaran?id_peserta=${id_peserta}&id_seminar=${id_seminar}`);
+const GetSertifikat = () => GET('Sertifikat');
+const GetIdSertifikat = (data) => GET_ID('Sertifikat?id=',data);
+const PostSertifikat = (data) => POST('Sertifikat',data);
+const PutSertifikat = (data) => PUT('Sertifikat',data);
+const DeleteSertifikat = (id) => DELETE('Sertifikat/index_delete?id=',id)
 const PutAktivasiAkun = (data) => PUT('AktivasiAkun',data);
 const PostFoto = (data,name) => POST_FOTO('ImageUpload',data,name);
+const PostImgSertifikat = (data,name) => POST_FOTO('ImgSertifikatUpload',data,name);
 const GetKalender = () => GET('Kalender');
 const GetIdAdmin = (data) => GET_ID('Pengguna?id=',data);
 const CountPeserta = () => GET('CountPeserta');
@@ -167,6 +174,7 @@ const API = {
     PostSeminar,
     PutSeminar,
     PutStatusSeminar,
+    PutSertifikatSeminar,
     DeleteSeminar,
     GetSeminarById,
     CariSeminar,
@@ -213,8 +221,14 @@ const API = {
     DeletePembayaran,
     GetPembayaranById,
     CheckPembayaran,
+    GetSertifikat,
+    GetIdSertifikat,
+    PostSertifikat,
+    PutSertifikat,
+    DeleteSertifikat,
     PutAktivasiAkun,
     PostFoto,
+    PostImgSertifikat,
     GetKalender,
     GetIdAdmin,
     CountPeserta,

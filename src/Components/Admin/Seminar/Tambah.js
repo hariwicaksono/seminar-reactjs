@@ -24,7 +24,7 @@ const validationSchema = yup.object({
     headline_seminar: yup.string().required(),
     deskripsi_seminar: yup.string().required(),
   }); 
-  function validateDTPicker(value) {
+function validateDTPicker(value) {
     let error;
     if (!value) {
       error = 'Required';
@@ -36,11 +36,12 @@ class Tambah extends Component {
         super(props)
         this.state = {
             cruser: '',
+            sertifikat: [],
             url: UploadUrl(),
             loading: true
         }
     }
-
+ 
     componentDidMount = () => {
         const datas = JSON.parse(localStorage.getItem('isAdmin'))
         const usernm = datas[0].usernm
@@ -48,13 +49,23 @@ class Tambah extends Component {
             cruser: usernm,
             loading: false
         })
+
+        API.GetSertifikat().then(res => {
+            this.setState({
+                sertifikat: res.data,
+                loading: false
+            })
+        })
     }
 
     render() {
+        const ListSertifikat= this.state.sertifikat.map((b, i) => (
+            <option value={b.id_sertifikat} key={i}>{b.id_sertifikat}</option>      
+        ))
         return (
             <>
            <Helmet>
-        <title> Tambah Seminar { TITLE }</title>
+            <title> Tambah Seminar { TITLE }</title>
             </Helmet>
                 <Container fluid>
                     
@@ -74,7 +85,6 @@ class Tambah extends Component {
                             <h5 className="mb-3" style={{fontWeight: '400'}}>Tambah Seminar</h5>
                             <Formik
                             initialValues={{ 
-                                id_seminar: '', 
                                 nm_seminar: '',
                                 tgl_seminar: '',
                                 jam_seminar: '',
@@ -89,15 +99,15 @@ class Tambah extends Component {
                             onSubmit={(values, actions) => {
                                 alert(JSON.stringify(values));
                                 
-                                API.PostSeminar(values).then(res=>{
+                               API.PostSeminar(values).then(res=>{
                                     //console.log(res)
-                                    if (res.status === 1 ) {
-                                        this.props.history.push('/seminar')
+                                   if (res.status === 1 ) {
+                                       this.props.history.push('/seminar')
                                        NotificationManager.success('Data berhasil disimpan');
                                     } 
                                     
-                                }).catch(err => {
-                                   // console.log(err.response)
+                               }).catch(err => {
+                                    console.log(err.response)
                                     NotificationManager.warning('Tidak ada data yang diubah');
 
                                 })
@@ -128,45 +138,22 @@ class Tambah extends Component {
 
 
                             <Form.Group>
-                           
-                            <Form.Row>
+                            <Row>
                             <Col>
                                 <Form.Label>Tanggal Seminar</Form.Label>
-                                <DatePicker 
-                                autoComplete="off"
-                      selected={values.tgl_seminar}
-                      value={values.tgl_seminar}
-                      dateFormat="yyyy-MM-dd"
-                      className="form-control"
-                      name="tgl_seminar"
-                      onChange={date => setFieldValue('tgl_seminar', date)}
-                      validate={validateDTPicker}
-                      onBlur={handleBlur}
-                      peekNextMonth
-      showMonthDropdown
-      showYearDropdown
-      dropdownMode="select"
-                    />
-                                
-                                {errors.tgl_seminar && touched.tgl_seminar && <span className="error">{errors.tgl_seminar}</span>}
+                                <Form.Control type="date" name="tgl_seminar" placeholder="" className="form-control" onChange={handleChange} onBlur={handleBlur} value={values.tgl_seminar} isInvalid={!!errors.tgl_seminar && touched.tgl_seminar} />
+                                {errors.tgl_seminar && touched.tgl_seminar && <Form.Control.Feedback type="invalid">{errors.tgl_seminar}</Form.Control.Feedback>}
                             </Col>
                             <Col>
                             <Form.Label>Jam Seminar</Form.Label>
-                            <DatePicker
-                            autoComplete="off"
-                                selected={values.jam_seminar}
-                                name="jam_seminar"
-                                className="form-control"
-                                onChange={date => setFieldValue('jam_seminar', date)}
-                                onBlur={handleBlur}
-                                showTimeSelect
-                                showTimeSelectOnly
-                                timeIntervals={15}
-                                timeCaption="Time"
-                                dateFormat="hh:mm:ss"
-                                />
-                                {errors.jam_seminar && touched.jam_seminar && <span className="error">{errors.jam_seminar}</span>}
+                                <Form.Control type="time" name="jam_seminar" placeholder="" className="form-control" onChange={handleChange} onBlur={handleBlur} value={values.jam_seminar} isInvalid={!!errors.jam_seminar && touched.jam_seminar} />
+                                {errors.jam_seminar && touched.jam_seminar && <Form.Control.Feedback type="invalid">{errors.jam_seminar}</Form.Control.Feedback>}
                             </Col>
+                            </Row>
+                            </Form.Group>
+
+                            <Form.Group>
+                            <Row>
                             <Col>
                             <Form.Label>Lokasi Seminar</Form.Label>
                                 <Form.Control name="lokasi_seminar" placeholder="" className="form-control" onChange={handleChange} onBlur={handleBlur} value={values.lokasi_seminar} isInvalid={!!errors.lokasi_seminar && touched.lokasi_seminar} />
@@ -177,7 +164,7 @@ class Tambah extends Component {
                                 <Form.Control name="biaya_seminar" placeholder="" className="form-control" onChange={handleChange} onBlur={handleBlur} value={values.biaya_seminar} isInvalid={!!errors.biaya_seminar && touched.biaya_seminar} />
                                 {errors.biaya_seminar && touched.biaya_seminar && <Form.Control.Feedback type="invalid">{errors.biaya_seminar}</Form.Control.Feedback>}
                             </Col>
-                            </Form.Row>
+                            </Row>
                             </Form.Group>
 
                             <Form.Group>
@@ -193,6 +180,14 @@ class Tambah extends Component {
                                 {errors.deskripsi_seminar && touched.deskripsi_seminar && <Form.Control.Feedback type="invalid">{errors.deskripsi_seminar}</Form.Control.Feedback>}
                             </Form.Group>
 
+                            <Form.Group>
+                            <Form.Label>Pilih Sertifikat</Form.Label>
+                            <Form.Control as="select" name="id_sertifikat" onChange={handleChange} onBlur={handleBlur} value={values.id_sertifikat} isInvalid={!!errors.id_sertifikat && touched.id_sertifikat}>
+                            <option value="">Pilih Sertifikat</option>
+                            {ListSertifikat}
+                            </Form.Control>
+                            {errors.id_sertifikat && touched.id_sertifikat && <Form.Control.Feedback type="invalid">{errors.id_sertifikat}</Form.Control.Feedback>}
+                            </Form.Group>
                            
 
                             <Button variant="primary" type="submit" disabled={isSubmitting}>{isSubmitting ? (

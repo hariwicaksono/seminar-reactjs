@@ -3,18 +3,20 @@ import { Link } from 'react-router-dom'
 import API from '../../Configs/Axios'
 import { Container, Button, Table, Breadcrumb, Row, Col, Card } from 'react-bootstrap'
 import { Helmet } from 'react-helmet'
-import { ImagesUrl } from '../../Configs/Url'
+import { UploadUrl } from '../../Configs/Url'
 import Loader from 'react-loader'
 import moment from 'moment'
 import 'moment/locale/id'
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
 import QRCode from 'qrcode.react'
+import Parser from 'html-react-parser'
+import jsxToString from 'jsx-to-string'
 
-const TITLE = 'Cetak PDF - Seminar App'
+const TITLE = 'Cetak Sertifikat - Seminar App'
 var options = {lines: 13,length: 20,width: 10,radius: 30,scale: 0.35,corners: 1,color: '#fff',opacity: 0.25,rotate: 0,direction: 1,speed: 1,trail: 60,fps: 20,zIndex: 2e9,top: '50%',left: '50%',shadow: false,hwaccel: false,position: 'absolute'};
 
-class CetakPDF extends Component {
+class CetakSertifikat extends Component {
     constructor(props){
         super(props)
         this.state = {
@@ -25,6 +27,8 @@ class CetakPDF extends Component {
             jam:'',
             no_reg:'',
             token:'',
+            img: '',
+            url: UploadUrl(),
             loading: true
         }
     }
@@ -48,7 +52,7 @@ class CetakPDF extends Component {
 
     componentDidMount = () => {
         const id = this.props.match.params.id
-        API.GetPembayaranById(id).then(res=>{
+        API.GetSeminarById(id).then(res=>{
             setTimeout(() => this.setState({
                 nama_sem : res.data[0].nm_seminar,
                 nama : res.data[0].nama_peserta,
@@ -57,6 +61,8 @@ class CetakPDF extends Component {
                 jam: res.data[0].jam_seminar,
                 no_reg: res.data[0].id_peserta,
                 token: res.data[0].token_peserta,
+                img: res.data[0].img_sertifikat,
+                template: res.data[0].template_sertifikat,
                 loading: false
             }), 100);
         }).catch(err => {
@@ -81,11 +87,18 @@ class CetakPDF extends Component {
                       
                         <Breadcrumb className="card px-3 mb-2">
                         <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/" }}>Home</Breadcrumb.Item>
-                        <Breadcrumb.Item active>Cetak Bukti Pendaftaran</Breadcrumb.Item>
+                        <Breadcrumb.Item active>Cetak Sertifikat</Breadcrumb.Item>
                         </Breadcrumb>
+
+                        <div className="card card-lg w-100 h-100">
+                    <img alt="Image" src={this.state.url+this.state.img} className="bg-image" />
+                    <div className="card-body" >
+
+                    </div>
+                  </div>
                         
                         <div id="pdfdiv" className="mb-2 bg-white px-5 py-4">
-                            <h2 className="text-center">Bukti Pendaftaran Seminar</h2>
+                            <h2 className="text-center">Sertifikat Seminar</h2>
                             <hr/>
                             <Row>
                             <Col sm={10}>
@@ -156,4 +169,4 @@ class CetakPDF extends Component {
     }
 }
 
-export default CetakPDF
+export default CetakSertifikat

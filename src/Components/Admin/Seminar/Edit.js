@@ -14,11 +14,13 @@ import * as yup from 'yup'
 const TITLE = ' - Seminar App'
 var options = {lines: 13,length: 20,width: 10,radius: 30,scale: 0.35,corners: 1,color: '#fff',opacity: 0.25,rotate: 0,direction: 1,speed: 1,trail: 60,fps: 20,zIndex: 2e9,top: '50%',left: '50%',shadow: false,hwaccel: false,position: 'absolute'};
 const validationSchema = yup.object({
-    //username: yup.string().required(),
-    //password: yup.string().required()
-    //.min(8, "Password is too short - should be 8 chars minimum.")
-    //.matches(/(?=.*[0-9])/, "Password must contain a number.")
-    //,
+    nm_seminar: yup.string().required(),
+    tgl_seminar: yup.string().required(),
+    jam_seminar: yup.string().required(),
+    biaya_seminar: yup.number().required().typeError("Harus berupa angka"),
+    lokasi_seminar: yup.string().required(),
+    headline_seminar: yup.string().required(),
+    deskripsi_seminar: yup.string().required(),
   }); 
 class Edit extends Component {
     constructor(props){
@@ -46,7 +48,9 @@ class Edit extends Component {
         this.setState({
             id : id
         })
+        
         API.GetIdSeminar(id).then(res=>{
+            console.log(res)
             setTimeout(() => this.setState({
                 nama: res.data[0].nm_seminar,
                 tgl: res.data[0].tgl_seminar,
@@ -62,9 +66,13 @@ class Edit extends Component {
         }).catch(err => {
             console.log(err)
         })
+
+      
+
     }
 
     render() {
+
         return (
             <>
            <Helmet>
@@ -141,17 +149,24 @@ class Edit extends Component {
 
 
                             <Form.Group>
-                            <Form.Row>
+                            <Row>
                             <Col>
                                 <Form.Label>Tanggal Seminar</Form.Label>
-                                <Form.Control name="tgl_seminar" placeholder="" className="form-control" onChange={handleChange} onBlur={handleBlur} value={values.tgl_seminar} isInvalid={!!errors.tgl_seminar && touched.tgl_seminar} />
+                                <Form.Control type="date" name="tgl_seminar" placeholder="" className="form-control" onChange={handleChange} onBlur={handleBlur} value={values.tgl_seminar} isInvalid={!!errors.tgl_seminar && touched.tgl_seminar} />
                                 {errors.tgl_seminar && touched.tgl_seminar && <Form.Control.Feedback type="invalid">{errors.tgl_seminar}</Form.Control.Feedback>}
                             </Col>
                             <Col>
                             <Form.Label>Jam Seminar</Form.Label>
-                                <Form.Control name="jam_seminar" placeholder="" className="form-control" onChange={handleChange} onBlur={handleBlur} value={values.jam_seminar} isInvalid={!!errors.jam_seminar && touched.jam_seminar} />
+                                <Form.Control type="time" name="jam_seminar" placeholder="" className="form-control" onChange={handleChange} onBlur={handleBlur} value={values.jam_seminar} isInvalid={!!errors.jam_seminar && touched.jam_seminar} />
                                 {errors.jam_seminar && touched.jam_seminar && <Form.Control.Feedback type="invalid">{errors.jam_seminar}</Form.Control.Feedback>}
                             </Col>
+                            
+                            </Row>
+                            </Form.Group>
+
+                            <Form.Group>
+                            <Row>
+                            
                             <Col>
                             <Form.Label>Lokasi Seminar</Form.Label>
                                 <Form.Control name="lokasi_seminar" placeholder="" className="form-control" onChange={handleChange} onBlur={handleBlur} value={values.lokasi_seminar} isInvalid={!!errors.lokasi_seminar && touched.lokasi_seminar} />
@@ -162,7 +177,7 @@ class Edit extends Component {
                                 <Form.Control name="biaya_seminar" placeholder="" className="form-control" onChange={handleChange} onBlur={handleBlur} value={values.biaya_seminar} isInvalid={!!errors.biaya_seminar && touched.biaya_seminar} />
                                 {errors.biaya_seminar && touched.biaya_seminar && <Form.Control.Feedback type="invalid">{errors.biaya_seminar}</Form.Control.Feedback>}
                             </Col>
-                            </Form.Row>
+                            </Row>
                             </Form.Group>
 
                             <Form.Group>
@@ -177,7 +192,6 @@ class Edit extends Component {
                                 <Form.Control as="textarea" rows="3" name="deskripsi_seminar" placeholder="" className="form-control" onChange={handleChange} onBlur={handleBlur} value={values.deskripsi_seminar} isInvalid={!!errors.deskripsi_seminar && touched.deskripsi_seminar} />
                                 {errors.deskripsi_seminar && touched.deskripsi_seminar && <Form.Control.Feedback type="invalid">{errors.deskripsi_seminar}</Form.Control.Feedback>}
                             </Form.Group>
-
 
                             <Form.Group>
                                 <Form.Label>Aktifkan Seminar</Form.Label>

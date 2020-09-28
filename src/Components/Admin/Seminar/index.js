@@ -20,6 +20,7 @@ class index extends Component {
         super(props)
         this.state = {
           Seminar: [],
+          sertifikat: [],
            loading: true
             
         }
@@ -42,6 +43,12 @@ class index extends Component {
         }).catch(err => {
           console.log(err.response)
       })
+      API.GetSertifikat().then(res => {
+        this.setState({
+            sertifikat: res.data,
+            loading: false
+        })
+    })
     }  
     
     
@@ -98,7 +105,6 @@ class index extends Component {
                             }) => (
                         <Form onChange={handleSubmit}>
                             <Form.Control as="select" name="aktif_seminar" onChange={handleChange} defaultValue={row.aktif_seminar} onBlur={handleBlur} size="sm" custom>
-                            <option value="">Pilih Status</option>
                             <option value="Y" >{isSubmitting ? 
                            "loading..." : "Aktif"}
                            </option>
@@ -108,6 +114,59 @@ class index extends Component {
  
                             </Form.Control>
        
+                     </Form>
+                     )}
+                    </Formik>
+          </>,
+        },
+        ,
+        {
+          name: 'Sertifikat',
+          sortable: true,
+          cell: row => <>
+          <Formik
+                            initialValues={{ 
+                                id: row.id_seminar, 
+                                id_sertifikat: '',
+                                
+                            }}
+                            onSubmit={(values, actions) => {
+                                alert('Apakah anda yakin akan mengubah data ini?');
+                                API.PutSertifikatSeminar(values).then(res=>{
+                                  //console.log(res)
+                                  if (res.status === 1 ) {
+                                      NotificationManager.success('Data berhasil disimpan');
+                                  } 
+                                  
+                              }).catch(err => {
+                                  console.log(err.response)
+                                  NotificationManager.warning('Tidak ada data yang diubah');
+
+                              })
+                                
+                                setTimeout(() => {
+                                actions.setSubmitting(false);
+                                }, 1000);
+                            }}
+                            
+                            >
+                            {({
+                                handleSubmit,
+                                handleChange,
+                                handleBlur,
+                                values,
+                                touched,
+                                errors,
+                                isSubmitting
+                            }) => (
+                        <Form onChange={handleSubmit}>
+                            <Form.Control as="select" name="id_sertifikat" onChange={handleChange} defaultValue={row.id_sertifikat} onBlur={handleBlur} size="sm" custom>
+                            <option value="">Pilih Sertifikat</option>
+                            {this.state.sertifikat.map((b, i) => (<option value={b.id_sertifikat} key={i}>{isSubmitting ? 
+                           "loading..." : b.id_sertifikat}</option>))}
+ 
+                            </Form.Control>
+                           
                      </Form>
                      )}
                     </Formik>

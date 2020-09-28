@@ -49,7 +49,7 @@ class Konfirmasi extends Component {
  
     componentDidMount = () => {
         const datas = JSON.parse(localStorage.getItem('isLogin'))
-        const id = datas[0].email_peserta
+        const id = datas[0].id_peserta
         API.GetSeminarById(id).then(res=>{
             setTimeout(() => this.setState({
                 id_peserta: res.data[0].id_peserta,
@@ -77,7 +77,7 @@ class Konfirmasi extends Component {
     render() {
 
         const ListBank = this.state.Bank.map((b, i) => (
-            <option value={b.id_bank} key={i}>{b.nm_bank}</option>      
+        <option value={b.id_bank} key={i}>{b.nm_bank} - {b.no_rek}</option>      
         ))
 
         const ListSeminar = this.state.Seminar.map((s, i) => (

@@ -76,11 +76,6 @@ class index extends Component {
           sortable: true,
         },
         {
-          name: 'Nama Seminar',
-          selector: 'nm_seminar',
-          sortable: true,
-        },
-        {
           name: 'Email',
           selector: 'email_peserta',
           sortable: true,

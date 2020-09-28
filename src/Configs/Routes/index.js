@@ -16,6 +16,7 @@ import AktivasiAkun from "../../Components/AktivasiAkun"
 import Member from "../../Components/Member"
 import Konfirmasi from "../../Components/Member/Konfirmasi"
 import Cetak from "../../Components/Member/Cetak"
+import Sertifikat from "../../Components/Member/Sertifikat"
 import Admin from "../../Components/Admin"
 import AIdentitasWeb from "../../Components/Admin/IdentitasWeb"
 import AProfilWeb from "../../Components/Admin/ProfilWeb"
@@ -39,6 +40,9 @@ import ABankEdit from "../../Components/Admin/Bank/Edit"
 import AGfJenkel from "../../Components/Admin/Grafik/Jenkel"
 import AGfPendidikan from "../../Components/Admin/Grafik/Pendidikan"
 import AGfRangeusia from "../../Components/Admin/Grafik/Rangeusia"
+import ASertifikat from "../../Components/Admin/Sertifikat/"
+import ASertiTambah from "../../Components/Admin/Sertifikat/Tambah"
+import ASertiEdit from "../../Components/Admin/Sertifikat/Edit"
 
 const MyRouter = () => {
     return(
@@ -55,7 +59,8 @@ const MyRouter = () => {
             <Route path="/aktivasi_akun/:id" component={AktivasiAkun} />
             <PrivateRoute path="/member" component={Member} />
             <PrivateRoute path="/konfirmasi" component={Konfirmasi} />
-            <PrivateRoute path="/cetak/:id" component={Cetak} />
+            <PrivateRoute path="/cetak/bukti/:id" component={Cetak} />
+            <PrivateRoute path="/cetak/sertifikat/:id" component={Sertifikat} />
             <PrivateRoute path="/admin" component={Admin} exact />
             <PrivateRoute path="/konten/identitasweb" component={AIdentitasWeb} />
             <PrivateRoute path="/konten/profilweb" component={AProfilWeb} />
@@ -79,6 +84,9 @@ const MyRouter = () => {
             <PrivateRoute path="/grafik/jenkel" component={AGfJenkel} />
             <PrivateRoute path="/grafik/pendidikan" component={AGfPendidikan} />
             <PrivateRoute path="/grafik/rangeusia" component={AGfRangeusia} />
+            <PrivateRoute path="/sertifikat" component={ASertifikat} exact />
+            <PrivateRoute path="/sertifikat/tambah" component={ASertiTambah} />
+            <PrivateRoute path="/sertifikat/edit/:id" component={ASertiEdit} />
             <NotificationContainer />
         </ScrollToTop>
         </Switch>
