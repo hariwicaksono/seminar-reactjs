@@ -10,11 +10,58 @@ import 'moment/locale/id'
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
 import QRCode from 'qrcode.react'
-import Parser from 'html-react-parser'
-import jsxToString from 'jsx-to-string'
+import { PDFViewer, Document, Page, Canvas, Image, View, StyleSheet } from "@react-pdf/renderer";
+import styled from '@react-pdf/styled-components';
 
 const TITLE = 'Cetak Sertifikat - Seminar App'
 var options = {lines: 13,length: 20,width: 10,radius: 30,scale: 0.35,corners: 1,color: '#fff',opacity: 0.25,rotate: 0,direction: 1,speed: 1,trail: 60,fps: 20,zIndex: 2e9,top: '50%',left: '50%',shadow: false,hwaccel: false,position: 'absolute'};
+const styles = StyleSheet.create({
+    page: {
+      flexDirection: "row"
+    },
+    section: {
+      flexGrow: 1
+    },
+    image: {
+        zIndex: '0',
+        position: 'absolute',
+        top: '0',
+        left: '0',
+        width: '100%',
+        height: '100%'
+    },
+    qr: {
+        position: 'absolute',
+        bottom: '150px',
+        right: '500px',
+        zIndex: '10'
+    }
+  });
+    const Nama = styled.Text`
+    font-size: 26px;
+    font-weight: 500;
+    text-align: center; 
+    position: relative;
+    top: 270px;
+    `;
+    const Seminar = styled.Text`
+    font-size: 16px;
+    text-align: center; 
+    position: relative;
+    top: 310px;
+    `;
+    const Ketua = styled.Text`
+    font-size: 14px;
+    position: absolute;
+    bottom: 110px;
+    right: 220px;
+    `;
+    const Pejabat1 = styled.Text`
+    font-size: 14px;
+    position: absolute;
+    bottom: 110px;
+    left: 200px;
+    `;
 
 class CetakSertifikat extends Component {
     constructor(props){
@@ -22,33 +69,15 @@ class CetakSertifikat extends Component {
         this.state = {
             nama_sem : '',
             nama:'',
-            lokasi:'',
             tanggal:'',
-            jam:'',
+            ketua: '',
+            pejabat1: '',
             no_reg:'',
-            token:'',
             img: '',
             url: UploadUrl(),
             loading: true
         }
     }
-
-    printDocument() {  
-        const input = document.getElementById('pdfdiv');  
-        html2canvas(input)  
-          .then((canvas) => {  
-            var imgWidth = 200;  
-            var pageHeight = 290;  
-            var imgHeight = canvas.height * imgWidth / canvas.width;  
-            var heightLeft = imgHeight;  
-            const imgData = canvas.toDataURL('image/png');  
-            const pdf = new jsPDF('p', 'mm', 'a4')  
-            var position = 0;  
-            var heightLeft = imgHeight;  
-            pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);  
-            pdf.save("download.pdf");  
-          });  
-      }  
 
     componentDidMount = () => {
         const id = this.props.match.params.id
@@ -56,20 +85,48 @@ class CetakSertifikat extends Component {
             setTimeout(() => this.setState({
                 nama_sem : res.data[0].nm_seminar,
                 nama : res.data[0].nama_peserta,
-                lokasi: res.data[0].lokasi_seminar,
-                tanggal: res.data[0].tgl_seminar,
-                jam: res.data[0].jam_seminar,
+                tanggal: res.data[0].tanggal_sertifikat,
+                ketua: res.data[0].ketua_sertifikat,
+                pejabat1: res.data[0].pejabat1_sertifikat,
                 no_reg: res.data[0].id_peserta,
-                token: res.data[0].token_peserta,
                 img: res.data[0].img_sertifikat,
-                template: res.data[0].template_sertifikat,
                 loading: false
             }), 100);
         }).catch(err => {
             console.log(err)
         })
-    }
+    } 
+
     render() {
+        const MyDocument = (
+            <Document>
+              <Page size="A4" orientation="landscape" style={styles.page}>
+              <Image 
+              style={styles.image}
+              src={ this.state.url+this.state.img }
+              source={{
+                header: {
+                   'Access-Control-Allow-Origin': '*'
+                }
+              }}
+              
+              />
+               <View style={styles.section}>
+               <Nama>{this.state.nama}</Nama>
+               <Seminar>{this.state.nama_sem}</Seminar>
+                <Ketua>{this.state.ketua}</Ketua>
+                <Pejabat1>{this.state.pejabat1}</Pejabat1>
+ 
+                </View>
+
+             
+                   
+                
+                 
+                    
+              </Page>
+            </Document>
+          );
         return (
             <>
            <Helmet>
@@ -90,74 +147,8 @@ class CetakSertifikat extends Component {
                         <Breadcrumb.Item active>Cetak Sertifikat</Breadcrumb.Item>
                         </Breadcrumb>
 
-                        <div className="card card-lg w-100 h-100">
-                    <img alt="Image" src={this.state.url+this.state.img} className="bg-image" />
-                    <div className="card-body" >
+                        <PDFViewer className="w-100 vh-100">{MyDocument}</PDFViewer>
 
-                    </div>
-                  </div>
-                        
-                        <div id="pdfdiv" className="mb-2 bg-white px-5 py-4">
-                            <h2 className="text-center">Sertifikat Seminar</h2>
-                            <hr/>
-                            <Row>
-                            <Col sm={10}>
-                            <Table hover responsive>
-                            <tbody>
-                                <tr>
-                                <td>No Pendaftaran</td>
-                                <td>:</td>
-                                <td>{this.state.no_reg}</td>
-                                </tr>
-                                <tr>
-                                <td>Nama</td>
-                                <td>:</td>
-                                <td>{this.state.nama}</td>
-                                </tr>
-                                <tr>
-                                <td>Seminar</td>
-                                <td>:</td>
-                                <td>{this.state.nama_sem}</td>
-                                </tr>
-                                <tr>
-                                <td>Lokasi</td>
-                                <td>:</td>
-                                <td>{this.state.lokasi}</td>
-                                </tr>
-                                <tr>
-                                <td>Tanggal</td>
-                                <td>:</td>
-                                <td>{moment(this.state.tanggal).format('DD MMMM YYYY')}</td>
-                                </tr>
-                                <tr>
-                                <td>Pukul</td>
-                                <td>:</td>
-                                <td>{moment(this.state.jam, "HH:mm:ss").format('HH:mm')}</td>
-                                </tr>
-                                
-                                <tr>
-                                <td>Security Key</td>
-                                <td>:</td>
-                                <td>{this.state.token}</td>
-                                </tr>
-                            </tbody>
-                            </Table>
-                            </Col>
-                            <Col sm={2}>
-                            <div className="text-center">
-                                <QRCode value={this.state.no_reg} /><br/>
-                                <samp>{this.state.no_reg}</samp>
-                            </div>
-                            </Col>
-
-                            </Row>
-                            
-                        </div>
-
-                        <Button onClick={this.printDocument} variant="primary" size="lg" block>  
-                        Generate PDF
-                        </Button>  
-                     
                         </>
                     }
                     </Col>

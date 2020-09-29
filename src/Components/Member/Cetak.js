@@ -62,8 +62,10 @@ class CetakPDF extends Component {
         }).catch(err => {
             console.log(err)
         })
+        
     }
     render() {
+
         return (
             <>
            <Helmet>
@@ -131,7 +133,7 @@ class CetakPDF extends Component {
                             </Table>
                             </Col>
                             <Col sm={2}>
-                            <div className="text-center">
+                            <div  className="text-center">
                                 <QRCode value={this.state.no_reg} /><br/>
                                 <samp>{this.state.no_reg}</samp>
                             </div>
