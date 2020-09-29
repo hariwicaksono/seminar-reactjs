@@ -10,3 +10,7 @@ export const ImagesUrl = () => {
 export const UploadUrl = () => {
     return "http://localhost/seminar-server/assets/images/uploads/"
 }
+
+export const QrcodeUrl = () => {
+    return "http://localhost/seminar-server/assets/images/qrcode/"
+}

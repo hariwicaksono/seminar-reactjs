@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import API from '../../Configs/Axios'
 import { Container, Button, Table, Breadcrumb, Row, Col, Card } from 'react-bootstrap'
 import { Helmet } from 'react-helmet'
-import { UploadUrl } from '../../Configs/Url'
+import { UploadUrl, QrcodeUrl } from '../../Configs/Url'
 import Loader from 'react-loader'
 import moment from 'moment'
 import 'moment/locale/id'
@@ -31,10 +31,10 @@ const styles = StyleSheet.create({
         height: '100%'
     },
     qr: {
-        position: 'absolute',
-        bottom: '150px',
+        position: 'relative',
+        bottom: '120px',
         right: '500px',
-        zIndex: '10'
+        zIndex: '10 !important'
     }
   });
     const Nama = styled.Text`
@@ -75,6 +75,7 @@ class CetakSertifikat extends Component {
             no_reg:'',
             img: '',
             url: UploadUrl(),
+            qrurl: QrcodeUrl(),
             loading: true
         }
     }
@@ -90,6 +91,7 @@ class CetakSertifikat extends Component {
                 pejabat1: res.data[0].pejabat1_sertifikat,
                 no_reg: res.data[0].id_peserta,
                 img: res.data[0].img_sertifikat,
+                qrcode: res.data[0].qrcode,
                 loading: false
             }), 100);
         }).catch(err => {
@@ -117,6 +119,16 @@ class CetakSertifikat extends Component {
                 <Ketua>{this.state.ketua}</Ketua>
                 <Pejabat1>{this.state.pejabat1}</Pejabat1>
  
+                <Image 
+              style={styles.qr}
+              src={ this.state.url+this.state.qrcode }
+              source={{
+                header: {
+                   'Access-Control-Allow-Origin': '*'
+                }
+              }}
+              
+              />
                 </View>
 
              
