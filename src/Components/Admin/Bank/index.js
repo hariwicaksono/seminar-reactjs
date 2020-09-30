@@ -181,19 +181,6 @@ class index extends Component {
         cursor: pointer;
       }
     `;
-    const Select = styled.select`
-      width: 350px;
-      height: 34px;
-      padding: 0 10px 0 5px;
-      font-size: 14px;
-      border-radius: 3px;
-      border-top-left-radius: 5px;
-      border-bottom-left-radius: 5px;
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-      border: 1px solid #e5e5e5;
-      margin-right: 10px;
-    `;
     const ClearButton = styled(Button)`
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
@@ -278,7 +265,9 @@ class index extends Component {
             <> 
              
             <Helmet>
-            <title>{ "Admin"+" - "+TITLE }</title>
+            <title>{ "Admin"+
+                    " - "+
+                    TITLE }</title>
             </Helmet>
                 <Container fluid>
                 <Breadcrumb className="card px-3 mb-2">

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import API from '../Configs/Axios'
 import { Link } from 'react-router-dom'
-import { Container,Breadcrumb, Row, Col, Card } from 'react-bootstrap'
+import { Container,Breadcrumb, Card } from 'react-bootstrap'
 import { Helmet } from 'react-helmet'
 //import Loader from 'react-loader'
 import Skeleton from 'react-loading-skeleton'

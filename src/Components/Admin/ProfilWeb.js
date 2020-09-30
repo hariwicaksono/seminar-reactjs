@@ -1,19 +1,17 @@
 import React, { Component } from 'react'
-import {Link,Redirect,NavLink} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import API from '../../Configs/Axios'
 import { Helmet } from 'react-helmet'
 import { NotificationManager } from 'react-notifications'
 import {Container, Breadcrumb, Card, Row, Col, Spinner, Button, Form} from 'react-bootstrap'
-import { Formik } from 'formik';
-import * as yup from 'yup';
+import { Formik } from 'formik'
+import * as yup from 'yup'
+import Skeleton from 'react-loading-skeleton'
 
 const TITLE = 'Profil Web - Seminar App'
 const validationSchema = yup.object({
-    //username: yup.string().required(),
-    //password: yup.string().required()
-    //.min(8, "Password is too short - should be 8 chars minimum.")
-    //.matches(/(?=.*[0-9])/, "Password must contain a number.")
-    //,
+    isi_profil: yup.string().required('Isi Profil Web harus diisi'),
+    aktif_profil: yup.string().required('Harus dipilih salah satu'),
   }); 
 class ProfilWeb extends Component {
     constructor(props) {
@@ -21,8 +19,8 @@ class ProfilWeb extends Component {
         this.state = {
             isi_profil: '',
             aktif_profil: '',
-            usernm: ''
-            
+            usernm: '',
+            loading: true
         }
 
     }
@@ -31,12 +29,13 @@ class ProfilWeb extends Component {
     const datas = JSON.parse(localStorage.getItem('isAdmin'))
     const id = datas[0].usernm
     API.GetProfilWeb().then(res=>{
-        console.log(res)
-        this.setState({
+        //console.log(res)
+        setTimeout(() => this.setState({
             isi_profil: res.data[0].isi_profil,
             aktif_profil: res.data[0].aktif_profil,
-            usernm: id
-          })
+            usernm: id,
+            loading: false
+          }), 100);
     })
     }            
 
@@ -44,19 +43,26 @@ class ProfilWeb extends Component {
         return (
             <>
             <Helmet>
-            <title>{ "Admin"+" - "+TITLE }</title>
+            <title>{ "Admin"+
+                    ' - '+
+                    TITLE }</title>
             </Helmet>
                 <Container fluid>
                 <Breadcrumb className="card px-3 mb-2">
                 <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/admin" }}>Beranda</Breadcrumb.Item>
-                <Breadcrumb.Item active>Identitas Web</Breadcrumb.Item>
+                <Breadcrumb.Item active>Profil Web</Breadcrumb.Item>
                 </Breadcrumb>
                     <Row>
                   
                     <Col>
-
                         <Card className="shadow" body>
-                        <h3 className="mb-3">Identitas Web</h3> 
+                        <h3 className="mb-3">Profil Web</h3> 
+                        {this.state.loading ?
+                        <>
+                        <Skeleton count={3} height={40} className="mb-1" />
+                        <Skeleton width={100} height={40} />
+                        </>
+                        :
                             <Formik
                             initialValues={{ 
                                 isi_profil: this.state.isi_profil, 
@@ -132,7 +138,7 @@ class ProfilWeb extends Component {
                      </Form>
                      )}
                     </Formik>
-
+                    }
                         </Card>
                     </Col>
                     </Row>

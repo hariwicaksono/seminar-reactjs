@@ -1,5 +1,5 @@
 import React, { Component, useState, useMemo } from 'react'
-import {Link,Redirect,NavLink} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import API from '../../../Configs/Axios'
 import { Helmet } from 'react-helmet'
 import { NotificationManager } from 'react-notifications'
@@ -51,19 +51,17 @@ class index extends Component {
     })
     }  
     
-    
     render() {
-
       const columns = [
         {
           name: 'ID Seminar',
           selector: 'id_seminar',
-          sortable: true,
+          sortable: true
         },
         {
           name: 'Nama Seminar',
           selector: 'nm_seminar',
-          sortable: true,
+          sortable: true
         },
         {
           name: 'Aktif',
@@ -72,8 +70,7 @@ class index extends Component {
           <Formik
                             initialValues={{ 
                                 id: row.id_seminar, 
-                                aktif_seminar: '',
-                                
+                                aktif_seminar: ''
                             }}
                             onSubmit={(values, actions) => {
                                 alert('Apakah anda yakin akan mengubah data ini?');
@@ -119,7 +116,6 @@ class index extends Component {
                     </Formik>
           </>,
         },
-        ,
         {
           name: 'Sertifikat',
           sortable: true,
@@ -321,7 +317,9 @@ class index extends Component {
             <> 
              
             <Helmet>
-            <title>{ "Admin"+" - "+TITLE }</title>
+            <title>{ "Admin"+
+                    " - "+
+                    TITLE }</title>
             </Helmet>
                 <Container fluid>
                 <Breadcrumb className="card px-3 mb-2">

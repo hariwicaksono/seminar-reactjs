@@ -38,7 +38,9 @@ class GrafikJenkel extends Component {
     return (
       <>
        <Helmet>
-            <title>{ "Admin"+" - "+TITLE }</title>
+       <title>{ "Admin"+
+                    " - "+
+                    TITLE }</title>
             </Helmet>
             <Container fluid>
                 <Breadcrumb className="card px-3 mb-2">

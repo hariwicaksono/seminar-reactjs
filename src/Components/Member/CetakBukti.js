@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import API from '../../Configs/Axios'
-import { Container, Button, Table, Breadcrumb, Row, Col, Card } from 'react-bootstrap'
+import { Container, Button, Table, Breadcrumb, Row, Col } from 'react-bootstrap'
 import { Helmet } from 'react-helmet'
-import { ImagesUrl } from '../../Configs/Url'
+//import { ImagesUrl } from '../../Configs/Url'
 import Loader from 'react-loader'
 import moment from 'moment'
 import 'moment/locale/id'
@@ -14,7 +14,7 @@ import QRCode from 'qrcode.react'
 const TITLE = 'Cetak PDF - Seminar App'
 var options = {lines: 13,length: 20,width: 10,radius: 30,scale: 0.35,corners: 1,color: '#fff',opacity: 0.25,rotate: 0,direction: 1,speed: 1,trail: 60,fps: 20,zIndex: 2e9,top: '50%',left: '50%',shadow: false,hwaccel: false,position: 'absolute'};
 
-class CetakPDF extends Component {
+class CetakBukti extends Component {
     constructor(props){
         super(props)
         this.state = {
@@ -34,13 +34,12 @@ class CetakPDF extends Component {
         html2canvas(input)  
           .then((canvas) => {  
             var imgWidth = 200;  
-            var pageHeight = 290;  
+            //var pageHeight = 290;  
             var imgHeight = canvas.height * imgWidth / canvas.width;  
-            var heightLeft = imgHeight;  
+            //var heightLeft = imgHeight;  
             const imgData = canvas.toDataURL('image/png');  
             const pdf = new jsPDF('p', 'mm', 'a4')  
             var position = 0;  
-            var heightLeft = imgHeight;  
             pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);  
             pdf.save("download.pdf");  
           });  
@@ -158,4 +157,4 @@ class CetakPDF extends Component {
     }
 }
 
-export default CetakPDF
+export default CetakBukti

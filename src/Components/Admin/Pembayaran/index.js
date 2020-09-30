@@ -1,5 +1,5 @@
 import React, { Component, useState, useMemo } from 'react'
-import {Link,Redirect,NavLink} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import API from '../../../Configs/Axios'
 import {UploadUrl} from '../../../Configs/Url'
 import { Helmet } from 'react-helmet'
@@ -221,7 +221,7 @@ class index extends Component {
         <p>
           Seminar: {data.nm_seminar}<br/>
           Tanggal Bayar: {data.tgl_transfer}<br/>
-          Bukti Bayar: <br/><a href={this.state.url+data.img_bayar} alt="" target="_blank"><img src={this.state.url+data.img_bayar} width="100" alt=""/></a>
+          Bukti Bayar: <br/><a href={this.state.url+data.img_bayar} alt="" target="_blank" rel="noopener noreferrer"><img src={this.state.url+data.img_bayar} width="100" alt=""/></a>
         </p>
       </ExpandedStyle>
     );
@@ -275,7 +275,9 @@ class index extends Component {
             <> 
              
             <Helmet>
-            <title>{ "Admin"+" - "+TITLE }</title>
+            <title>{ "Admin"+
+                    " - "+
+                    TITLE }</title>
             </Helmet>
                 <Container fluid>
                 <Breadcrumb className="card px-3 mb-2">

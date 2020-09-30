@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import API from '../Configs/Axios'
-import { Container, Breadcrumb, Row, Col, Card } from 'react-bootstrap'
+import { Container, Breadcrumb, Card } from 'react-bootstrap'
 import { Helmet } from 'react-helmet'
-import {ImagesUrl} from '../Configs/Axios'
 import Loader from 'react-loader'
 import moment from 'moment'
 import 'moment/locale/id'
@@ -56,17 +55,17 @@ class Detail extends Component {
                         :
                         <>
                       
-                        <Breadcrumb className="card px-3 mb-2">
+                        <Breadcrumb className="card shadow px-3 mb-2">
                         <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/" }}>Home</Breadcrumb.Item>
-                        <Breadcrumb.Item active>Detail</Breadcrumb.Item>
+                        <Breadcrumb.Item active>Detail Seminar</Breadcrumb.Item>
                         </Breadcrumb>
                         
-                        <Card className="mb-2" body>
+                        <Card className="shadow mb-2" body>
                             <h2>{this.state.nama}</h2>
                             <p className="lead">{this.state.headline}</p>
                             <p>{this.state.deskripsi}</p>
                         </Card>
-                        <Card className="mb-2" body>
+                        <Card className="shadow mb-2" body>
                             <h3>Deskripsi</h3>
                             <p>Tanggal: {moment(this.state.tanggal).format('DD MMMM YYYY')}</p>
                             <p>Pukul: {moment(this.state.jam, "HH:mm:ss").format('HH:mm')}</p>

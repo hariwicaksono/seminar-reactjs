@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Link,Redirect,NavLink} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import API from '../Configs/Axios'
 import { Helmet } from 'react-helmet'
 import { NotificationManager } from 'react-notifications'

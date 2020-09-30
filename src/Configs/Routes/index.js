@@ -15,8 +15,8 @@ import Login from "../../Components/Login"
 import AktivasiAkun from "../../Components/AktivasiAkun"
 import Member from "../../Components/Member"
 import Konfirmasi from "../../Components/Member/Konfirmasi"
-import Cetak from "../../Components/Member/Cetak"
-import Sertifikat from "../../Components/Member/Sertifikat"
+import CetakBukti from "../../Components/Member/CetakBukti"
+import CetakSertifikat from "../../Components/Member/CetakSertifikat"
 import Admin from "../../Components/Admin"
 import AIdentitasWeb from "../../Components/Admin/IdentitasWeb"
 import AProfilWeb from "../../Components/Admin/ProfilWeb"
@@ -43,6 +43,7 @@ import AGfRangeusia from "../../Components/Admin/Grafik/Rangeusia"
 import ASertifikat from "../../Components/Admin/Sertifikat/"
 import ASertiTambah from "../../Components/Admin/Sertifikat/Tambah"
 import ASertiEdit from "../../Components/Admin/Sertifikat/Edit"
+import APengaturan from "../../Components/Admin/Pengaturan/"
 
 const MyRouter = () => {
     return(
@@ -57,10 +58,11 @@ const MyRouter = () => {
             <PublicRoute path="/login" component={Login} restricted/>
             <PublicRoute path="/register" component={Register} restricted/>
             <Route path="/aktivasi_akun/:id" component={AktivasiAkun} />
+            <Route path="/sertifikat/:id" component={CetakSertifikat} />
             <PrivateRoute path="/member" component={Member} />
             <PrivateRoute path="/konfirmasi" component={Konfirmasi} />
-            <PrivateRoute path="/cetak/bukti/:id" component={Cetak} />
-            <PrivateRoute path="/cetak/sertifikat/:id" component={Sertifikat} />
+            <PrivateRoute path="/cetak/bukti/:id" component={CetakBukti} />
+            <PrivateRoute path="/cetak/sertifikat/:id" component={CetakSertifikat} />
             <PrivateRoute path="/admin" component={Admin} exact />
             <PrivateRoute path="/konten/identitasweb" component={AIdentitasWeb} />
             <PrivateRoute path="/konten/profilweb" component={AProfilWeb} />
@@ -87,6 +89,7 @@ const MyRouter = () => {
             <PrivateRoute path="/sertifikat" component={ASertifikat} exact />
             <PrivateRoute path="/sertifikat/tambah" component={ASertiTambah} />
             <PrivateRoute path="/sertifikat/edit/:id" component={ASertiEdit} />
+            <PrivateRoute path="/pengaturan" component={APengaturan} />
             <NotificationContainer />
         </ScrollToTop>
         </Switch>

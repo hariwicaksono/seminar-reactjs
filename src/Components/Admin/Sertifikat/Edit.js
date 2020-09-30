@@ -6,8 +6,8 @@ import { NotificationManager } from 'react-notifications'
 import {Container, Breadcrumb, Card, Row, Col, Spinner, Button, Form} from 'react-bootstrap'
 import { Helmet } from 'react-helmet'
 import Loader from 'react-loader'
-import moment from 'moment'
-import 'moment/locale/id'
+//import moment from 'moment'
+//import 'moment/locale/id'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 
@@ -135,7 +135,7 @@ class Edit extends Component {
                              
                              <Form.Group>
                              <Form.Label>Gambar Sertifikat</Form.Label><br/>
-                            <img src={this.state.url+this.state.img} className="img-fluid" width="200" />
+                            <img src={this.state.url+this.state.img} className="img-fluid" width="200" alt=""/>
                             </Form.Group>
 
 

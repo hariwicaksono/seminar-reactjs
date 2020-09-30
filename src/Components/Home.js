@@ -3,17 +3,12 @@ import {Link, Redirect} from 'react-router-dom'
 import { Container, Jumbotron, Row, Col, Card, Carousel } from 'react-bootstrap'
 import { CalendarEvent, GeoAlt, ArrowRepeat, Calendar3, InfoCircle } from "react-bootstrap-icons"
 import API from '../Configs/Axios'
-//import Loader from 'react-loader'
 import Skeleton from 'react-loading-skeleton'
 import { isLogin, isAdmin } from '../Utils'
 import moment from 'moment'
 import 'moment/locale/id'
-//import FullCalendar from '@fullcalendar/react'
-//import dayGridPlugin from '@fullcalendar/daygrid'
-//import listPlugin from '@fullcalendar/list'; 
-//import "@fullcalendar/common/main.css"  
-//import "@fullcalendar/daygrid/main.css"  
-//import "@fullcalendar/list/main.css"
+import ArsipSeminar from "./ArsipSeminar"
+//import Loader from 'react-loader'
 
 //var options = {lines: 13,length: 20,width: 10,radius: 30,scale: 0.35,corners: 1,color: '#fff',opacity: 0.25,rotate: 0,direction: 1,speed: 1,trail: 60,fps: 20,zIndex: 2e9,top: '50%',left: '50%',shadow: false,hwaccel: false,position: 'absolute'};
 class Home extends Component {
@@ -21,37 +16,25 @@ class Home extends Component {
         super(props)
         this.state = {
             AktifSeminar: [],
-            ArsipSeminar: [],
+            Seminar: [],
             loading: true
-         
         }
     }
 
     componentDidMount = () => {
-        this.setState({
-            loading: true
-        })
         API.GetAktifSeminar().then(res => {
-            setTimeout(() => this.setState({
+           this.setState({
                 AktifSeminar: res.data,
-                loading: false
-            }), 500);
+            })
         })
         API.GetArsipSeminar().then(res => {
             setTimeout(() => this.setState({
-                ArsipSeminar: res.data,
-                loading: false
-            }), 500);
-        })
-
-        /*API.GetKalender().then(res=>{
-            setTimeout(() => this.setState({
-                Kalender : res.data,
+                Seminar: res.data,
                 loading: false
             }), 100);
-        })*/
-
+        })
     }
+
     render() {
         if (isLogin()) {
             return( <Redirect to="/member" /> )
@@ -79,21 +62,13 @@ class Home extends Component {
                     <Link to="/register" className="btn btn-outline-success btn-lg" >DAFTAR</Link>
             </Carousel.Item>
         ))
-        
-        const ListArsip = this.state.ArsipSeminar.map((s, i) => (
-            <div key={i + 1}>
-                    <h5>{s.nm_seminar}</h5>
-                    <p><CalendarEvent/> {s.tgl_seminar} &mdash; {s.headline_seminar}</p>
-                    <Link to={'/detail/'+s.id_seminar} className="btn btn-primary" >DETAIL</Link>
-             </div> 
-        ))
  
         return (
             <>
                 <Container> 
                     <Row>
                         <Col>
-                        <Jumbotron className="shadow text-center py-5">
+                        <Jumbotron className="shadow text-center py-5 mb-2">
                         {this.state.loading ?
                         <>
                         <h1 className="h2"><Skeleton height={40} /></h1>
@@ -118,7 +93,7 @@ class Home extends Component {
                         }
                         </Jumbotron>
 
-                        <div className="mb-3" style={{fontWeight: '700'}}>
+                        <div className="mb-2" style={{fontWeight: '700'}}>
                             <Row>
                                 <Col>
                                 <Card as={Link} to="/caradaftar" bg="primary" text="light" className="mb-0" body><ArrowRepeat size="20"/> Cara Daftar</Card>
@@ -145,20 +120,10 @@ class Home extends Component {
                         </>
                         :
                         <>
-                        {ListArsip}
+                        <ArsipSeminar data={this.state.Seminar} />
                         </>
                         }
                         </Card>
-
-                        {/*<FullCalendar   
-                        headerToolbar={{
-                            left: 'prev,next',
-                            right: 'title'
-                        }} 
-                            plugins={[listPlugin, dayGridPlugin]}  
-                            events={this.state.Kalender}  
-                            initialView="listWeek"
-                        />*/}
 
                         </Col>
                     </Row>

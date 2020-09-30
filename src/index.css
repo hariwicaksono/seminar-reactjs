@@ -400,3 +400,69 @@ table td {
     z-index: 9999
 }
 .fc-toolbar-chunk h2.fc-toolbar-title {font-size: 1rem;}
+.progressbar-wrapper {
+    width: 100%;
+  }
+  .progressbar {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 0px;
+    counter-reset: step;
+  }
+  .progressbar li {
+    list-style-type: none;
+    width: 10%;
+    float: left;
+    font-size: 14px;
+    font-weight: 500;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+    color: #666;
+  }
+  
+  .progressbar li:before {
+    width: 32px;
+    height: 32px;
+    content: counter(step);
+    counter-increment: step;
+    line-height: 32px;
+    border: 2px solid #7d7d7d;
+    display: block;
+    text-align: center;
+    margin: 0 auto 3px auto;
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+    background-color: #fff;
+    font-size: 16px;
+  }
+  .progressbar li:after {
+    width: 400%;
+    height: 1px;
+    content: '';
+    position: absolute;
+    background-color: #7d7d7d;
+    top: 18px;
+    left: -375%;
+    z-index: 0;
+  }
+  
+  .progressbar li:first-child:after {
+      content: none;
+  }
+  .progressbar li.active {
+      color: #02B875;
+      font-weight: 500;
+      
+  }
+  .progressbar li.active:before {
+      color: #fff;
+    background-color: #02B875;
+      border-color: #02B875;
+  }
+  .progressbar li.active:after {
+    background-color: #02B875;
+}
+ 
+  

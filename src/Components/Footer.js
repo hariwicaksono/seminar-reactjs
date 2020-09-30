@@ -1,7 +1,6 @@
 import React,{Component} from 'react'
 //import {Link,Redirect } from 'react-router-dom'
 import { Container, Row, Col} from 'react-bootstrap'
-import {Chat} from 'react-bootstrap-icons'
  
 class Footer extends Component{
     render(){

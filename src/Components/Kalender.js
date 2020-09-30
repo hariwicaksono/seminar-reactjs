@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
-import { Container, Breadcrumb, Row, Col, Card } from 'react-bootstrap'
+import { Container, Breadcrumb, Card } from 'react-bootstrap'
 //import {ImagesUrl} from '../Configs/Url'
 import { Helmet } from 'react-helmet'
 import API from '../Configs/Axios'

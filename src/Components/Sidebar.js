@@ -1,8 +1,8 @@
 import React, {Component, useState} from 'react'
-import {NavLink} from 'react-router-dom'
+import {Link, NavLink} from 'react-router-dom'
 import API from '../Configs/Axios'
 import { logout, isLogin, isAdmin } from '../Utils'
-import {Button, Collapse} from 'react-bootstrap'
+import { Collapse} from 'react-bootstrap'
 import { HouseDoor, Files, BoxArrowRight, People, FileEarmarkText, Gear } from 'react-bootstrap-icons'
 
 function SubMenu() {
@@ -12,9 +12,9 @@ function SubMenu() {
     return (
         <>
       <li>
-        <a href={"#"} onClick={() => setOpen1(!open1)} data-toggle="collapse" aria-controls="collapseKonten" aria-expanded={open1} className="dropdown-toggle">
+        <Link onClick={() => setOpen1(!open1)} data-toggle="collapse" aria-controls="collapseKonten" aria-expanded={open1} className="dropdown-toggle">
             <Files/> <span>Konten</span>
-        </a>
+        </Link>
         <Collapse in={open1} id="collapseKonten">
         <ul className="list-unstyled">
             <li>
@@ -46,9 +46,9 @@ function SubMenu() {
             </NavLink>
         </li>
       <li>
-      <a href={"#"} onClick={() => setOpen2(!open2)} data-toggle="collapse" aria-controls="collapseGrafik" aria-expanded={open2} className="dropdown-toggle">
+      <Link onClick={() => setOpen2(!open2)} data-toggle="collapse" aria-controls="collapseGrafik" aria-expanded={open2} className="dropdown-toggle">
           <Files/> <span>Grafik</span>
-      </a>
+      </Link>
       <Collapse in={open2}>
       <ul className="list-unstyled" id="collapseGrafik">
           <li>
@@ -70,9 +70,9 @@ function SubMenu() {
       </Collapse>
     </li>
     <li>
-      <a href={"#"} onClick={() => setOpen3(!open3)} data-toggle="collapse" aria-controls="collapsePengaturan" aria-expanded={open3} className="dropdown-toggle">
+      <Link onClick={() => setOpen3(!open3)} data-toggle="collapse" aria-controls="collapsePengaturan" aria-expanded={open3} className="dropdown-toggle">
           <Gear/> <span>Pengaturan</span>
-      </a>
+      </Link>
       <Collapse in={open3}>
       <ul className="list-unstyled" id="collapsePengaturan">
           <li>
@@ -98,6 +98,11 @@ function SubMenu() {
           <li>
           <NavLink to={'/bank'} title="Bank" alt="Bank">
             <span>Bank</span>
+            </NavLink>
+          </li>
+          <li>
+          <NavLink to={'/pengaturan'} title="Pengaturan" alt="Pengaturan">
+            <span>Pengaturan</span>
             </NavLink>
           </li>
       </ul>

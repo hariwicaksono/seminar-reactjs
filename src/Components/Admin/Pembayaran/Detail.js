@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import API from '../../../Configs/Axios'
 import {UploadUrl} from '../../../Configs/Url'
-import { Container, Breadcrumb, Row, Col, Card, Badge  } from 'react-bootstrap'
+import { Container, Breadcrumb, Card, Badge  } from 'react-bootstrap'
 import { Helmet } from 'react-helmet'
 import Loader from 'react-loader'
-import moment from 'moment'
-import 'moment/locale/id'
+//import moment from 'moment'
+//import 'moment/locale/id'
 
 const TITLE = ' - Seminar App'
 var options = {lines: 13,length: 20,width: 10,radius: 30,scale: 0.35,corners: 1,color: '#fff',opacity: 0.25,rotate: 0,direction: 1,speed: 1,trail: 60,fps: 20,zIndex: 2e9,top: '50%',left: '50%',shadow: false,hwaccel: false,position: 'absolute'};
@@ -118,7 +118,7 @@ class Detail extends Component {
                             <dd className="col-sm-9">{this.state.info}</dd>
 
                             <dt className="col-sm-3">Bukti Pembayaran/Kuitansi</dt>
-                            <dd className="col-sm-9"><a href={this.state.url+this.state.bukti} alt="" target="_blank"><img src={this.state.url+this.state.bukti} width="150" alt=""/></a></dd>
+                            <dd className="col-sm-9"><a href={this.state.url+this.state.bukti} alt="" target="_blank" rel="noopener noreferrer"><img src={this.state.url+this.state.bukti} width="150" alt=""/></a></dd>
 
 
                             </dl>

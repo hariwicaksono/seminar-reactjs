@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import {Link,Redirect,NavLink} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import API from '../../Configs/Axios'
+import {UploadUrl} from '../../Configs/Url'
 import { Helmet } from 'react-helmet'
 import { NotificationManager } from 'react-notifications'
 import {Container, Breadcrumb, Card, Row, Col, Spinner, Button, Form} from 'react-bootstrap'
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import {UploadUrl} from '../../Configs/Url'
+import Skeleton from 'react-loading-skeleton'
 
 const TITLE = 'Cara Daftar - Seminar App'
 const validationSchema = yup.object({
@@ -30,8 +31,8 @@ class CaraDaftar extends Component {
                 foto: ''
             },
             fotoPreviewUrl: '',
-            url: UploadUrl()
-            
+            url: UploadUrl(),
+            loading: true 
         }
 
     }
@@ -40,13 +41,14 @@ class CaraDaftar extends Component {
     const datas = JSON.parse(localStorage.getItem('isAdmin'))
     const id = datas[0].usernm
     API.GetCaraDaftar().then(res=>{
-        console.log(res)
-        this.setState({
+        //console.log(res)
+        setTimeout(() => this.setState({
             isi_caradaftar: res.data[0].isi_caradaftar,
             img_caradaftar: res.data[0].img_caradaftar,
             aktif_caradaftar: res.data[0].aktif_caradaftar,
-            usernm: id
-          })
+            usernm: id,
+            loading: false
+          }), 100);
     })
     }            
 
@@ -54,7 +56,9 @@ class CaraDaftar extends Component {
         return (
             <>
             <Helmet>
-            <title>{ "Admin"+" - "+TITLE }</title>
+            <title>{ "Admin"+
+                    " - "+
+                    TITLE }</title>
             </Helmet>
                 <Container fluid>
                 <Breadcrumb className="card px-3 mb-2">
@@ -67,7 +71,13 @@ class CaraDaftar extends Component {
 
                         <Card className="shadow" body>
                         <h3 className="mb-3">Cara Pendaftaran</h3> 
-                            <Formik
+                        {this.state.loading ?
+                        <>
+                        <Skeleton count={5} height={40} className="mb-1" />
+                        <Skeleton width={100} height={40} />
+                        </>
+                        :
+                        <Formik
                             initialValues={{ 
                                 isi_caradaftar: this.state.isi_caradaftar, 
                                 aktif_caradaftar: this.state.aktif_caradaftar,
@@ -126,7 +136,7 @@ class CaraDaftar extends Component {
 
                             <Form.Group>
                              <Form.Label>Gambar Cara Daftar</Form.Label><br/>
-                            <img src={this.state.url+this.state.img_caradaftar} className="img-fluid" width="200" />
+                            <img src={this.state.url+this.state.img_caradaftar} className="img-fluid" width="200" alt=""/>
                             </Form.Group>
 
                             <Form.Group>
@@ -176,7 +186,7 @@ class CaraDaftar extends Component {
                      </Form>
                      )}
                     </Formik>
-
+                    }
                         </Card>
                     </Col>
                     </Row>

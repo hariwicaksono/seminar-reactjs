@@ -1,19 +1,17 @@
 import React, { Component } from 'react'
-import {Link,Redirect,NavLink} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import API from '../../Configs/Axios'
 import { Helmet } from 'react-helmet'
 import { NotificationManager } from 'react-notifications'
 import {Container, Breadcrumb, Card, Row, Col, Spinner, Button, Form} from 'react-bootstrap'
-import { Formik } from 'formik';
-import * as yup from 'yup';
+import { Formik } from 'formik'
+import * as yup from 'yup'
+import Skeleton from 'react-loading-skeleton'
 
 const TITLE = 'Identitas Web - Seminar App'
 const validationSchema = yup.object({
-    //username: yup.string().required(),
-    //password: yup.string().required()
-    //.min(8, "Password is too short - should be 8 chars minimum.")
-    //.matches(/(?=.*[0-9])/, "Password must contain a number.")
-    //,
+    nm_website: yup.string().required('Nama Website harus diisi'),
+    nama_pt: yup.string().required('Nama Instansi harus diisi')
   }); 
 class IdentitasWeb extends Component {
     constructor(props) {
@@ -31,14 +29,15 @@ class IdentitasWeb extends Component {
             twitter: '',
             instagram: '',
             meta_deskripsi: '',
-            meta_keyword: ''
+            meta_keyword: '',
+            loading: true
         }
 
     }
 
     componentDidMount = () => {
     API.GetIdentitasWeb().then(res=>{
-        this.setState({
+        setTimeout(() => this.setState({
             nm_website: res.data[0].nm_website,
             nama_pt: res.data[0].nama_pt,
             alamat_pt: res.data[0].alamat_pt,
@@ -51,8 +50,9 @@ class IdentitasWeb extends Component {
             twitter: res.data[0].twitter,
             instagram: res.data[0].instagram,
             meta_deskripsi: res.data[0].meta_deskripsi,
-            meta_keyword: res.data[0].meta_keyword
-          })
+            meta_keyword: res.data[0].meta_keyword,
+            loading: false
+          }), 100);
     })
     }            
 
@@ -60,7 +60,9 @@ class IdentitasWeb extends Component {
         return (
             <>
             <Helmet>
-            <title>{ "Admin"+" - "+TITLE }</title>
+            <title>{ "Admin"+
+                    " - "+
+                    TITLE }</title>
             </Helmet>
                 <Container fluid>
                 <Breadcrumb className="card px-3 mb-2">
@@ -73,6 +75,12 @@ class IdentitasWeb extends Component {
 
                         <Card className="shadow" body>
                         <h3 className="mb-3">Identitas Web</h3> 
+                        {this.state.loading ?
+                        <>
+                        <Skeleton count={10} height={40} className="mb-1" />
+                        <Skeleton width={100} height={40} />
+                        </>
+                        :
                             <Formik
                             initialValues={{ 
                                 nm_website: this.state.nm_website, 
@@ -220,7 +228,7 @@ class IdentitasWeb extends Component {
                      </Form>
                      )}
                     </Formik>
-
+                    }
                         </Card>
                     </Col>
                     </Row>

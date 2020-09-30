@@ -135,6 +135,8 @@ const GetProfilWeb = () => GET('ProfilWeb');
 const PutProfilWeb = (data) => PUT('ProfilWeb',data);
 const GetCaraDaftar = () => GET('CaraDaftar');
 const PutCaraDaftar = (data) => PUT('CaraDaftar',data);
+const GetPengaturan = () => GET('Pengaturan');
+const PutPengaturan = (data) => PUT('Pengaturan',data);
 const GetPeserta = () => GET('Peserta');
 const GetIdPeserta = (data) => GET_ID('Peserta?id=',data);
 const PostPeserta = (data) => POST('Peserta',data);
@@ -208,6 +210,8 @@ const API = {
     PutProfilWeb,
     GetCaraDaftar,
     PutCaraDaftar,
+    GetPengaturan,
+    PutPengaturan,
     GetPeserta,
     GetIdPeserta,
     PostPeserta,

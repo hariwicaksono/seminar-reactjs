@@ -1,10 +1,10 @@
 import React,{Component} from 'react'
-import {Link,Redirect,NavLink} from 'react-router-dom'
+import {Link,NavLink} from 'react-router-dom'
 import {Container, Form,Button, Navbar, Nav, NavItem, NavDropdown} from 'react-bootstrap'
 import { BoxArrowInRight, TextLeft } from 'react-bootstrap-icons'
 import API from '../Configs/Axios'
 import {ImagesUrl} from '../Configs/Url'
-import { logout, isLogin, isAdmin } from '../Utils'
+import { logout, isAdmin } from '../Utils'
 import SearchForm from './SearchForm'
 
 class MyNavbar extends Component{

@@ -5,7 +5,7 @@ import Footer from '../../Components/Footer'
 import Sidebar from '../../Components/Sidebar'
 import { Helmet } from 'react-helmet'
 import MyRouter from '../../Configs/Routes'
-import { isLogin, isAdmin } from '../../Utils'
+import { isAdmin } from '../../Utils'
 
 const TITLE = 'Seminar App'
 

@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import API from '../../Configs/Axios'
-import { Container, Button, Table, Breadcrumb, Row, Col, Card } from 'react-bootstrap'
+import { Container, Breadcrumb, Row, Col } from 'react-bootstrap'
 import { Helmet } from 'react-helmet'
 import { UploadUrl, QrcodeUrl } from '../../Configs/Url'
 import Loader from 'react-loader'
-import moment from 'moment'
-import 'moment/locale/id'
-import jsPDF from 'jspdf'
-import html2canvas from 'html2canvas'
-import QRCode from 'qrcode.react'
-import { PDFViewer, Document, Page, Canvas, Image, View, StyleSheet } from "@react-pdf/renderer";
+//import moment from 'moment'
+//import 'moment/locale/id'
+//import jsPDF from 'jspdf'
+//import html2canvas from 'html2canvas'
+//import QRCode from 'qrcode.react'
+import { PDFViewer, Document, Page, Image, View, StyleSheet } from "@react-pdf/renderer";
 import styled from '@react-pdf/styled-components';
 
 const TITLE = 'Cetak Sertifikat - Seminar App'
@@ -111,8 +111,9 @@ class CetakSertifikat extends Component {
                    'Access-Control-Allow-Origin': '*'
                 }
               }}
-              
+              cache={false} allowDangerousPaths={true}
               />
+              
                <View style={styles.section}>
                <Nama>{this.state.nama}</Nama>
                <Seminar>{this.state.nama_sem}</Seminar>
@@ -120,15 +121,15 @@ class CetakSertifikat extends Component {
                 <Pejabat1>{this.state.pejabat1}</Pejabat1>
  
                 <Image 
-              style={styles.qr}
-              src={ this.state.url+this.state.qrcode }
-              source={{
-                header: {
-                   'Access-Control-Allow-Origin': '*'
-                }
-              }}
-              
-              />
+                  style={styles.qr}
+                  src={ this.state.qrurl+this.state.qrcode }
+                  source={{
+                    header: {
+                      'Access-Control-Allow-Origin': '*'
+                    }
+                  }}
+                  cache={false} allowDangerousPaths={true}
+                />
                 </View>
 
              

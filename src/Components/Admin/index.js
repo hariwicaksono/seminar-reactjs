@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import API from '../../Configs/Axios'
-import { Container, Breadcrumb, Button, Row, Col, Alert, Table, Card } from 'react-bootstrap'
-import Loader from 'react-loader'
-import { Helmet } from 'react-helmet'
-import { NotificationManager } from 'react-notifications'
-import moment from 'moment'
+import { Container, Breadcrumb, Row, Col, Card } from 'react-bootstrap'
 import { FileEarmark, People, FileEarmarkPlus, FileEarmarkX } from 'react-bootstrap-icons'
+import { Helmet } from 'react-helmet'
+import Skeleton from 'react-loading-skeleton'
+import Clock from 'react-live-clock'
 
 const TITLE = 'Admin - Seminar App'
-//var options = {lines: 13,length: 20,width: 10,radius: 30,scale: 0.35,corners: 1,color: '#fff',opacity: 0.25,rotate: 0,direction: 1,speed: 1,trail: 60,fps: 20,zIndex: 2e9,top: '50%',left: '50%',shadow: false,hwaccel: false,position: 'absolute'};
 class index extends Component {
     constructor(props) {
         super(props)
@@ -24,24 +22,28 @@ class index extends Component {
 
     componentDidMount = () => {
         API.CountSeminar().then(res=>{
-            this.setState({
-                JumlahSeminar: res.data
-              })
+            setTimeout(() => this.setState({
+                JumlahSeminar: res.data,
+                loading: false
+              }), 100);
         })
         API.CountPeserta().then(res=>{
-            this.setState({
-                JumlahPeserta: res.data
-              })
+            setTimeout(() => this.setState({
+                JumlahPeserta: res.data,
+                loading: false
+              }), 100);
         })
         API.CountBayarnew().then(res=>{
-            this.setState({
-                BayarNew: res.data[0].new
-              })
+            setTimeout(() => this.setState({
+                BayarNew: res.data[0].new,
+                loading: false
+              }), 100);
         })
         API.CountBayarcancel().then(res=>{
-            this.setState({
-                BayarCancel: res.data[0].cancel
-              })
+            setTimeout(() => this.setState({
+                BayarCancel: res.data[0].cancel,
+                loading: false
+              }), 100);
         })
 
     }
@@ -59,6 +61,30 @@ class index extends Component {
                 <Breadcrumb.Item active>Dashboard</Breadcrumb.Item>
                 </Breadcrumb>
                 <h2 className="text-light mb-3">Dashboard <small className="text-muted">Administrator</small></h2>
+                <h3 className="text-light mb-3 text-right"><Clock format={'D MMMM YYYY, HH:mm:ss'} ticking={true} timezone={'Asia/Jakarta'} /></h3>
+                
+                {this.state.loading ?
+                        <>
+                        <Row>
+                        <Col>
+                        <Skeleton height={120} />
+                        </Col>
+                        <Col>
+                        <Skeleton height={120} />
+                        </Col>
+                        </Row>
+                        <br/>
+                        <Row>
+                        <Col>
+                        <Skeleton height={120} />
+                        </Col>
+                        <Col>
+                        <Skeleton height={120} />
+                        </Col>
+                        </Row>
+                        </>
+                        :
+                        <>
                 <Row>
                     <Col>
                     <Card as={Link} to="/seminar" className="shadow" bg={'primary'} text={'light'} body>
@@ -98,7 +124,8 @@ class index extends Component {
                         </Card>
                     </Col>
                 </Row>
-                
+                </>
+                }
             </Container>
             </>
         )

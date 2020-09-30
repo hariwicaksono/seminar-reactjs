@@ -1,12 +1,12 @@
 import React, { Component, useState, useMemo } from 'react'
-import {Link,Redirect,NavLink} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import API from '../../../Configs/Axios'
 import {UploadUrl} from '../../../Configs/Url'
 import { Helmet } from 'react-helmet'
 import { NotificationManager } from 'react-notifications'
-import {Container, Breadcrumb, Card, Row, Col, Button, Form} from 'react-bootstrap'
+import {Container, Breadcrumb, Card, Row, Col, Button} from 'react-bootstrap'
 import { PencilSquare, TrashFill } from 'react-bootstrap-icons'
-import { Formik } from 'formik';
+//import { Formik } from 'formik';
 //import * as yup from 'yup';
 import Loader from 'react-loader'
 import DataTable from 'react-data-table-component'
@@ -152,7 +152,7 @@ class index extends Component {
     const ExpandedComponent = ({ data }) => (
       <ExpandedStyle>
         <p>
-          Gambar Sertifikat: <br/><a href={this.state.url+data.img_sertifikat} alt="" target="_blank"><img src={this.state.url+data.img_sertifikat} width="100" alt=""/></a>
+          Gambar Sertifikat: <br/><a href={this.state.url+data.img_sertifikat} alt="" target="_blank" rel="noopener noreferrer"><img src={this.state.url+data.img_sertifikat} width="100" alt=""/></a>
          
         </p>
       </ExpandedStyle>
@@ -209,7 +209,9 @@ class index extends Component {
             <> 
              
             <Helmet>
-            <title>{ "Admin"+" - "+TITLE }</title>
+            <title>{ "Admin"+
+                    " - "+
+                    TITLE }</title>
             </Helmet>
                 <Container fluid>
                 <Breadcrumb className="card px-3 mb-2">

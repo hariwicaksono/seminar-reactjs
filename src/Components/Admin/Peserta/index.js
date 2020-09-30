@@ -1,11 +1,11 @@
 import React, { Component, useState, useMemo } from 'react'
-import {Link,Redirect,NavLink} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import API from '../../../Configs/Axios'
 import { Helmet } from 'react-helmet'
 import { NotificationManager } from 'react-notifications'
-import {Container, Breadcrumb, Card, Row, Col, Spinner, Button, Modal, Form} from 'react-bootstrap'
+import {Container, Breadcrumb, Card, Row, Col, Button} from 'react-bootstrap'
 import { EyeFill, TrashFill } from 'react-bootstrap-icons'
-import { Formik } from 'formik';
+//import { Formik } from 'formik';
 //import * as yup from 'yup';
 //import TbPeserta from './TbPeserta'
 import Loader from 'react-loader'
@@ -209,7 +209,7 @@ class index extends Component {
     const BasicTable = () => {
       const [filterText, setFilterText] = useState('');
       const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
-      const filteredItems = this.state.Daftar.filter(item => item.nama_peserta && item.nama_peserta.toLowerCase().includes(filterText.toLowerCase()) || item.nm_seminar && item.nm_seminar.toLowerCase().includes(filterText.toLowerCase()) );
+      const filteredItems = this.state.Daftar.filter(item => (item.nama_peserta && item.nama_peserta.toLowerCase().includes(filterText.toLowerCase()) ) || (item.nm_seminar && item.nm_seminar.toLowerCase().includes(filterText.toLowerCase()) ) );
     
       const subHeaderComponentMemo = useMemo(() => {
         const handleClear = () => {
@@ -248,7 +248,9 @@ class index extends Component {
             <> 
              
             <Helmet>
-            <title>{ "Admin"+" - "+TITLE }</title>
+            <title>{ "Admin"+
+                    " - "+
+                    TITLE }</title>
             </Helmet>
                 <Container fluid>
                 <Breadcrumb className="card px-3 mb-2">

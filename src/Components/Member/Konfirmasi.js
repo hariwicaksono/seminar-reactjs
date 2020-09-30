@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import { render } from 'react-dom'
-import {Link,Redirect,NavLink} from 'react-router-dom'
+//import { render } from 'react-dom'
+import {Link} from 'react-router-dom'
 import API from '../../Configs/Axios'
 import { Helmet } from 'react-helmet'
 import { NotificationManager } from 'react-notifications'
 import {Container, Breadcrumb, Card, Row, Col, Spinner, Button, Form} from 'react-bootstrap'
-import { Formik, Field } from 'formik'
+import { Formik } from 'formik'
 import * as yup from 'yup'
-import Skeleton from 'react-loading-skeleton'
+//import Skeleton from 'react-loading-skeleton'
 
 const TITLE = 'Konfirmasi Pembayaran - Seminar App'
 const validationSchema = yup.object({
@@ -79,12 +79,6 @@ class Konfirmasi extends Component {
         const ListBank = this.state.Bank.map((b, i) => (
         <option value={b.id_bank} key={i}>{b.nm_bank} - {b.no_rek}</option>      
         ))
-
-        const ListSeminar = this.state.Seminar.map((s, i) => (
-            <option value={s.id_seminar} key={i}>{s.nm_seminar}</option>      
-        ))
-
-        
 
         return (
             <>
