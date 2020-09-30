@@ -142,7 +142,7 @@ const GetIdPeserta = (data) => GET_ID('Peserta?id=',data);
 const PostPeserta = (data) => POST('Peserta',data);
 const DeletePeserta = (id) => DELETE('Peserta/index_delete?id=',id)
 const CheckPeserta = (no_id, nm_peserta) => Axios(RootPath+`CheckPeserta?no_id=${no_id}&nm_peserta=${nm_peserta}`);
-const CheckNokartu = (data) => Axios(RootPath+`CheckNokartu?no_id=${data}`);
+const CheckEmail = (data) => Axios(RootPath+`CheckEmail?id=${data}`);
 const GetPembayaran = () => GET('Pembayaran');
 const GetIdPembayaran = (data) => GET_ID('Pembayaran?id=',data);
 const PostPembayaran = (data) => POST('Pembayaran',data);
@@ -152,6 +152,7 @@ const GetPembayaranById = (data) => GET_BY_ID('GetPembayaran?id=',data);
 const CheckPembayaran = (id_peserta, id_seminar) => Axios(RootPath+`CheckPembayaran?id_peserta=${id_peserta}&id_seminar=${id_seminar}`);
 const GetSertifikat = () => GET('Sertifikat');
 const GetIdSertifikat = (data) => GET_ID('Sertifikat?id=',data);
+const GetSertifikatById = (data) => GET_ID('GetSertifikat?id=',data);
 const PostSertifikat = (data) => POST('Sertifikat',data);
 const PutSertifikat = (data) => PUT('Sertifikat',data);
 const DeleteSertifikat = (id) => DELETE('Sertifikat/index_delete?id=',id)
@@ -217,7 +218,7 @@ const API = {
     PostPeserta,
     DeletePeserta,
     CheckPeserta,
-    CheckNokartu,
+    CheckEmail,
     GetPembayaran,
     GetIdPembayaran,
     PostPembayaran,
@@ -227,6 +228,7 @@ const API = {
     CheckPembayaran,
     GetSertifikat,
     GetIdSertifikat,
+    GetSertifikatById,
     PostSertifikat,
     PutSertifikat,
     DeleteSertifikat,

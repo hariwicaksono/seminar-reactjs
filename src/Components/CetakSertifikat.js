@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import API from '../../Configs/Axios'
+import API from '../Configs/Axios'
 import { Container, Breadcrumb, Row, Col } from 'react-bootstrap'
 import { Helmet } from 'react-helmet'
-import { UploadUrl, QrcodeUrl } from '../../Configs/Url'
+import { UploadUrl, QrcodeUrl } from '../Configs/Url'
 import Loader from 'react-loader'
 //import moment from 'moment'
 //import 'moment/locale/id'
@@ -82,7 +82,7 @@ class CetakSertifikat extends Component {
 
     componentDidMount = () => {
         const id = this.props.match.params.id
-        API.GetSeminarById(id).then(res=>{
+        API.GetSertifikatById(id).then(res=>{
             setTimeout(() => this.setState({
                 nama_sem : res.data[0].nm_seminar,
                 nama : res.data[0].nama_peserta,

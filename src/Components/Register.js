@@ -26,7 +26,19 @@ const Step2Schema = yup.object().shape({
 });
 const Step3Schema = yup.object().shape({
     no_hp: yup.number().required('Nomor Telepon atau HP harus diisi').typeError("Harus berupa angka"),
-    email: yup.string().email('Harus berupa email yang valid').required('Alamat email harus diisi'),
+    email: yup.string().email('Harus berupa email yang valid').required('Alamat email harus diisi').test({
+        message: () => 'Email sudah digunakan',
+        test: async (value) => {
+          try {
+              const res = await API.CheckEmail(value)
+              const result = await res.data.results;
+              return !result
+              } catch (error) {
+              console.log(error.response); 
+              return error.response;
+              }
+        },
+      }),
     password: yup.string().required('Password harus diisi'),
 });
 const initialValues = { 
