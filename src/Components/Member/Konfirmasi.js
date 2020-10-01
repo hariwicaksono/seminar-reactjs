@@ -95,9 +95,7 @@ class Konfirmasi extends Component {
                         <Breadcrumb.Item active>Konfirmasi Pembayaran</Breadcrumb.Item>
                         </Breadcrumb>
 
-                        <Card>
-                            <Card.Body>
-                               
+                        <Card className="shadow" body>   
                             <Formik
                             initialValues={{ 
                                 id_peserta: this.state.id_peserta, 
@@ -242,8 +240,6 @@ class Konfirmasi extends Component {
                             </Form>
                             )}
                             </Formik>
-
-                            </Card.Body>
                         </Card>
                     </Col>
                     </Row>

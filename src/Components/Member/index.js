@@ -40,7 +40,7 @@ class index extends Component {
                       bayar: res.data,
                       loading: false
                     })
-                    NotificationManager.warning('Perhatian, anda belum melakukan Pendaftaran');
+                    NotificationManager.warning('Perhatian, anda belum melakukan Pembayaran');
                   }
             }, 100);
             
@@ -130,24 +130,25 @@ class index extends Component {
                     :
                     <>
                 
-                    <div className="my-2 text-center">
+                    <div className="my-3 text-center">
                         <img src="./images/bg-informasi.png" className="mb-3 img-fluid" width="200" alt="Not Data Found" />
-                        <h4 className="mb-3">Anda Belum Melakukan Pembayaran</h4>
-                        <hr/>
-                        <Button as={Link} to="/konfirmasi" variant="primary" size="lg">Konfirmasi Pembayaran</Button>
+                        <h4 className="mb-2">Anda Belum Melakukan Pembayaran</h4>
+                        <Button as={Link} to="/konfirmasi" variant="outline-primary" size="lg">Konfirmasi Pembayaran</Button>
                     </div>
                     
-                    <Alert variant="warning" className="shadow">
-                    <Alert.Heading>Informasi Seminar</Alert.Heading>
+                    <Alert variant="warning">
+                    <Alert.Heading><small>Informasi Seminar</small></Alert.Heading>
+                    <small>
                     <p>
                     Seminar: {this.state.nama_sem}<br/>
-                    Biaya: Rp.{this.state.biaya}
+                    Biaya: <strong>Rp.{this.state.biaya}</strong>
                     </p>
                     <p>Pembayaran Seminar dapat di Transfer ke:<br/>
                     Bank: {this.state.nama_bank}<br/>
                     Nomor: {this.state.no_rek}<br/>
                     Nama: {this.state.pemilik_rek}
                     </p>
+                    </small>
                     </Alert>
                     </>
                     )

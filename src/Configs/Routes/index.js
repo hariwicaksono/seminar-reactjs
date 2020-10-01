@@ -18,7 +18,10 @@ import Member from "../../Components/Member"
 import MKonfirmasi from "../../Components/Member/Konfirmasi"
 import MCetakBukti from "../../Components/Member/CetakBukti"
 import MCetakSertifikat from "../../Components/Member/CetakSertifikat"
+import MProfil from "../../Components/Member/Profil"
+import MPassword from "../../Components/Member/Password"
 import Admin from "../../Components/Admin"
+import AAkunPassword from "../../Components/Admin/Akun/Password"
 import AIdentitasWeb from "../../Components/Admin/IdentitasWeb"
 import AProfilWeb from "../../Components/Admin/ProfilWeb"
 import ACaraDaftar from "../../Components/Admin/CaraDaftar"
@@ -53,7 +56,7 @@ const MyRouter = () => {
             <Route path="/" component={HomePage} exact />
             <Route path="/detail/:id" component={Detail} />
             <Route path="/kontak" component={Kontak} />
-            <Route path="/profil" component={Profil} />
+            <Route path="/tentang" component={Profil} />
             <Route path="/kalender" component={Kalender} />
             <Route path="/caradaftar" component={CaraDaftar} />
             <PublicRoute path="/login" component={Login} restricted/>
@@ -64,7 +67,10 @@ const MyRouter = () => {
             <PrivateRoute path="/konfirmasi" component={MKonfirmasi} />
             <PrivateRoute path="/cetak/bukti/:id" component={MCetakBukti} />
             <PrivateRoute path="/cetak/sertifikat/:id" component={MCetakSertifikat} />
+            <PrivateRoute path="/profil" component={MProfil} />
+            <PrivateRoute path="/password" component={MPassword} />
             <PrivateRoute path="/admin" component={Admin} exact />
+            <PrivateRoute path="/akun/password" component={AAkunPassword} />
             <PrivateRoute path="/konten/identitasweb" component={AIdentitasWeb} />
             <PrivateRoute path="/konten/profilweb" component={AProfilWeb} />
             <PrivateRoute path="/konten/caradaftar" component={ACaraDaftar} />

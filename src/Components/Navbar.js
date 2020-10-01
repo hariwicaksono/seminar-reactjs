@@ -1,10 +1,10 @@
 import React,{Component} from 'react'
 import {Link,NavLink} from 'react-router-dom'
 import {Container, Form,Button, Navbar, Nav, NavItem, NavDropdown} from 'react-bootstrap'
-import { BoxArrowInRight, TextLeft } from 'react-bootstrap-icons'
+import { BoxArrowInRight, TextLeft, Lock } from 'react-bootstrap-icons'
 import API from '../Configs/Axios'
 import {ImagesUrl} from '../Configs/Url'
-import { logout, isAdmin } from '../Utils'
+import { logout, isLogin, isAdmin } from '../Utils'
 import SearchForm from './SearchForm'
 
 class MyNavbar extends Component{
@@ -12,8 +12,6 @@ class MyNavbar extends Component{
         super(props)
         this.state = {
             login:false,
-            isLogin: false,
-            isAdmin: false,
             id: '',
             nama: '',
             foto:'',
@@ -24,27 +22,23 @@ class MyNavbar extends Component{
             logout();
         }
         componentDidMount = () => {
-        if (localStorage.getItem('isLogin')) {
-           //console.log('LOGIN')
+        if (isLogin()) {
             const data = JSON.parse(localStorage.getItem('isLogin'))
             const id = data[0].id_peserta
             API.GetIdPeserta(id).then(res=>{
                 this.setState({
-                    id : res.id_peserta,
-                    nama: res.nama_peserta,
-                    isLogin: true
+                    id : res.data[0].id_peserta,
+                    nama: res.data[0].nama_peserta
                 })
             })
                 
-        } else if (localStorage.getItem('isAdmin')) {
-            //console.log('ADMIN')
+        } else if (isAdmin()) {
              const data = JSON.parse(localStorage.getItem('isAdmin'))
              const id = data[0].usernm
-             API.GetIdAdmin(id).then(res=>{
+             API.GetIdPengguna(id).then(res=>{
                  this.setState({
-                     id : res.usernm,
-                     nama: res.nm_lengkap,
-                     isAdmin: true
+                     id : res.data[0].usernm,
+                     nama: res.data[0].nm_lengkap
                  })
              })
                  
@@ -56,7 +50,6 @@ class MyNavbar extends Component{
         }
         }
     render(){
-
         return(
             <>
             {isAdmin() ?
@@ -104,6 +97,7 @@ class MyNavbar extends Component{
                     src={this.state.url+'no-avatar.png'} />
                 </>
                 )} id="basic-nav-dropdown" alignRight>
+                <NavDropdown.Item href=''>{this.state.nama}</NavDropdown.Item>
                 <NavDropdown.Item onClick={this.Logout} href=''><BoxArrowInRight/> Keluar</NavDropdown.Item>
                 </NavDropdown>
                 </NavItem>
@@ -140,7 +134,7 @@ class MyNavbar extends Component{
                    </>
                 } 
                 <NavDropdown title="Tentang" id="basic-nav-dropdown">
-                <NavDropdown.Item as={Link} to='/profil'>Profil</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to='/tentang'>Tentang</NavDropdown.Item>
                 <NavDropdown.Item as={Link} to='/caradaftar'>Cara Daftar</NavDropdown.Item>
                 <NavDropdown.Item as={Link} to='/kalender'>Kalender</NavDropdown.Item>
                  <NavDropdown.Item as={Link} to='/kontak'>Kontak</NavDropdown.Item>
@@ -179,6 +173,8 @@ class MyNavbar extends Component{
                     src={this.state.url+'no-avatar.png'} />
                 </>
                 )} id="basic-nav-dropdown" alignRight>
+                <NavDropdown.Item as={Link} to='/profil'>{this.state.nama}</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to='/password'><Lock/> Ganti Password</NavDropdown.Item>
                 <NavDropdown.Item onClick={this.Logout} href=''><BoxArrowInRight/> Keluar</NavDropdown.Item>
                 </NavDropdown>
                 </NavItem>

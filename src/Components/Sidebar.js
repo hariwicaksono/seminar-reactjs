@@ -1,18 +1,19 @@
 import React, {Component, useState} from 'react'
 import {Link, NavLink} from 'react-router-dom'
 import API from '../Configs/Axios'
-import { logout, isLogin, isAdmin } from '../Utils'
+import { logout, isLogin } from '../Utils'
 import { Collapse} from 'react-bootstrap'
-import { HouseDoor, Files, BoxArrowRight, People, FileEarmarkText, Gear } from 'react-bootstrap-icons'
+import { HouseDoor, Files, BoxArrowRight, People, FileEarmarkText, Gear, Lightning, Box } from 'react-bootstrap-icons'
 
 function SubMenu() {
     const [open1, setOpen1] = useState(false);
     const [open2, setOpen2] = useState(false);
     const [open3, setOpen3] = useState(false);
+    const [open4, setOpen4] = useState(false);
     return (
         <>
       <li>
-        <Link onClick={() => setOpen1(!open1)} data-toggle="collapse" aria-controls="collapseKonten" aria-expanded={open1} className="dropdown-toggle">
+        <Link to={'#'} onClick={() => setOpen1(!open1)} data-toggle="collapse" aria-controls="collapseKonten" aria-expanded={open1} className="dropdown-toggle">
             <Files/> <span>Konten</span>
         </Link>
         <Collapse in={open1} id="collapseKonten">
@@ -36,6 +37,11 @@ function SubMenu() {
         </Collapse>
       </li>
       <li>
+            <NavLink to={'/seminar'} title="Seminar" alt="Seminar">
+            <Lightning/> <span>Seminar</span>
+            </NavLink>
+        </li>
+      <li>
             <NavLink to={'/peserta'} title="Peserta Seminar" alt="Peserta Seminar">
             <People/> <span>Peserta Seminar</span>
             </NavLink>
@@ -46,7 +52,7 @@ function SubMenu() {
             </NavLink>
         </li>
       <li>
-      <Link onClick={() => setOpen2(!open2)} data-toggle="collapse" aria-controls="collapseGrafik" aria-expanded={open2} className="dropdown-toggle">
+      <Link to={'#'} onClick={() => setOpen2(!open2)} data-toggle="collapse" aria-controls="collapseGrafik" aria-expanded={open2} className="dropdown-toggle">
           <Files/> <span>Grafik</span>
       </Link>
       <Collapse in={open2}>
@@ -70,16 +76,11 @@ function SubMenu() {
       </Collapse>
     </li>
     <li>
-      <Link onClick={() => setOpen3(!open3)} data-toggle="collapse" aria-controls="collapsePengaturan" aria-expanded={open3} className="dropdown-toggle">
-          <Gear/> <span>Pengaturan</span>
+      <Link to={'#'} onClick={() => setOpen3(!open3)} data-toggle="collapse" aria-controls="collapseMaster" aria-expanded={open3} className="dropdown-toggle">
+          <Box/> <span>Master</span>
       </Link>
       <Collapse in={open3}>
-      <ul className="list-unstyled" id="collapsePengaturan">
-          <li>
-            <NavLink to={'/seminar'} title="Seminar" alt="Seminar">
-            <span>Seminar</span>
-            </NavLink>
-          </li>
+      <ul className="list-unstyled" id="collapseMaster">
           <li>
           <NavLink to={'/sertifikat'} title="Sertifikat" alt="Sertifikat">
             <span>Sertifikat</span>
@@ -108,6 +109,30 @@ function SubMenu() {
       </ul>
       </Collapse>
     </li>
+    <li>
+      <Link to={'#'} onClick={() => setOpen4(!open4)} data-toggle="collapse" aria-controls="collapsePengaturan" aria-expanded={open4} className="dropdown-toggle">
+          <Gear/> <span>Pengaturan</span>
+      </Link>
+      <Collapse in={open4}>
+      <ul className="list-unstyled" id="collapsePengaturan">
+          <li>
+          <NavLink to={'/pengaturan'} title="Pengaturan" alt="Pengaturan">
+            <span>Pengaturan</span>
+            </NavLink>
+          </li>
+          <li>
+          <NavLink to={'/akun/password'} title="Ganti Password" alt="Ganti Password">
+            <span>Ganti Password</span>
+            </NavLink>
+          </li>
+          <li>
+              <NavLink onClick={() => {logout()}} to='' activeClassName="" alt="Logout">
+              <BoxArrowRight/> <span>Logout</span>
+              </NavLink>
+          </li>
+      </ul>
+      </Collapse>
+    </li>
     </>
     );
   }
@@ -115,13 +140,8 @@ class Sidebar extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            login:false
-            
+            login:false 
         }
-    }
-    Logout = () => {
-        logout();
-        
     }
     componentDidMount = () => {
         if (isLogin()) {
@@ -149,7 +169,6 @@ class Sidebar extends Component {
         <>
         <nav id="sidebar" className={this.props.showMenu ? 'shadow' : 'shadow active' }>
         <ul className="list-unstyled components">
-        
                 <li>
                     <NavLink to={'/admin'} title="Petunjuk" alt="Petunjuk">
                     <HouseDoor/> <span>Home</span>
@@ -158,20 +177,15 @@ class Sidebar extends Component {
                 
                 <SubMenu/>
                            
-
-                {isAdmin() ?
+                {/*isAdmin() ?
                     <>
-                    <li>
-                            <NavLink onClick={this.Logout} to='' activeClassName="">
-                           <BoxArrowRight/> <span>Logout</span>
-                            </NavLink>
-                        </li>
+                    
                     </>
                     :
                     <>
                         
                     </>
-                } 
+                */} 
           
             </ul>
         </nav>

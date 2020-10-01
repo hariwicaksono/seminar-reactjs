@@ -48,7 +48,7 @@ class Home extends Component {
                     <h1 className="h2">{s.nm_seminar}</h1>
                     <p className="mb-3"><CalendarEvent/> {moment(s.tgl_seminar).format('DD-MM-YYYY')}, Pukul {moment(s.jam_seminar, "HH:mm:ss").format('HH:mm')} &mdash; <GeoAlt/> {s.lokasi_seminar}</p>
                     <p className="lead">{s.headline_seminar}</p>
-                    <Link to={'/detail/'+s.id_seminar} className="btn btn-outline-primary btn-lg">DETAIL</Link>&nbsp;
+                    <Link to={'/detail/'+s.id_seminar} className="btn btn-primary btn-lg">DETAIL</Link>&nbsp;
                     <Link to="/register" className="btn btn-outline-success btn-lg" >DAFTAR</Link>
             </div>
         ))
@@ -68,7 +68,7 @@ class Home extends Component {
                 <Container> 
                     <Row>
                         <Col>
-                        <Jumbotron className="shadow text-center py-5 mb-2">
+                        <Jumbotron className="shadow text-center bg-white py-5 mb-2">
                         {this.state.loading ?
                         <>
                         <h1 className="h2"><Skeleton height={40} /></h1>

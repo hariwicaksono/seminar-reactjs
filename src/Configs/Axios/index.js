@@ -140,6 +140,8 @@ const PutPengaturan = (data) => PUT('Pengaturan',data);
 const GetPeserta = () => GET('Peserta');
 const GetIdPeserta = (data) => GET_ID('Peserta?id=',data);
 const PostPeserta = (data) => POST('Peserta',data);
+const PutPeserta = (data) => PUT('Peserta',data);
+const PutPesertaPassword = (data) => PUT('PesertaPassword',data);
 const DeletePeserta = (id) => DELETE('Peserta/index_delete?id=',id)
 const CheckPeserta = (no_id, nm_peserta) => Axios(RootPath+`CheckPeserta?no_id=${no_id}&nm_peserta=${nm_peserta}`);
 const CheckEmail = (data) => Axios(RootPath+`CheckEmail?id=${data}`);
@@ -159,8 +161,10 @@ const DeleteSertifikat = (id) => DELETE('Sertifikat/index_delete?id=',id)
 const PutAktivasiAkun = (data) => PUT('AktivasiAkun',data);
 const PostFoto = (data,name) => POST_FOTO('ImageUpload',data,name);
 const PostImgSertifikat = (data,name) => POST_FOTO('ImgSertifikatUpload',data,name);
+const GetPengguna = () => GET('Pengguna');
+const GetIdPengguna = (data) => GET_ID('Pengguna?id=',data);
+const PutPenggunaPassword = (data) => PUT('PenggunaPassword',data);
 const GetKalender = () => GET('Kalender');
-const GetIdAdmin = (data) => GET_ID('Pengguna?id=',data);
 const CountPeserta = () => GET('CountPeserta');
 const CountBayarnew = () => GET('CountBayarnew');
 const CountBayarcancel = () => GET('CountBayarcancel');
@@ -216,6 +220,8 @@ const API = {
     GetPeserta,
     GetIdPeserta,
     PostPeserta,
+    PutPeserta,
+    PutPesertaPassword,
     DeletePeserta,
     CheckPeserta,
     CheckEmail,
@@ -235,8 +241,10 @@ const API = {
     PutAktivasiAkun,
     PostFoto,
     PostImgSertifikat,
+    GetPengguna,
+    GetIdPengguna,
+    PutPenggunaPassword,
     GetKalender,
-    GetIdAdmin,
     CountPeserta,
     CountBayarnew,
     CountBayarcancel,
