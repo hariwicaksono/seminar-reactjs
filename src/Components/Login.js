@@ -48,12 +48,14 @@ class Login extends Component {
                             API.PostLogin(values).then(res=>{
                                 if (res.id === "1" ) {
                                     localStorage.setItem('isLogin',JSON.stringify(res.data))
-                                    window.location.href = '/member';
+                                    this.props.history.push('/member');
                                     NotificationManager.success('Login Berhasil');
+                                    window.location.reload();
                                 } else if (res.id === "2" ) {
                                     localStorage.setItem('isAdmin',JSON.stringify(res.data))
-                                    window.location.href = '/admin';
+                                    this.props.history.push('/admin');
                                     NotificationManager.success('Login Berhasil');
+                                    window.location.reload();
                                 } else {
                                     NotificationManager.error('Login Gagal, periksa kembali username dan password anda');
                                 }

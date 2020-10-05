@@ -9,8 +9,10 @@ export const login = () => {
 
 export const logout = () => {
     (localStorage.removeItem(TOKEN_KEY1) || localStorage.removeItem(TOKEN_KEY2));
-    window.location.href = '/';
     NotificationManager.success('Berhasil keluar sistem');
+    setTimeout(()=>{
+        window.location.href = './';
+      },2000);
 }
 
 export const isLogin = () => {

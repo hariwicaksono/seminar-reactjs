@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import API from '../../Configs/Axios'
+import { ImagesUrl } from '../../Configs/Url'
 import { Container, Breadcrumb, Button, Row, Col, Alert, Table, Card } from 'react-bootstrap'
 import Loader from 'react-loader'
 import { Helmet } from 'react-helmet'
@@ -20,6 +21,7 @@ class index extends Component {
             nama_bank:'',
             no_rek:'',
             pemilik_rek:'',
+            url: ImagesUrl(),
             loading: true
         }
     }
@@ -131,7 +133,7 @@ class index extends Component {
                     <>
                 
                     <div className="my-3 text-center">
-                        <img src="./images/bg-informasi.png" className="mb-3 img-fluid" width="200" alt="Not Data Found" />
+                        <img src={this.state.url+"bg-informasi.png"} className="mb-3 img-fluid" width="200" alt="Not Data Found" />
                         <h4 className="mb-2">Anda Belum Melakukan Pembayaran</h4>
                         <Button as={Link} to="/konfirmasi" variant="outline-primary" size="lg">Konfirmasi Pembayaran</Button>
                     </div>
