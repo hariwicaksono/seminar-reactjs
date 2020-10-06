@@ -114,7 +114,7 @@ class Password extends Component {
                             }
                                 
                                 setTimeout(() => {
-                                actions.setSubmitting(true);
+                                actions.setSubmitting(false);
                                 }, 1000);
                             }}
                             validationSchema={validationSchema}

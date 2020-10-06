@@ -13,4 +13,4 @@ export const UploadUrl = () => {
 
 export const QrcodeUrl = () => {
     return "http://localhost/seminar-server/assets/images/qrcode/"
-}
+} 

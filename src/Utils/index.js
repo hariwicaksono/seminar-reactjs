@@ -11,7 +11,7 @@ export const logout = () => {
     (localStorage.removeItem(TOKEN_KEY1) || localStorage.removeItem(TOKEN_KEY2));
     NotificationManager.success('Berhasil keluar sistem');
     setTimeout(()=>{
-        window.location.href = './';
+        window.location.reload();
       },2000);
 }
 
