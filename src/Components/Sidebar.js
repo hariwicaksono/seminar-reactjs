@@ -101,11 +101,6 @@ function SubMenu() {
             <span>Bank</span>
             </NavLink>
           </li>
-          <li>
-          <NavLink to={'/pengaturan'} title="Pengaturan" alt="Pengaturan">
-            <span>Pengaturan</span>
-            </NavLink>
-          </li>
       </ul>
       </Collapse>
     </li>

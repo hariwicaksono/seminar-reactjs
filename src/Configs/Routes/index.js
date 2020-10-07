@@ -64,7 +64,7 @@ const MyRouter = () => {
             <PublicRoute path="/kalender" component={Kalender} exact />
             <PublicRoute path="/caradaftar" component={CaraDaftar} exact />
             <PublicRoute path="/aktivasi_akun/:id" component={AktivasiAkun} exact />
-            <PublicRoute path="/sertifikat/:id" component={CetakSertifikat} exact />
+            <PublicRoute path="/cetak_sertifikat/:id" component={CetakSertifikat} exact />
             <PublicRoute path="/login" component={Login} restricted={(isLogin() || isAdmin())} exact />
             <PublicRoute path="/register" component={Register} restricted={(isLogin() || isAdmin())} exact />
             <PrivateRoute path="/member" component={Member} isAuthenticated={isLogin()} redirect="/login" exact />
