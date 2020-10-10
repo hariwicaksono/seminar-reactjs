@@ -13,9 +13,13 @@ import DataTable from 'react-data-table-component'
 import styled from 'styled-components'
 import Dialog from 'react-bootstrap-dialog'
 
-const TITLE = 'Kartu Identitas - Seminar App'
+const seo = {
+  title: 'Admin Seminar App',
+  description: 'Seminar App Dengan ReactJS dan CodeIgniter 3',
+  image: '',
+  url: '',
+}
 var options = {lines: 13,length: 20,width: 10,radius: 30,scale: 0.35,corners: 1,color: '#fff',opacity: 0.25,rotate: 0,direction: 1,speed: 1,trail: 60,fps: 20,zIndex: 2e9,top: '50%',left: '50%',shadow: false,hwaccel: false,position: 'absolute'};
-
 class index extends Component {
     constructor(props) {
         super(props)
@@ -263,9 +267,8 @@ class index extends Component {
             <> 
              
             <Helmet>
-            <title>{ "Admin"+
-                    " - "+
-                    TITLE }</title>
+            <title>Master Kartu Identitas - { seo.title }</title>
+            <meta name="description" content={seo.description} />
             </Helmet>
                 <Container fluid>
                 <Breadcrumb className="card px-3 mb-2">

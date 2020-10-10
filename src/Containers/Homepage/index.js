@@ -7,8 +7,12 @@ import { Helmet } from 'react-helmet'
 import MyRouter from '../../Configs/Routes'
 import { isAdmin } from '../../Utils'
 
-const TITLE = 'Seminar App'
-
+const seo = {
+    title: 'Seminar App',
+    description: 'Seminar App Dengan ReactJS dan CodeIgniter 3',
+    image: '',
+    url: '',
+  }
 class Home extends Component {
     
     constructor(props) {
@@ -31,7 +35,8 @@ class Home extends Component {
             
             <>
             <Helmet>
-                <title>{ TITLE }</title>
+                <title>{ seo.title }</title>
+                <meta name="description" content={seo.description} />
                 <style type="text/css">{`
                 body {
                     background-color: #fff;

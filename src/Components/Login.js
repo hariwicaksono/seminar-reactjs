@@ -7,7 +7,12 @@ import {Container, Card, Row, Col, Spinner, Button, Form} from 'react-bootstrap'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 
-const TITLE = 'Masuk - Seminar App'
+const seo = {
+    title: 'Seminar App',
+    description: 'Seminar App Dengan ReactJS dan CodeIgniter 3',
+    image: '',
+    url: '',
+}
 const validationSchema = yup.object({
     username: yup.string().required('Username harus diisi'),
     password: yup.string().required('Password harus diisi')
@@ -25,7 +30,8 @@ class Login extends Component {
         return (
             <>
             <Helmet>
-            <title>{ TITLE }</title>
+            <title>Login - { seo.title }</title>
+            <meta name="description" content={'Login'+seo.description} />
             </Helmet>
                 <Container>
                     <Row className="justify-content-center">

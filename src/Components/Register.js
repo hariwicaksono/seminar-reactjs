@@ -8,8 +8,12 @@ import { Formik, Field } from 'formik'
 import FormSelect from './RegisterSelect';
 import * as yup from 'yup'
 
-const TITLE = 'Register - Seminar App'
-
+const seo = {
+    title: 'Seminar App',
+    description: 'Seminar App Dengan ReactJS dan CodeIgniter 3',
+    image: '',
+    url: '',
+}
 const Step1Schema = yup.object().shape({
     id_seminar: yup.string().required('Seminar harus dipilih'),
     jns_id: yup.string().required('Jenis Kartu Identitas harus dipilih'),
@@ -122,7 +126,8 @@ class Wizard extends Component {
         return (
             <>
             <Helmet>
-            <title>{ TITLE }</title>
+            <title>Register - { seo.title }</title>
+            <meta name="description" content={'Register'+seo.description} />
             </Helmet>
                 <Container>
                     <Row>

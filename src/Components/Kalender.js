@@ -14,7 +14,12 @@ import "@fullcalendar/daygrid/main.css"
 import "@fullcalendar/timegrid/main.css"
 import "@fullcalendar/list/main.css"
 
-const TITLE = 'Kalender - Seminar App'
+const seo = {
+    title: 'Seminar App',
+    description: 'Seminar App Dengan ReactJS dan CodeIgniter 3',
+    image: '',
+    url: '',
+  }
 class Kalender extends Component {
     constructor(props){
         super(props)
@@ -39,7 +44,8 @@ class Kalender extends Component {
         return (
             <>
             <Helmet>
-            <title>{ TITLE }</title>
+            <title>Kalender - { seo.title }</title>
+            <meta name="description" content={'Kalender'+seo.description} />
             </Helmet>
             <Container>
             <Breadcrumb className="card px-3 mb-2">

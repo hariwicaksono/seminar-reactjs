@@ -9,7 +9,12 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import Skeleton from 'react-loading-skeleton'
 
-const TITLE = 'Cara Daftar - Seminar App'
+const seo = {
+    title: 'Admin Seminar App',
+    description: 'Seminar App Dengan ReactJS dan CodeIgniter 3',
+    image: '',
+    url: '',
+  }
 const validationSchema = yup.object({
     foto: yup.mixed().required()
     //username: yup.string().required(),
@@ -56,9 +61,8 @@ class CaraDaftar extends Component {
         return (
             <>
             <Helmet>
-            <title>{ "Admin"+
-                    " - "+
-                    TITLE }</title>
+            <title>Cara Daftar - { seo.title }</title>
+            <meta name="description" content={seo.description} />
             </Helmet>
                 <Container fluid>
                 <Breadcrumb className="card px-3 mb-2">

@@ -7,7 +7,12 @@ import { Helmet } from 'react-helmet'
 import Skeleton from 'react-loading-skeleton'
 import Clock from 'react-live-clock'
 
-const TITLE = 'Admin - Seminar App'
+const seo = {
+    title: 'Admin Seminar App',
+    description: 'Seminar App Dengan ReactJS dan CodeIgniter 3',
+    image: '',
+    url: '',
+  }
 class index extends Component {
     constructor(props) {
         super(props)
@@ -53,7 +58,8 @@ class index extends Component {
         return (
             <>
             <Helmet>
-                <title>{ TITLE }</title>
+            <title>{ seo.title }</title>
+            <meta name="description" content={seo.description} />
             </Helmet>
             <Container fluid>
                 <Breadcrumb className="card px-3 mb-3">

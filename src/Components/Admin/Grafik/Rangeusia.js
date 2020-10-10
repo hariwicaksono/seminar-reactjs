@@ -7,8 +7,12 @@ import {Pie} from 'react-chartjs-2'
 import 'chartjs-plugin-colorschemes/src/plugins/plugin.colorschemes'
 import { SetOne9 } from 'chartjs-plugin-colorschemes/src/colorschemes/colorschemes.brewer'
 
-const TITLE = 'Grafik Peserta-Range Usia - Seminar App'
-
+const seo = {
+  title: 'Admin Seminar App',
+  description: 'Seminar App Dengan ReactJS dan CodeIgniter 3',
+  image: '',
+  url: '',
+}
 class GrafikRangeusia extends Component {
     constructor(props) {
         super(props)
@@ -39,9 +43,8 @@ class GrafikRangeusia extends Component {
     return (
       <>
        <Helmet>
-       <title>{ "Admin"+
-                    " - "+
-                    TITLE }</title>
+       <title>Grafik Range Usia - { seo.title }</title>
+            <meta name="description" content={seo.description} />
             </Helmet>
             <Container fluid>
                 <Breadcrumb className="card px-3 mb-2">

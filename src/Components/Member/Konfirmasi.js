@@ -9,7 +9,12 @@ import { Formik } from 'formik'
 import * as yup from 'yup'
 //import Skeleton from 'react-loading-skeleton'
 
-const TITLE = 'Konfirmasi Pembayaran - Seminar App'
+const seo = {
+    title: 'Seminar App',
+    description: 'Seminar App Dengan ReactJS dan CodeIgniter 3',
+    image: '',
+    url: '',
+}
 const validationSchema = yup.object({
     id_peserta: yup.string().required('Id Pendaftaran harus dipilih'),
     id_seminar: yup.string().required('Id Seminar harus dipilih'),
@@ -84,7 +89,8 @@ class Konfirmasi extends Component {
             <>
 
             <Helmet>
-            <title>{ TITLE }</title>
+            <title>Konfirmasi Bayar - { seo.title }</title>
+            <meta name="description" content={'Konfirmasi Bayar'+seo.description} />
             </Helmet>
                 <Container>
                     <Row>

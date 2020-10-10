@@ -7,7 +7,12 @@ import {UploadUrl} from '../Configs/Url'
 //import Loader from 'react-loader'
 import Skeleton from 'react-loading-skeleton'
 
-const TITLE = 'Cara Pendaftaran - Seminar App'
+const seo = {
+    title: 'Seminar App',
+    description: 'Seminar App Dengan ReactJS dan CodeIgniter 3',
+    image: '',
+    url: '',
+}
 //var options = {lines: 13,length: 20,width: 10,radius: 30,scale: 0.35,corners: 1,color: '#fff',opacity: 0.25,rotate: 0,direction: 1,speed: 1,trail: 60,fps: 20,zIndex: 2e9,top: '50%',left: '50%',shadow: false,hwaccel: false,position: 'absolute'};
 class CaraDaftar extends Component {
     constructor(props){
@@ -45,7 +50,8 @@ class CaraDaftar extends Component {
         return (
             <>
            <Helmet>
-            <title>{ TITLE }</title>
+           <title>Cara Daftar - { seo.title }</title>
+            <meta name="description" content={'Cara Daftar'+seo.description} />
             </Helmet>
                 <Container>
                     

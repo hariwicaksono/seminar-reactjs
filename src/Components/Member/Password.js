@@ -8,7 +8,12 @@ import { Formik } from 'formik'
 import * as yup from 'yup'
 import Skeleton from 'react-loading-skeleton'
 
-const TITLE = 'Akun Password - Seminar App'
+const seo = {
+    title: 'Seminar App',
+    description: 'Seminar App Dengan ReactJS dan CodeIgniter 3',
+    image: '',
+    url: '',
+}
 const validationSchema = yup.object({
     password: yup.string().required()
     .min(8, "Kata sandi terlalu pendek - minimal 8 karakter.")
@@ -43,7 +48,8 @@ class Password extends Component {
         return (
             <>
             <Helmet>
-            <title>{ TITLE }</title>
+            <title>Ganti Password - { seo.title }</title>
+            <meta name="description" content={'Ganti Password'+seo.description} />
             </Helmet>
                 <Container>
                 <Breadcrumb className="card px-3 mb-2">

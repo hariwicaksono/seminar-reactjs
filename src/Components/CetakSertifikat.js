@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import API from '../Configs/Axios'
-import { Container, Breadcrumb, Row, Col } from 'react-bootstrap'
+import { Container, Breadcrumb, Card } from 'react-bootstrap'
 import { Helmet } from 'react-helmet'
 import { UploadUrl, QrcodeUrl } from '../Configs/Url'
 import Loader from 'react-loader'
@@ -13,7 +13,12 @@ import Loader from 'react-loader'
 import { PDFViewer, Document, Page, Image, View, StyleSheet } from "@react-pdf/renderer";
 import styled from '@react-pdf/styled-components';
 
-const TITLE = 'Cetak Sertifikat - Seminar App'
+const seo = {
+  title: 'Seminar App',
+  description: 'Seminar App Dengan ReactJS dan CodeIgniter 3',
+  image: '',
+  url: '',
+}
 var options = {lines: 13,length: 20,width: 10,radius: 30,scale: 0.35,corners: 1,color: '#fff',opacity: 0.25,rotate: 0,direction: 1,speed: 1,trail: 60,fps: 20,zIndex: 2e9,top: '50%',left: '50%',shadow: false,hwaccel: false,position: 'absolute'};
 const styles = StyleSheet.create({
     page: {
@@ -23,7 +28,7 @@ const styles = StyleSheet.create({
       flexGrow: 1
     },
     image: {
-        zIndex: '0',
+        zIndex: '1',
         position: 'absolute',
         top: '0',
         left: '0',
@@ -31,10 +36,12 @@ const styles = StyleSheet.create({
         height: '100%'
     },
     qr: {
+        zIndex: '9',
         position: 'relative',
-        bottom: '120px',
-        right: '500px',
-        zIndex: '10 !important'
+        left: '50px',
+        top: '50px',
+        width: '100px',
+        height: '100px'
     }
   });
     const Nama = styled.Text`
@@ -83,6 +90,7 @@ class CetakSertifikat extends Component {
     componentDidMount = () => {
         const id = this.props.match.params.id
         API.GetSertifikatById(id).then(res=>{
+          if (res.data.length > 0) {
             setTimeout(() => this.setState({
                 nama_sem : res.data[0].nm_seminar,
                 nama : res.data[0].nama_peserta,
@@ -94,8 +102,14 @@ class CetakSertifikat extends Component {
                 qrcode: res.data[0].qrcode,
                 loading: false
             }), 100);
+          } else {
+            this.setState({
+                error: "No Data Found",
+                loading: false
+            })
+        }
         }).catch(err => {
-            console.log(err)
+          console.log(err.response)
         })
     } 
 
@@ -113,14 +127,8 @@ class CetakSertifikat extends Component {
               }}
               cache={false} allowDangerousPaths={true}
               />
-              
-               <View style={styles.section}>
-               <Nama>{this.state.nama}</Nama>
-               <Seminar>{this.state.nama_sem}</Seminar>
-                <Ketua>{this.state.ketua}</Ketua>
-                <Pejabat1>{this.state.pejabat1}</Pejabat1>
- 
-                <Image 
+
+              <Image 
                   style={styles.qr}
                   src={ this.state.qrurl+this.state.qrcode }
                   source={{
@@ -130,42 +138,51 @@ class CetakSertifikat extends Component {
                   }}
                   cache={false} allowDangerousPaths={true}
                 />
+              
+               <View style={styles.section}>
+               <Nama>{this.state.nama}</Nama>
+               <Seminar>{this.state.nama_sem}</Seminar>
+                <Ketua>{this.state.ketua}</Ketua>
+                <Pejabat1>{this.state.pejabat1}</Pejabat1>
+ 
+               
                 </View>
-
-             
-                   
-                
-                 
-                    
+   
               </Page>
             </Document>
           );
         return (
             <>
            <Helmet>
-        <title>{ TITLE }</title>
+           <title>Cetak Sertifikat - { seo.title }</title>
+            <meta name="description" content={'Cetak Sertifikat'+seo.description} />
             </Helmet>
                 <Container>
-                <Row className="justify-content-center">
-                  
-                  <Col lg="12">
+               
+                <Breadcrumb className="card px-3 mb-2">
+                        <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/" }}>Home</Breadcrumb.Item>
+                        <Breadcrumb.Item active>Cetak Sertifikat</Breadcrumb.Item>
+                        </Breadcrumb>
+                        <Card className="shadow" body>
+                <p className="lead text-center">
+                        {this.state.error}
+                        </p>
                     { this.state.loading ?
                         <Loader options={options} className="spinner" />
                         
                         :
                         <>
                       
-                        <Breadcrumb className="card px-3 mb-2">
-                        <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/" }}>Home</Breadcrumb.Item>
-                        <Breadcrumb.Item active>Cetak Sertifikat</Breadcrumb.Item>
-                        </Breadcrumb>
-
+                        
+                        {this.state.nama ?
                         <PDFViewer className="w-100 vh-100 mb-3">{MyDocument}</PDFViewer>
-
+                        :
+                        ""
+                       }
                         </>
                     }
-                    </Col>
-                    </Row>
+              
+              </Card>
                    
                 </Container>
             </>

@@ -8,7 +8,12 @@ import { Formik } from 'formik'
 import * as yup from 'yup'
 import Skeleton from 'react-loading-skeleton'
 
-const TITLE = 'Profil Web - Seminar App'
+const seo = {
+    title: 'Admin Seminar App',
+    description: 'Seminar App Dengan ReactJS dan CodeIgniter 3',
+    image: '',
+    url: '',
+  }
 const validationSchema = yup.object({
     isi_profil: yup.string().required('Isi Profil Web harus diisi'),
     aktif_profil: yup.string().required('Harus dipilih salah satu'),
@@ -43,9 +48,8 @@ class ProfilWeb extends Component {
         return (
             <>
             <Helmet>
-            <title>{ "Admin"+
-                    ' - '+
-                    TITLE }</title>
+            <title>Profil Web - { seo.title }</title>
+            <meta name="description" content={seo.description} />
             </Helmet>
                 <Container fluid>
                 <Breadcrumb className="card px-3 mb-2">

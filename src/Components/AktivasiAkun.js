@@ -3,7 +3,14 @@ import React, { Component } from 'react'
 import API from '../Configs/Axios'
 import { NotificationManager } from 'react-notifications'
 import {Container, Row, Col, Card} from 'react-bootstrap'
+import { Helmet } from 'react-helmet'
 
+const seo = {
+    title: 'Seminar App',
+    description: 'Seminar App Dengan ReactJS dan CodeIgniter 3',
+    image: '',
+    url: '',
+}
 class AktivasiAkun extends Component {
     constructor(props){
         super(props)
@@ -36,6 +43,10 @@ class AktivasiAkun extends Component {
         
         return (
             <>
+            <Helmet>
+            <title>Aktivasi Akun - { seo.title }</title>
+            <meta name="description" content={'Aktivasi Akun'+seo.description} />
+            </Helmet>
             <Container>
             <Row className="justify-content-center">
             <Col lg="8">

@@ -8,7 +8,12 @@ import { Formik } from 'formik'
 import * as yup from 'yup'
 import Skeleton from 'react-loading-skeleton'
 
-const TITLE = 'Identitas Web - Seminar App'
+const seo = {
+    title: 'Admin Seminar App',
+    description: 'Seminar App Dengan ReactJS dan CodeIgniter 3',
+    image: '',
+    url: '',
+  }
 const validationSchema = yup.object({
     nm_website: yup.string().required('Nama Website harus diisi'),
     nama_pt: yup.string().required('Nama Instansi harus diisi')
@@ -60,9 +65,8 @@ class IdentitasWeb extends Component {
         return (
             <>
             <Helmet>
-            <title>{ "Admin"+
-                    " - "+
-                    TITLE }</title>
+            <title>Identitas Web - { seo.title }</title>
+            <meta name="description" content={seo.description} />
             </Helmet>
                 <Container fluid>
                 <Breadcrumb className="card px-3 mb-2">
